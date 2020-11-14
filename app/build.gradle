@@ -1,0 +1,75 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "com.example.external"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+//            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+            //  'armeabi', 'x86','armeabi-v7a', 'arm64-v8a', 'x86_64', 'mips', 'mips64'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation rootProject.ext.compilelibs['appcompat']
+    //Meterial Design
+    implementation rootProject.ext.compilelibs['design-x']
+    testImplementation 'junit:junit:4.+'
+    implementation rootProject.ext.compilelibs['constraintlayout']
+    //http
+    implementation rootProject.ext.compilelibs['okhttp']
+    implementation rootProject.ext.compilelibs['okhttp-logging']
+    implementation rootProject.ext.compilelibs['retrofit2']
+    implementation rootProject.ext.compilelibs['rxbinding']
+    implementation rootProject.ext.compilelibs['rxjava2']
+    implementation rootProject.ext.compilelibs['rxandroid']
+    implementation rootProject.ext.compilelibs['adapter-rxjava2']
+
+    //recycleView--------androidx
+    implementation rootProject.ext.compilelibs['recyclerview-x']
+    implementation rootProject.ext.compilelibs['SmartRefreshLayout']
+    implementation rootProject.ext.compilelibs['SmartRefreshHeader']
+
+    implementation rootProject.ext.compilelibs['fragmentation']
+    implementation rootProject.ext.compilelibs['gson']
+    implementation rootProject.ext.compilelibs['glide']
+    annotationProcessor rootProject.ext.compilelibs['glide-compiler']
+    implementation rootProject.ext.compilelibs['jessyan']
+    implementation rootProject.ext.compilelibs['converter-gson']
+    implementation rootProject.ext.compilelibs['alphatabs']
+    //download apk
+    implementation rootProject.ext.compilelibs['filedownloader']
+    implementation rootProject.ext.compilelibs['permission']
+    implementation rootProject.ext.compilelibs['utilcode']
+    implementation rootProject.ext.compilelibs['android.support.multidex']
+    implementation rootProject.ext.compilelibs['rxpermissions']
+    implementation rootProject.ext.compilelibs['customactivityoncrash']
+    implementation('com.github.ihsanbal:LoggingInterceptor:3.0.0') {
+        exclude group: 'org.json', module: 'json'
+    }
+}
