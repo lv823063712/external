@@ -83,7 +83,10 @@ public class StartActivity extends BaseActivity implements StartInterface.Strart
                             finish();
                         }).onDenied(datas -> PermissionUtils.launchAppDetailsSettings()).start();
             } else if (configBean.getStatus() == 0) {
+
                 Toast.makeText(mActivity, configBean.getMessage(), Toast.LENGTH_SHORT).show();
+
+                //
                 showErrorDialog();
             }
         }
