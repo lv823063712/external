@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -26,8 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
             android:layout_marginTop="35.5dp"
+            android:layout_marginRight="40dp"
             android:orientation="horizontal"
             tools:ignore="UselessLeaf">
 
@@ -51,9 +50,9 @@
                 android:layout_alignParentRight="true"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
-                android:singleLine="true"
                 android:background="@null"
                 android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.@-"
+                android:singleLine="true"
                 android:textColor="#041D98"
                 android:textColorHint="@color/gray_B2B2B2"
                 android:textSize="34sp"
@@ -86,11 +85,11 @@
                 android:background="@null"
                 android:cursorVisible="true"
                 android:maxLength="20"
-                android:text="101101"
                 android:textColor="#041D98"
                 android:textColorHint="@color/gray_B2B2B2"
                 android:textSize="34sp"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText"
+                tools:text="101101" />
 
             <TextView
                 android:id="@+id/get_send_code"
@@ -112,8 +111,8 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
             android:layout_marginTop="14dp"
+            android:layout_marginRight="40dp"
             android:layout_marginBottom="@dimen/dp_20"
             android:background="#041D98" />
 
@@ -173,7 +172,6 @@
                     android:textSize="16sp" />
 
             </LinearLayout>
-
 
             <TextView
                 android:id="@+id/login_register"

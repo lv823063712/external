@@ -127,11 +127,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 utils.show();
                 startPresenter.get(Constant.SEND_CODE, header, body, SendCodeBean.class);
                 new CountDownTimer(60 * 1000, 1000) {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onTick(long millisUntilFinished) {
                         get_send_code.setBackground(getResources().getDrawable(R.mipmap.icon_recangle_blue));
                         get_send_code.setTextColor(getResources().getColor(R.color.green_06524D));
-                        get_send_code.setText("(" + millisUntilFinished + ")");
+                        String countSecond = String.valueOf(millisUntilFinished / 1000);
+                        get_send_code.setText("(" + countSecond + ")");
                     }
 
                     @SuppressLint("WrongConstant")

@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/icon_background"
+    tools:context=".ui.activity.IdentificationActivity">
+
+    <ImageView
+        android:id="@+id/iden_back"
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="@dimen/dp_30"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="47dp"
+        android:padding="@dimen/dp_5"
+        android:src="@mipmap/icon_back" />
+
+    <LinearLayout
+        android:id="@+id/step_lly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iden_back"
+        android:layout_marginStart="@dimen/dp_50"
+        android:layout_marginEnd="@dimen/dp_50"
+        android:layout_marginBottom="@dimen/dp_50"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/one_button"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:background="@drawable/shape_10_white"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="#041D98" />
+
+        <View
+            android:id="@+id/one_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#041D98" />
+
+        <TextView
+            android:id="@+id/two_button"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:background="@drawable/shape_041d98_10"
+            android:gravity="center"
+            android:textColor="#041D98" />
+
+        <View
+            android:id="@+id/two_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#041D98" />
+
+        <TextView
+            android:id="@+id/three_button"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:background="@drawable/shape_041d98_10"
+            android:gravity="center"
+            android:textColor="#041D98" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/step_lly"
+        android:layout_marginBottom="85dp"
+        android:background="@drawable/shape_login_bottom_bg"
+        android:orientation="vertical">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/first_step"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_30"
+                    android:layout_marginTop="47dp"
+                    android:text="Basic information"
+                    android:textColor="#041D98"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/full_name_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:layout_marginStart="@dimen/dp_30"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginEnd="@dimen/dp_30"
+                    android:background="@drawable/shape_6c82f0_26"
+                    android:hint="Full Name"
+                    android:paddingStart="24dp"
+                    android:textColor="#6D83F2"
+                    android:textColorHint="#6D83F2"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/birthday_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:layout_marginStart="@dimen/dp_30"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginEnd="@dimen/dp_30"
+                    android:background="@drawable/shape_6c82f0_26"
+                    android:drawableEnd="@mipmap/icon_blue_jiantou"
+                    android:hint="Birthday"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="17dp"
+                    android:textColor="#6D83F2"
+                    android:textColorHint="#6D83F2"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/gender_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:layout_marginStart="@dimen/dp_30"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginEnd="@dimen/dp_30"
+                    android:background="@drawable/shape_6c82f0_26"
+                    android:drawableEnd="@mipmap/icon_blue_jiantou"
+                    android:hint="Gender"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="17dp"
+                    android:textColor="#6D83F2"
+                    android:textColorHint="#6D83F2"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/marital_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:layout_marginStart="@dimen/dp_30"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginEnd="@dimen/dp_30"
+                    android:background="@drawable/shape_6c82f0_26"
+                    android:drawableEnd="@mipmap/icon_blue_jiantou"
+                    android:hint="Marital"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="17dp"
+                    android:textColor="#6D83F2"
+                    android:textColorHint="#6D83F2"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/education_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:layout_marginStart="@dimen/dp_30"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginEnd="@dimen/dp_30"
+                    android:background="@drawable/shape_6c82f0_26"
+                    android:drawableEnd="@mipmap/icon_blue_jiantou"
+                    android:hint="Education"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="17dp"
+                    android:textColor="#6D83F2"
+                    android:textColorHint="#6D83F2"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/email_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:layout_marginStart="@dimen/dp_30"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginEnd="@dimen/dp_30"
+                    android:layout_marginBottom="@dimen/dp_50"
+                    android:background="@drawable/shape_6c82f0_26"
+                    android:hint="E-mail"
+                    android:paddingStart="24dp"
+                    android:textColor="#6D83F2"
+                    android:textColorHint="#6D83F2"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/second_steps"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginTop="47dp"
+                android:text="Work information"
+                android:textColor="#041D98"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/employment_type_et"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:background="@drawable/shape_6c82f0_26"
+                android:drawableEnd="@mipmap/icon_blue_jiantou"
+                android:hint="Employment Type "
+                android:paddingStart="24dp"
+                android:paddingEnd="17dp"
+                android:textColor="#6D83F2"
+                android:textColorHint="#6D83F2"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/your_monthly_salary_et"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:background="@drawable/shape_6c82f0_26"
+                android:drawableEnd="@mipmap/icon_blue_jiantou"
+                android:hint="Your Monthly Salary"
+                android:paddingStart="24dp"
+                android:paddingEnd="17dp"
+                android:textColor="#6D83F2"
+                android:textColorHint="#6D83F2"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/monthly_family_income_et"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:background="@drawable/shape_6c82f0_26"
+                android:drawableEnd="@mipmap/icon_blue_jiantou"
+                android:hint="Monthly Family Income"
+                android:paddingStart="24dp"
+                android:paddingEnd="17dp"
+                android:textColor="#6D83F2"
+                android:textColorHint="#6D83F2"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/third_step"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginTop="47dp"
+                android:text="Bank information"
+                android:textColor="#041D98"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/ifsc_et"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:background="@drawable/shape_6c82f0_26"
+                android:hint="IFSC Code"
+                android:paddingStart="24dp"
+                android:textColor="#6D83F2"
+                android:textColorHint="#6D83F2"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/bank_name_et"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:background="@drawable/shape_6c82f0_26"
+                android:hint="Bank Name"
+                android:paddingStart="24dp"
+                android:textColor="#6D83F2"
+                android:textColorHint="#6D83F2"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/bank_account"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:background="@drawable/shape_6c82f0_26"
+                android:hint="Bank Account NO."
+                android:paddingStart="24dp"
+                android:textColor="#6D83F2"
+                android:textColorHint="#6D83F2"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_dbfcf9_32_32">
+
+        <TextView
+            android:id="@+id/step_tv"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:background="@drawable/shape_jb_bg"
+            android:gravity="center"
+            android:text="Next"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
