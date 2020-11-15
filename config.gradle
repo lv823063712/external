@@ -1,4 +1,4 @@
-ext{
+ext {
 
     compilelibs = [
             'appcompat'               : 'androidx.appcompat:appcompat:1.1.0',
@@ -38,6 +38,7 @@ ext{
             'rxpermissions'           : 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar',
 
             'filedownloader'          : 'com.liulishuo.filedownloader:library:1.7.2',
+            'xpopup'                  : 'com.lxj:xpopup:2.2.1',
 
 
             'xedittext'               : 'com.xw.repo:xedittext-androidx:2.2.6',

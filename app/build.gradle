@@ -73,4 +73,7 @@ dependencies {
     implementation('com.github.ihsanbal:LoggingInterceptor:3.0.0') {
         exclude group: 'org.json', module: 'json'
     }
+    //xpopup
+    implementation rootProject.ext.compilelibs['xpopup']
+
 }
