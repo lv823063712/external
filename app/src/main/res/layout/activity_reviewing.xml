@@ -20,10 +20,10 @@
         android:textSize="@dimen/dp_10" />
 
     <RelativeLayout
+        android:id="@+id/first_show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/first_reviewing"
-        android:visibility="gone">
+        android:layout_below="@+id/first_reviewing">
 
         <RelativeLayout
             android:id="@+id/image_show"
@@ -56,18 +56,18 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:visibility="gone"
+        android:id="@+id/second_reviewing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/first_reviewing"
         android:layout_marginStart="@dimen/dp_30"
-        android:layout_marginEnd="@dimen/dp_30">
+        android:layout_marginEnd="@dimen/dp_30"
+        android:visibility="gone">
 
         <RelativeLayout
             android:id="@+id/borrow_money"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:background="@mipmap/icon_reviewing_two">
 
             <TextView
@@ -80,6 +80,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/borrow_money_limit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/hint_text"
