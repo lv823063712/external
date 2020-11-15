@@ -79,8 +79,8 @@ public class StartActivity extends BaseActivity implements StartInterface.Strart
                         .runtime()
                         .permission(strings)
                         .onGranted(datas -> {
-                            Intent intent = new Intent(mActivity, LoginActivity.class);
-                            startActivity(intent);
+                            startActivity(new Intent(mActivity, LoginActivity.class));
+                            finish();
                         }).onDenied(datas -> PermissionUtils.launchAppDetailsSettings()).start();
             } else if (configBean.getStatus() == 0) {
                 Toast.makeText(mActivity, configBean.getMessage(), Toast.LENGTH_SHORT).show();
@@ -110,12 +110,7 @@ public class StartActivity extends BaseActivity implements StartInterface.Strart
                 .cancelTouchout(true)
                 .build();
         TextView tuxing = view.getView().findViewById(R.id.tuxing);
-        tuxing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                network();
-            }
-        });
+        tuxing.setOnClickListener(v -> network());
         dialog.show();
     }
 
@@ -123,7 +118,7 @@ public class StartActivity extends BaseActivity implements StartInterface.Strart
         startPresenter = new StartPresenter(this);
         Map<String, Object> header = new HashMap<>();
         Map<String, Object> body = new HashMap<>();
-        startPresenter.get(Constant.CONFIG, header, body, ConfigBean.class);
+        startPresenter.get(Constant.CONFIG_URL, header, body, ConfigBean.class);
     }
 
     @Override
