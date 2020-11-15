@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.example.external.R;
 import com.example.external.base.BaseActivity;
+import com.example.external.utils.StatusBarUtil;
 
 public class ReviewingActivity extends BaseActivity {
     private TextView first_reviewing, step_tv, some_user, some_user_dollor;
@@ -20,6 +21,7 @@ public class ReviewingActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+
         initView();
     }
 

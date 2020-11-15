@@ -10,6 +10,7 @@ import androidx.core.widget.NestedScrollView;
 
 import com.example.external.R;
 import com.example.external.base.BaseActivity;
+import com.example.external.utils.StatusBarUtil;
 
 public class IdentificationActivity extends BaseActivity implements View.OnClickListener {
     private ImageView iden_back;
@@ -29,6 +30,7 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected void initData() {
+        StatusBarUtil.setTextColor(this);
         initView();
     }
 

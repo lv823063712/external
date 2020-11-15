@@ -6,6 +6,7 @@ import com.example.external.R;
 import com.example.external.base.BaseActivity;
 import com.example.external.ui.fragment.HomePageFragment;
 import com.example.external.ui.fragment.MeFragment;
+import com.example.external.utils.StatusBarUtil;
 import com.yinglan.alphatabs.AlphaTabsIndicator;
 import com.yinglan.alphatabs.OnTabChangedListner;
 
@@ -27,6 +28,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        StatusBarUtil.setTextColor(this);
         initView();
         initFragment();
         initBottomNavigationView();

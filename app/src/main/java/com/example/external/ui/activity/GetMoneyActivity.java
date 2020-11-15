@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.external.R;
 import com.example.external.base.BaseActivity;
 import com.example.external.utils.AppUtils;
+import com.example.external.utils.StatusBarUtil;
 
 public class GetMoneyActivity extends BaseActivity implements View.OnClickListener {
 
@@ -30,6 +31,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void initData() {
+        StatusBarUtil.setTextColor(this);
         initView();
     }
 
