@@ -58,7 +58,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.External"
         tools:targetApi="n">
-        <activity android:name=".ui.activity.IdentificationActivity"></activity>
+        <activity android:name=".ui.activity.GetMoneyActivity"></activity>
+        <activity android:name=".ui.activity.ReviewingActivity" />
+        <activity android:name=".ui.activity.IdentificationActivity" />
         <activity
             android:name=".ui.activity.StartActivity"
             android:configChanges="orientation|screenSize"

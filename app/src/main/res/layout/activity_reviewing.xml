@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.ReviewingActivity">
+
+    <TextView
+        android:id="@+id/first_reviewing"
+        android:layout_width="91dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_50"
+        android:layout_marginBottom="@dimen/dp_50"
+        android:background="@drawable/shape_fe9e80_7"
+        android:gravity="center"
+        android:text="1. Reviewing"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dp_10" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/first_reviewing"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:id="@+id/image_show"
+            android:layout_width="match_parent"
+            android:layout_height="216dp"
+
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/shape_638cf2_8">
+
+            <ImageView
+                android:layout_width="273dp"
+                android:layout_height="208dp"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/icon_fill_in" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_show"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="40dp"
+            android:lineSpacingExtra="6dp"
+            android:text="The application information has been submitted. We will review the information within three minutes. Please check."
+            android:textColor="#6C83F2"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/first_reviewing"
+        android:layout_marginStart="@dimen/dp_30"
+        android:layout_marginEnd="@dimen/dp_30">
+
+        <RelativeLayout
+            android:id="@+id/borrow_money"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@mipmap/icon_reviewing_two">
+
+            <TextView
+                android:id="@+id/hint_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="29dp"
+                android:layout_marginTop="19dp"
+                android:text="Your loan amount"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hint_text"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginBottom="@dimen/dp_15"
+                android:textSize="48sp"
+                tools:text="₹ 80,000" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/vip_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/borrow_money"
+            android:layout_marginTop="26dp"
+            android:lineSpacingExtra="@dimen/dp_8"
+            android:text="You are eligible to borrow.\n\n\nYou need to be a member to get an installment loan, and your loan interest will be very low."
+            android:textColor="#041D98"
+            android:textSize="14sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:layout_below="@+id/vip_hint"
+            android:layout_marginTop="@dimen/dp_30"
+            android:background="@drawable/shape_vip_bg">
+
+            <TextView
+                android:id="@+id/some_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_15"
+                android:textColor="@color/white"
+                android:textSize="21sp"
+                tools:text="982****261" />
+
+            <TextView
+                android:id="@+id/some_user_dollor"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/some_user"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                tools:text="become a member and just borrowed ₹33,000" />
+
+
+            <ImageView
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:src="@mipmap/icon_rupe" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/step_tv"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginBottom="23dp"
+        android:background="@drawable/shape_next_bg"
+        android:gravity="center"
+        android:text="Next"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

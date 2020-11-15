@@ -333,7 +333,7 @@
             android:layout_centerInParent="true"
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_marginRight="@dimen/dp_20"
-            android:background="@drawable/shape_jb_bg"
+            android:background="@drawable/shape_next_bg"
             android:gravity="center"
             android:text="Next"
             android:textColor="@color/white"
