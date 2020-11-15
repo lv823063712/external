@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 进度条在0%的时候展示的图片 -->
+    <item
+        android:id="@android:id/background"
+        android:drawable="@drawable/shape_null"></item>
+    <!-- 进度条在0%~100%之间的时候展示的图片 -->
+    <item
+        android:id="@android:id/secondaryProgress"
+        android:drawable="@drawable/shape_null"></item>
+    <!-- 进度条在100%的时候展示的图片 -->
+    <item
+        android:id="@android:id/progress"
+        android:drawable="@drawable/shape_null"></item>
+
+
+</layer-list>

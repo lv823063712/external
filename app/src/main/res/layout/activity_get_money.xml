@@ -1,41 +1,451 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_marginStart="@dimen/dp_30"
+    android:layout_marginEnd="@dimen/dp_30"
     tools:context=".ui.activity.GetMoneyActivity">
 
-    <LinearLayout
+
+    <TextView
+        android:id="@+id/title_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="37dp"
+        android:text="Get Money"
+        android:textColor="#041D98"
+        android:textSize="24sp" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@+id/title_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
-        android:orientation="vertical">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="37dp"
-            android:text="Get Money"
-            android:textColor="#041D98"
-            android:textSize="24sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:text="Your loan amount"
-            android:textColor="#6C82F2"
-            android:textSize="14sp" />
-
-        <SeekBar
+        android:layout_above="@+id/hint_textview"
+        android:layout_height="wrap_content">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:thumb="@mipmap/icon_bar_bg" />
-    </LinearLayout>
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:text="Your loan amount"
+                android:textColor="#6C82F2"
+                android:textSize="14sp" />
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/show_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:text="₹30,000"
+                android:textColor="#041D98"
+                android:textSize="38sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:id="@+id/money_one"
+                        android:layout_width="0dp"
+                        android:layout_height="5dp"
+                        android:layout_marginEnd="@dimen/dp_2"
+                        android:layout_weight="1"
+                        android:background="#9BE5F0" />
+
+                    <View
+                        android:id="@+id/money_two"
+                        android:layout_width="0dp"
+                        android:layout_height="5dp"
+                        android:layout_marginEnd="@dimen/dp_2"
+                        android:layout_weight="1"
+                        android:background="#9BE5F0" />
+
+                    <View
+                        android:id="@+id/money_three"
+                        android:layout_width="0dp"
+                        android:layout_height="5dp"
+                        android:layout_marginEnd="@dimen/dp_2"
+                        android:layout_weight="1"
+                        android:background="#9BE5F0" />
+
+                    <View
+                        android:id="@+id/money_four"
+                        android:layout_width="0dp"
+                        android:layout_height="5dp"
+                        android:layout_marginEnd="@dimen/dp_2"
+                        android:layout_weight="1"
+                        android:background="#9BE5F0" />
+
+
+                </LinearLayout>
+
+                <SeekBar
+                    android:id="@+id/money_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="6dp"
+                    android:progressDrawable="@drawable/layer_bar"
+                    android:thumb="@mipmap/icon_bar_bg" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:text="Term (Months)"
+                android:textColor="#6C82F2"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/month_show"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:text="1 Months"
+                android:textColor="#041D98"
+                android:textSize="38sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:id="@+id/months_one"
+                        android:layout_width="0dp"
+                        android:layout_height="5dp"
+                        android:layout_marginEnd="@dimen/dp_2"
+                        android:layout_weight="1"
+                        android:background="#9BE5F0" />
+
+                    <View
+                        android:id="@+id/months_two"
+                        android:layout_width="0dp"
+                        android:layout_height="5dp"
+                        android:layout_marginEnd="@dimen/dp_2"
+                        android:layout_weight="1"
+                        android:background="#9BE5F0" />
+
+                    <View
+                        android:id="@+id/months_three"
+                        android:layout_width="0dp"
+                        android:layout_height="5dp"
+                        android:layout_marginEnd="@dimen/dp_2"
+                        android:layout_weight="1"
+                        android:background="#9BE5F0" />
+
+                    <View
+                        android:id="@+id/months_four"
+                        android:layout_width="0dp"
+                        android:layout_height="5dp"
+                        android:layout_marginEnd="@dimen/dp_2"
+                        android:layout_weight="1"
+                        android:background="#9BE5F0" />
+
+
+                </LinearLayout>
+
+                <SeekBar
+                    android:id="@+id/plan_months"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="6dp"
+                    android:progressDrawable="@drawable/layer_bar"
+                    android:thumb="@mipmap/icon_bar_bg" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/my_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_bg_home"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/details_show"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="Interest details"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/list_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="17dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_20"
+                            android:layout_weight="1"
+                            android:text="Loan term"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/loan_term"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dp_14"
+                            android:textColor="@color/white"
+                            tools:text="12 months" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="17dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_20"
+                            android:layout_weight="1"
+                            android:text="Loan Interest"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/loan_interest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dp_14"
+                            android:textColor="@color/white"
+                            tools:text="xxxxx" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="17dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_20"
+                            android:layout_weight="1"
+                            android:text="Monthly Payment"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/monthly_payment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dp_14"
+                            android:textColor="@color/white"
+                            tools:text="xxxxx" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="17dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_20"
+                            android:layout_weight="1"
+                            android:text="Monthly principal"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/monthly_principal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dp_14"
+                            android:textColor="@color/white"
+                            tools:text="xxxxx" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="17dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_20"
+                            android:layout_weight="1"
+                            android:text="Monthly inerest"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/monthly_inerest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dp_14"
+                            android:textColor="@color/white"
+                            tools:text="xxxxx" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="17dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_20"
+                            android:layout_weight="1"
+                            android:text="Bank Card Number"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/bank_card_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dp_14"
+                            android:textColor="@color/white"
+                            tools:text="xxxxx" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="97dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/shape_background_get_loan"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_14"
+                    android:text="Member Fee"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginEnd="@dimen/dp_20"
+                    android:background="@drawable/shape_white_8"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/dp_15"
+                        android:layout_height="@dimen/dp_15"
+                        android:layout_marginStart="@dimen/dp_15"
+                        android:background="@drawable/shape_fe9e80_8" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_12"
+                        android:layout_weight="1"
+                        android:text="Limit discounts"
+                        android:textColor="#041D98"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/original_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="11dp"
+                        android:textColor="#6C83F3"
+                        android:textSize="16sp"
+                        tools:text="₹899" />
+
+                    <TextView
+                        android:id="@+id/reality_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_13"
+                        android:text="₹699"
+                        android:textColor="#FE9E80"
+                        android:textSize="23sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/hint_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dp_100"
+        android:text="If you fall,it be refunded to you within 5 days"
+        android:textColor="#041D98"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/get_loan"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginBottom="23dp"
+        android:background="@drawable/shape_next_bg"
+        android:gravity="center"
+        android:text="Get Loan"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

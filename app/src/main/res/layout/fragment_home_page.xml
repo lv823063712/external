@@ -246,6 +246,7 @@
             android:background="@drawable/shape_bg_homeconfirm" />
 
         <TextView
+            android:id="@+id/Borrow"
             android:layout_width="138dp"
             android:layout_height="24dp"
             android:layout_marginStart="122dp"
