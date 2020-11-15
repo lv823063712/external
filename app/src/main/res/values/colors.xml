@@ -13,13 +13,16 @@
 
     <color name="black_50">#80000000</color>
     <color name="black">#CC000000</color>
+    <color name="black_021365">#021365</color>
     <color name="black_333333">#333333</color>
     <color name="black_66333333">#66333333</color>
     <color name="black_444444">#444444</color>
     <color name="black_404040">#404040</color>
     <color name="black_343434">#343434</color>
+    <color name="white_FFFAFA">#FFFAFA</color>
 
     <color name="blue_2D5AFF">#2D5AFF</color>
+    <color name="blue_6D82F0">#6D82F0</color>
     <color name="blue_1BDDFD">#1BDDFD</color>
     <color name="blue_4BA2FF">#4BA2FF</color>
     <color name="blue_538DF8">#538DF8</color>

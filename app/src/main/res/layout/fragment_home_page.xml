@@ -3,12 +3,257 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.fragment.HomePageFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="44dp"
+            android:text="Look This !"
+            android:textColor="@color/blue_041D98"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="82dp"
+            android:text="Your maximum loan amount can reach"
+            android:textColor="@color/blue_6D82F0"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="145dp"
+            android:background="@mipmap/icon_round4"
+            android:text="-"
+            android:textColor="@color/white_FFFAFA"
+            android:textSize="48sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="304dp"
+            android:layout_marginTop="145dp"
+            android:background="@mipmap/icon_round5"
+            android:text="+"
+            android:textColor="@color/white_FFFAFA"
+            android:textSize="48sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="230dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="74dp"
+            android:layout_marginTop="190dp"
+            android:layout_marginEnd="82dp"
+            android:background="@color/blue_041D98" />
+
+        <View
+            android:layout_width="320dp"
+            android:layout_height="97dp"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="216dp"
+            android:layout_marginEnd="33dp"
+            android:background="@drawable/shape_bg_home" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="54dp"
+            android:layout_marginTop="230dp"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="21sp"
+            android:text="982****261" />
+
+        <TextView
+            android:layout_width="227dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="54dp"
+            android:layout_marginTop="264dp"
+            android:layout_marginEnd="105dp"
+            android:maxLines="2"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:text="become a member and just borrowed 33,000" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="51dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="278dp"
+            android:layout_marginTop="239dp"
+            android:layout_marginEnd="57dp"
+            android:src="@mipmap/icon_team26" />
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="43dp"
+            android:layout_marginTop="334dp"
+            android:layout_marginEnd="283dp"
+            android:maxLines="1"
+            android:textColor="@color/blue_041D98"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:text="Fast !" />
+
+        <TextView
+            android:layout_width="217dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="77dp"
+            android:layout_marginTop="386dp"
+            android:layout_marginEnd="92dp"
+            android:maxLines="1"
+            android:textColor="@color/blue_041D98"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="Ultrafast review, 30 seconds loans" />
+
+        <TextView
+            android:layout_width="220dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="77dp"
+            android:layout_marginTop="420dp"
+            android:layout_marginEnd="92dp"
+            android:maxLines="1"
+            android:textColor="@color/blue_041D98"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="Up to 12 months installment loan" />
+
+        <TextView
+            android:layout_width="25dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="382dp"
+            android:background="@mipmap/icon_round4"
+            android:textColor="@color/white_FFFAFA"
+            android:textSize="48sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="25dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="415dp"
+            android:background="@mipmap/icon_round5"
+            android:textColor="@color/white_FFFAFA"
+            android:textSize="48sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="102dp"
+            android:layout_height="81dp"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="460dp"
+            android:layout_marginEnd="33dp"
+            android:background="@drawable/shape_bg_home1" />
+
+        <View
+            android:layout_width="104dp"
+            android:layout_height="81dp"
+            android:layout_marginStart="141dp"
+            android:layout_marginTop="460dp"
+            android:layout_marginEnd="141dp"
+            android:background="@drawable/shape_bg_home2" />
+
+        <View
+            android:layout_width="102dp"
+            android:layout_height="81dp"
+            android:layout_marginStart="251dp"
+            android:layout_marginTop="460dp"
+            android:layout_marginEnd="33dp"
+            android:background="@drawable/shape_bg_home3" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="34dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="67dp"
+            android:layout_marginTop="474dp"
+            android:layout_marginEnd="285dp"
+            android:src="@mipmap/icon_pen" />
+
+        <TextView
+            android:layout_width="58dp"
+            android:layout_height="11dp"
+            android:layout_marginStart="57dp"
+            android:layout_marginTop="519dp"
+            android:layout_marginEnd="271dp"
+            android:maxLines="1"
+            android:textColor="@color/black_021365"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:text="Submit Info" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="34dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="179dp"
+            android:layout_marginTop="474dp"
+            android:layout_marginEnd="173dp"
+            android:src="@mipmap/icon_team11" />
+
+        <TextView
+            android:layout_width="77dp"
+            android:layout_height="11dp"
+            android:layout_marginStart="157dp"
+            android:layout_marginTop="519dp"
+            android:layout_marginEnd="152dp"
+            android:maxLines="1"
+            android:textColor="@color/black_021365"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:text="Get credit score" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="34dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="285dp"
+            android:layout_marginTop="474dp"
+            android:layout_marginEnd="67dp"
+            android:src="@mipmap/icon_team25" />
+
+        <TextView
+            android:layout_width="52dp"
+            android:layout_height="11dp"
+            android:layout_marginStart="276dp"
+            android:layout_marginTop="519dp"
+            android:layout_marginEnd="58dp"
+            android:maxLines="1"
+            android:textColor="@color/black_021365"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:text="Get Money" />
+
+        <View
+            android:layout_width="335dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="659dp"
+            android:layout_marginEnd="23dp"
+            android:background="@drawable/shape_bg_homeconfirm" />
+
+        <TextView
+            android:layout_width="138dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="122dp"
+            android:layout_marginTop="676dp"
+            android:layout_marginEnd="126dp"
+            android:text="Borrow Money"
+            android:textColor="#ffffffff"
+            android:textSize="19sp" />
+    </RelativeLayout>
 
 </FrameLayout>
