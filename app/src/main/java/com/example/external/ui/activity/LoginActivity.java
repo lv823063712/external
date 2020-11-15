@@ -1,5 +1,8 @@
 package com.example.external.ui.activity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,6 +31,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private TextView get_send_code, login_register;
     private DialogUtils utils;
     private StartPresenter startPresenter;
+    private View top_check, bottom_check;
+    private TextView top_text, bottom_text;
+    private int topView = 0;
+    private int bottomView = 0;
 
     @Override
     protected int getLayout() {
@@ -42,16 +49,21 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     private void initView() {
         user_input_phone = findViewById(R.id.user_input_phone);
-        user_input_code = findViewById(R.id.user_input_password);
+        user_input_code = findViewById(R.id.send_code);
         get_send_code = findViewById(R.id.get_send_code);
         login_register = findViewById(R.id.login_register);
-
+        top_check = findViewById(R.id.top_check);
+        top_text = findViewById(R.id.top_text);
+        bottom_check = findViewById(R.id.bottom_check);
+        bottom_text = findViewById(R.id.bottom_text);
     }
 
     @Override
     protected void setClick() {
         get_send_code.setOnClickListener(this);
         login_register.setOnClickListener(this);
+        top_check.setOnClickListener(this);
+        bottom_check.setOnClickListener(this);
     }
 
     @Override
@@ -62,6 +74,28 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.top_check:
+                if (topView == 0) {
+                    top_check.setBackground(getResources().getDrawable(R.drawable.shape_login_bottom_circle_bg));
+                    top_text.setTextColor(getResources().getColor(R.color.blue_041D98));
+                    topView = 1;
+                } else {
+                    top_check.setBackground(getResources().getDrawable(R.drawable.shape_hollow_circle));
+                    top_text.setTextColor(getResources().getColor(R.color.gray_929292));
+                    topView = 0;
+                }
+                break;
+            case R.id.bottom_check:
+                if (bottomView == 0) {
+                    bottom_check.setBackground(getResources().getDrawable(R.drawable.shape_login_bottom_circle_bg));
+                    bottom_text.setTextColor(getResources().getColor(R.color.blue_041D98));
+                    bottomView = 1;
+                } else {
+                    bottom_check.setBackground(getResources().getDrawable(R.drawable.shape_hollow_circle));
+                    bottom_text.setTextColor(getResources().getColor(R.color.gray_929292));
+                    bottomView = 0;
+                }
+                break;
             case R.id.login_register:
                 Map<String, Object> headers = RequestCommon.getInstance().headers(mActivity);
                 Map<String, Object> bodys = new HashMap<>();
@@ -92,6 +126,22 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 }
                 utils.show();
                 startPresenter.get(Constant.SEND_CODE, header, body, SendCodeBean.class);
+                new CountDownTimer(60 * 1000, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        get_send_code.setBackground(getResources().getDrawable(R.mipmap.icon_recangle_blue));
+                        get_send_code.setTextColor(getResources().getColor(R.color.green_06524D));
+                        get_send_code.setText("(" + millisUntilFinished + ")");
+                    }
+
+                    @SuppressLint("WrongConstant")
+                    @Override
+                    public void onFinish() {
+                        get_send_code.setBackground(getResources().getDrawable(R.mipmap.icon_recangle));
+                        get_send_code.setTextColor(getResources().getColor(R.color.blue_041D98));
+                        get_send_code.setText("resend");
+                    }
+                }.start();
                 break;
         }
     }
@@ -106,7 +156,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         } else if (data instanceof LoginBean) {
             LoginBean loginBean = (LoginBean) data;
             Toast.makeText(mActivity, loginBean.getMessage(), Toast.LENGTH_SHORT).show();
-
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
     }
 

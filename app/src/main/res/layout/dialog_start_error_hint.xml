@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="227dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_10_white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="Hint"
+        android:textColor="@color/black_333333"
+        android:textSize="17sp"
+        tools:ignore="RelativeOverlap" />
+
+    <TextView
+        android:id="@+id/tv_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="55dp"
+        android:layout_marginBottom="5dp"
+        android:padding="@dimen/dp_5"
+        android:text="The necessary parameters were not obtained"
+        android:textColor="@color/gray_666666"
+        android:textSize="@dimen/dp_14"
+        tools:ignore="RelativeOverlap" />
+
+
+    <TextView
+        android:id="@+id/tuxing"
+        android:padding="@dimen/dp_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="38dp"
+        android:layout_marginBottom="5dp"
+        android:text="retry"
+        android:layout_below="@+id/tv_hint"
+        android:textColor="@color/blue_538DF8"
+        android:textSize="14sp"/>
+</RelativeLayout>

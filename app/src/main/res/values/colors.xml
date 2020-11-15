@@ -49,6 +49,11 @@
     <color name="yellow_FF8F6D">#FF8F6D</color>
     <color name="yellow_FFBE0D">#FFBE0D</color>
 
+
+    <color name="green_06524D">#06524D</color>
+    <color name="blue_041D98">#041D98</color>
+    <color name="gray_929292">#929292</color>
+
     <color name="gray_F7F8F9">#F7F8F9</color>
     <color name="gray_F7F4F8">#F7F4F8</color>
     <color name="gray_BEC2CC">#BEC2CC</color>
