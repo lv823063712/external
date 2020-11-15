@@ -3,23 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/icon_background"
     tools:context=".ui.activity.StartActivity">
-
-
-    <TextView
-        android:id="@+id/login_start"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="16dp"
-        android:background="@color/blue_538DF8"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:text="startPage,click intent LoginPage"
-        android:textColor="@color/white"
-        android:textSize="17sp"
-        tools:ignore="HardcodedText" />
 
 
 </RelativeLayout>

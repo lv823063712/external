@@ -18,5 +18,6 @@ public class Constant {
     public static final String HOMEPAGE = "product";
     public static final String SEND_CODE = "user/sms";
     public static final String LOGIN = "user/login";
+    public static final String CONFIG = "config";
 
 }

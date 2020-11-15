@@ -39,6 +39,7 @@ dependencies {
     implementation rootProject.ext.compilelibs['appcompat']
     //Meterial Design
     implementation rootProject.ext.compilelibs['design-x']
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.+'
     implementation rootProject.ext.compilelibs['constraintlayout']
     //http
