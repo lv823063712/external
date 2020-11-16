@@ -36,9 +36,11 @@
             android:layout_marginStart="52dp"
             android:layout_marginTop="145dp"
             android:background="@mipmap/icon_round4"
+            android:gravity="center"
+            android:includeFontPadding="false"
             android:text="-"
             android:textColor="@color/white_FFFAFA"
-            android:textSize="48sp"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
         <TextView
@@ -47,9 +49,11 @@
             android:layout_marginStart="304dp"
             android:layout_marginTop="145dp"
             android:background="@mipmap/icon_round5"
+            android:gravity="center"
+            android:includeFontPadding="false"
             android:text="+"
             android:textColor="@color/white_FFFAFA"
-            android:textSize="48sp"
+            android:textSize="26dp"
             android:textStyle="bold" />
 
         <View
@@ -60,42 +64,46 @@
             android:layout_marginEnd="82dp"
             android:background="@color/blue_041D98" />
 
-        <View
+        <RelativeLayout
             android:layout_width="320dp"
             android:layout_height="97dp"
             android:layout_marginStart="33dp"
             android:layout_marginTop="216dp"
             android:layout_marginEnd="33dp"
-            android:background="@drawable/shape_bg_home" />
+            android:background="@drawable/shape_bg_home">
 
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="28dp"
-            android:layout_marginStart="54dp"
-            android:layout_marginTop="230dp"
-            android:maxLines="1"
-            android:textColor="@color/white"
-            android:textSize="21sp"
-            android:text="982****261" />
+            <TextView
+                android:id="@+id/home_some_user"
+                android:layout_width="100dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="@dimen/dp_14"
+                android:maxLines="1"
+                android:text="982****261"
+                android:textColor="@color/white"
+                android:textSize="21sp" />
 
-        <TextView
-            android:layout_width="227dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="54dp"
-            android:layout_marginTop="264dp"
-            android:layout_marginEnd="105dp"
-            android:maxLines="2"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:text="become a member and just borrowed 33,000" />
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="36dp"
+                android:layout_below="@+id/home_some_user"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="7dp"
+                android:maxLines="2"
+                android:text="become a member and just borrowed 33,000"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="51dp"
-            android:layout_height="51dp"
-            android:layout_marginStart="278dp"
-            android:layout_marginTop="239dp"
-            android:layout_marginEnd="57dp"
-            android:src="@mipmap/icon_team26" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="51dp"
+                android:layout_height="51dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="24dp"
+                android:src="@mipmap/icon_team26" />
+
+        </RelativeLayout>
+
 
         <TextView
             android:layout_width="60dp"
@@ -104,10 +112,10 @@
             android:layout_marginTop="334dp"
             android:layout_marginEnd="283dp"
             android:maxLines="1"
+            android:text="Fast !"
             android:textColor="@color/blue_041D98"
             android:textSize="24sp"
-            android:textStyle="bold"
-            android:text="Fast !" />
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="217dp"
@@ -116,10 +124,10 @@
             android:layout_marginTop="386dp"
             android:layout_marginEnd="92dp"
             android:maxLines="1"
+            android:text="Ultrafast review, 30 seconds loans"
             android:textColor="@color/blue_041D98"
             android:textSize="13sp"
-            android:textStyle="bold"
-            android:text="Ultrafast review, 30 seconds loans" />
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="220dp"
@@ -128,10 +136,10 @@
             android:layout_marginTop="420dp"
             android:layout_marginEnd="92dp"
             android:maxLines="1"
+            android:text="Up to 12 months installment loan"
             android:textColor="@color/blue_041D98"
             android:textSize="13sp"
-            android:textStyle="bold"
-            android:text="Up to 12 months installment loan" />
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="25dp"
@@ -144,6 +152,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/biaoshi"
             android:layout_width="25dp"
             android:layout_height="24dp"
             android:layout_marginStart="40dp"
@@ -153,109 +162,116 @@
             android:textSize="48sp"
             android:textStyle="bold" />
 
-        <View
-            android:layout_width="102dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="81dp"
-            android:layout_marginStart="33dp"
-            android:layout_marginTop="460dp"
-            android:layout_marginEnd="33dp"
-            android:background="@drawable/shape_bg_home1" />
+            android:layout_below="@+id/biaoshi"
+            android:layout_marginTop="@dimen/dp_20"
+            android:orientation="horizontal">
 
-        <View
-            android:layout_width="104dp"
-            android:layout_height="81dp"
-            android:layout_marginStart="141dp"
-            android:layout_marginTop="460dp"
-            android:layout_marginEnd="141dp"
-            android:background="@drawable/shape_bg_home2" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="81dp"
+                android:layout_marginStart="33dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_home1"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        <View
-            android:layout_width="102dp"
-            android:layout_height="81dp"
-            android:layout_marginStart="251dp"
-            android:layout_marginTop="460dp"
-            android:layout_marginEnd="33dp"
-            android:background="@drawable/shape_bg_home3" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="34dp"
+                    android:layout_height="32dp"
+                    android:src="@mipmap/icon_pen" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="34dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="67dp"
-            android:layout_marginTop="474dp"
-            android:layout_marginEnd="285dp"
-            android:src="@mipmap/icon_pen" />
+                <TextView
+                    android:layout_width="58dp"
+                    android:layout_height="11dp"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:maxLines="1"
+                    android:text="Submit Info"
+                    android:textColor="@color/black_021365"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="58dp"
-            android:layout_height="11dp"
-            android:layout_marginStart="57dp"
-            android:layout_marginTop="519dp"
-            android:layout_marginEnd="271dp"
-            android:maxLines="1"
-            android:textColor="@color/black_021365"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            android:text="Submit Info" />
+            </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="34dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="179dp"
-            android:layout_marginTop="474dp"
-            android:layout_marginEnd="173dp"
-            android:src="@mipmap/icon_team11" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="81dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_home2"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        <TextView
-            android:layout_width="77dp"
-            android:layout_height="11dp"
-            android:layout_marginStart="157dp"
-            android:layout_marginTop="519dp"
-            android:layout_marginEnd="152dp"
-            android:maxLines="1"
-            android:textColor="@color/black_021365"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            android:text="Get credit score" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/test"
-            android:layout_width="34dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="285dp"
-            android:layout_marginTop="474dp"
-            android:layout_marginEnd="67dp"
-            android:src="@mipmap/icon_team25" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="34dp"
+                    android:layout_height="32dp"
+                    android:src="@mipmap/icon_team11" />
 
-        <TextView
-            android:layout_width="52dp"
-            android:layout_height="11dp"
-            android:layout_marginStart="276dp"
-            android:layout_marginTop="519dp"
-            android:layout_marginEnd="58dp"
-            android:maxLines="1"
-            android:textColor="@color/black_021365"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            android:text="Get Money" />
+                <TextView
+                    android:layout_width="77dp"
+                    android:layout_height="11dp"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:maxLines="1"
+                    android:text="Get credit score"
+                    android:textColor="@color/black_021365"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
 
-        <View
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="81dp"
+                android:layout_marginEnd="33dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_home3"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/test"
+                    android:layout_width="34dp"
+                    android:layout_height="32dp"
+                    android:src="@mipmap/icon_team25" />
+
+                <TextView
+                    android:layout_width="52dp"
+                    android:layout_height="11dp"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:maxLines="1"
+                    android:text="Get Money"
+                    android:textColor="@color/black_021365"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <RelativeLayout
             android:layout_width="335dp"
             android:layout_height="58dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="659dp"
-            android:layout_marginEnd="23dp"
-            android:background="@drawable/shape_bg_homeconfirm" />
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:background="@drawable/shape_bg_homeconfirm">
 
-        <TextView
-            android:id="@+id/Borrow"
-            android:layout_width="138dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="122dp"
-            android:layout_marginTop="676dp"
-            android:layout_marginEnd="126dp"
-            android:text="Borrow Money"
-            android:textColor="#ffffffff"
-            android:textSize="19sp" />
+            <TextView
+                android:id="@+id/Borrow"
+                android:layout_width="138dp"
+                android:layout_height="24dp"
+                android:layout_centerInParent="true"
+                android:text="Borrow Money"
+                android:textColor="#ffffffff"
+                android:textSize="19sp" />
+
+        </RelativeLayout>
+
+
     </RelativeLayout>
 
 </FrameLayout>
