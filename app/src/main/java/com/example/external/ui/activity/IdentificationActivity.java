@@ -155,6 +155,7 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                     three_button.setBackground(getResources().getDrawable(R.drawable.shape_10_white));
                 }
                 break;
+            default:break;
         }
     }
 }

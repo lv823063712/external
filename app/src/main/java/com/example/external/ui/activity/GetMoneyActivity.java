@@ -130,6 +130,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.get_loan:
                 break;
+            default:break;
         }
     }
 

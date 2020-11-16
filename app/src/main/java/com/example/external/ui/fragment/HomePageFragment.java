@@ -11,7 +11,6 @@ import com.example.external.ui.activity.GetMoneyActivity;
 
 public class HomePageFragment extends BaseFragment {
 
-
     @Override
     protected int getLayout() {
         return R.layout.fragment_home_page;
