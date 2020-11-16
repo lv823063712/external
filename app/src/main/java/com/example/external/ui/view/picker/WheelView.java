@@ -37,98 +37,71 @@ import java.util.concurrent.TimeUnit;
  */
 public class WheelView extends View {
 
-    public enum ACTION { // 点击，滑翔(滑到尽头)，拖拽事件
-        CLICK, FLING, DRAG
-    }
-
-    private LineConfig lineConfig = null;//分割线配置
-    private LineConfig.DividerType dividerType;//分隔线类型
-
-    Context context;
-
+    // 修改这个值可以改变滑行速度
+    private static final int VELOCITY_FLING = 10;
+    private static final float SCALE_CONTENT = 0.8F;//非中间文字则用此控制高度，压扁形成3d错觉
     public Handler handler;
-    private GestureDetector gestureDetector;//控制滑动
-    private OnItemPickListener onItemPickListener;
-
-    private boolean isOptions = false;
-    //    private boolean isCenterLabel = true;//
-    private boolean onlyShowCenterLabel = true;//附加单位是否仅仅只显示在选中项后面  是否只中间选中显示label   中间显示只有一个label   否则 和item个数一样
-
-    public void setLabelSpace(int labelSpace) {
-        this.labelSpace = labelSpace;
-    }//label与文本的间距
-
-    private int labelSpace = 0;
-
-    // Timer mTimer;
-    ScheduledExecutorService mExecutor = Executors.newSingleThreadScheduledExecutor();
-    private ScheduledFuture<?> mFuture;
-
-    Paint paintOuterText;
-    Paint paintCenterText;
-    Paint paintLine;
-
-    WheelAdapter<String> adapter;
-
-    private String label;//附加单位
     public int textSize;//选项的文字大小
     public int maxTextWidth;
     public int maxTextHeight;
     public float itemHeight;//每行高度
-
+    public boolean isLoop;
+    //滚动总高度y值
+    public float totalScrollY;
+    //初始化默认选中项
+    public int initPosition;
+    Context context;
+    // Timer mTimer;
+    ScheduledExecutorService mExecutor = Executors.newSingleThreadScheduledExecutor();
+    Paint paintOuterText;
+    Paint paintCenterText;
+    Paint paintLine;
+    WheelAdapter<String> adapter;
     Typeface typeface = Typeface.MONOSPACE;//字体样式，默认是等宽字体
-
-    private int textColorOut = 0xFFa8a8a8;
-    private int textColorCenter = 0xFF2a2a2a;
-    private int dividerColor = 0xFFd5d5d5;
-    private int dividerWidth;
-
     // 条目间距倍数
     float lineSpacingMultiplier = 1.6F;
-    public boolean isLoop;
-
     // 第一条线Y坐标值
     float firstLineY;
     //第二条线Y坐标
     float secondLineY;
     //中间label绘制的Y坐标
     float centerY;
-
-    //滚动总高度y值
-    public float totalScrollY;
-    //初始化默认选中项
-    public int initPosition;
-    //选中的Item
-    private String selectedItem;
-    //选中的Item是第几个
-    private int selectedPosition;
     int preCurrentIndex;
     //滚动偏移值,用于记录滚动了多少个item
     int change;
-
     // 绘制几个条目，实际上第一项和最后一项Y轴压缩成0%了，所以可见的数目实际为9
     int itemsVisible = 11;
-
     int measuredHeight;// WheelView 控件高度
     int measuredWidth;// WheelView 控件宽度
-
     // 半圆周长
     int halfCircumference;
     // 半径
     int radius;
-
+    long startTime = 0;
+    int widthMeasureSpec, heightMeasureSpec;
+    private LineConfig lineConfig = null;//分割线配置
+    private LineConfig.DividerType dividerType;//分隔线类型
+    private GestureDetector gestureDetector;//控制滑动
+    private OnItemPickListener onItemPickListener;
+    private boolean isOptions = false;
+    //    private boolean isCenterLabel = true;//
+    private boolean onlyShowCenterLabel = true;//附加单位是否仅仅只显示在选中项后面  是否只中间选中显示label   中间显示只有一个label   否则 和item个数一样
+    private int labelSpace = 0;
+    private ScheduledFuture<?> mFuture;
+    private String label;//附加单位
+    private int textColorOut = 0xFFa8a8a8;
+    private int textColorCenter = 0xFF2a2a2a;
+    private int dividerColor = 0xFFd5d5d5;
+    private int dividerWidth;
+    //选中的Item
+    private String selectedItem;
+    //选中的Item是第几个
+    private int selectedPosition;
     private int mOffset = 0;
     private float previousY = 0;
-    long startTime = 0;
-
-    // 修改这个值可以改变滑行速度
-    private static final int VELOCITY_FLING = 10;
-    int widthMeasureSpec, heightMeasureSpec;
-
     private int mGravity = Gravity.CENTER;
     private int drawCenterContentStart = 0;//中间选中文字开始绘制位置
     private int drawOutContentStart = 0;//非中间文字开始绘制位置
-    private static final float SCALE_CONTENT = 0.8F;//非中间文字则用此控制高度，压扁形成3d错觉
     private float centerContentOffset;//偏移量
 
     public WheelView(Context context) {
@@ -169,6 +142,10 @@ public class WheelView extends View {
 
         initWheelView(context);
     }
+
+    public void setLabelSpace(int labelSpace) {
+        this.labelSpace = labelSpace;
+    }//label与文本的间距
 
     /**
      * 判断间距是否在1.0-2.0之间
@@ -349,24 +326,18 @@ public class WheelView extends View {
         }
     }
 
-    public final void setCurrentItem(int currentItem) {
-        this.initPosition = currentItem;
-        totalScrollY = 0;//回归顶部，不然重设setCurrentItem的话位置会偏移的，就会显示出不对位置的数据
-        invalidate();
-    }
-
     public final void setOnItemPickListener(OnItemPickListener onItemPickListener) {
         this.onItemPickListener = onItemPickListener;
+    }
+
+    public final WheelAdapter getAdapter() {
+        return adapter;
     }
 
     public final void setAdapter(WheelAdapter adapter) {
         this.adapter = adapter;
         remeasure();
         invalidate();
-    }
-
-    public final WheelAdapter getAdapter() {
-        return adapter;
     }
 
     public final int getCurrentPosition() {
@@ -376,6 +347,12 @@ public class WheelView extends View {
     public final String getCurrentItem() {
         selectedItem = (String) adapter.getItem(selectedPosition);
         return selectedItem;
+    }
+
+    public final void setCurrentItem(int currentItem) {
+        this.initPosition = currentItem;
+        totalScrollY = 0;//回归顶部，不然重设setCurrentItem的话位置会偏移的，就会显示出不对位置的数据
+        invalidate();
     }
 
     //handler 里调用
@@ -587,7 +564,6 @@ public class WheelView extends View {
         //设置2条横线外面的文字大小
         paintOuterText.setTextSize(size);
     }
-
 
     //递归计算出对应的index
     private int getLoopMappingIndex(int index) {
@@ -866,6 +842,10 @@ public class WheelView extends View {
             judgeLineSpace();
 
         }
+    }
+
+    public enum ACTION { // 点击，滑翔(滑到尽头)，拖拽事件
+        CLICK, FLING, DRAG
     }
 
 

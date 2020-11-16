@@ -16,15 +16,15 @@ public class SystemCommon {
         return SystemCommon.ViewHolder.SYSTEM_COMMON;
     }
 
-    private static class ViewHolder {
-        private static final SystemCommon SYSTEM_COMMON = new SystemCommon();
-    }
-
     public void keyBoard(Activity mActivity) {
         View view = mActivity.getWindow().peekDecorView();
         if (view != null) {
             InputMethodManager inputmanger = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
             inputmanger.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    private static class ViewHolder {
+        private static final SystemCommon SYSTEM_COMMON = new SystemCommon();
     }
 }

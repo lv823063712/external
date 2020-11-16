@@ -85,10 +85,6 @@ public class EducationPop extends BasePopupWindow implements View.OnClickListene
         this.selectAll = onClickListener;
     }
 
-    public interface selectAll {
-        void selectAll(String nameAb);
-    }
-
     public void selectAll(String nameAb) {
         selectAll.selectAll(nameAb);
     }
@@ -96,7 +92,7 @@ public class EducationPop extends BasePopupWindow implements View.OnClickListene
     private View onSinglePicker() {
 //        String[] ss = (String[]) list.toArray();
         SinglePicker<String> picker = new SinglePicker<>(mContext, new String[]{"Other", "High School Diploma",
-                "Bachelor degree","Master Diploma","Doctoral Diploma"});
+                "Bachelor degree", "Master Diploma", "Doctoral Diploma"});
         picker.setCanLoop(false);
         picker.setLineVisible(true);
         picker.setLineColor(ContextCompat.getColor(mContext, R.color.gray_cc));
@@ -114,5 +110,9 @@ public class EducationPop extends BasePopupWindow implements View.OnClickListene
         });
 
         return picker.getContentView();
+    }
+
+    public interface selectAll {
+        void selectAll(String nameAb);
     }
 }

@@ -87,10 +87,6 @@ public class SexPicker extends BasePopupWindow implements View.OnClickListener {
         this.selectAll = onClickListener;
     }
 
-    public interface selectAll {
-        void selectAll(String nameAb);
-    }
-
     public void selectAll(String nameAb) {
         selectAll.selectAll(nameAb);
     }
@@ -115,5 +111,9 @@ public class SexPicker extends BasePopupWindow implements View.OnClickListener {
         });
 
         return picker.getContentView();
+    }
+
+    public interface selectAll {
+        void selectAll(String nameAb);
     }
 }

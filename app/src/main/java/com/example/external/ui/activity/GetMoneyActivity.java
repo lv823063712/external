@@ -1,8 +1,6 @@
 package com.example.external.ui.activity;
 
-import android.content.Intent;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -130,7 +128,8 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.get_loan:
                 break;
-            default:break;
+            default:
+                break;
         }
     }
 

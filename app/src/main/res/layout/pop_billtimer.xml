@@ -22,7 +22,7 @@
             android:paddingEnd="0dp"
             android:text="Cancel"
             android:textColor="@color/black_444444"
-            android:textSize="17sp"/>
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/tv_ok"

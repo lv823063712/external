@@ -8,13 +8,6 @@ package com.example.external.mvp.network;
  */
 public class Constant {
 
-    private static final String TEST_BASE_URL = "http://test-api.hqcashmart.com/v3/public/index.php/";
-
-
-    public static String getApiUrl() {
-        return TEST_BASE_URL;
-    }
-
     //配置信息
     public static final String CONFIG_URL = "config";
     //首页
@@ -45,4 +38,9 @@ public class Constant {
     public static final String UPBASEINFO_URL = "profile/update_baseinfo";
     //个人资料提交-IDINFO
     public static final String UPIDINFO_URL = "profile/update_idinfo";
+    private static final String TEST_BASE_URL = "http://test-api.hqcashmart.com/v3/public/index.php/";
+
+    public static String getApiUrl() {
+        return TEST_BASE_URL;
+    }
 }

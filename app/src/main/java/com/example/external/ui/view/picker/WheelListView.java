@@ -76,7 +76,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
     private int textSize = TEXT_SIZE;
     private int textColorNormal = TEXT_COLOR_NORMAL;
     private int textColorFocus = TEXT_COLOR_FOCUS;
-//    private boolean isUserScroll = false;//是否用户手动滚动
+    //    private boolean isUserScroll = false;//是否用户手动滚动
     private LineConfig lineConfig = null;//分割线配置
 
     public WheelListView(Context context) {
@@ -252,7 +252,6 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
         setSelectedIndex(adapter.getData().indexOf(item));
     }
 
-   
 
     /**
      * 获得滚轮当前真实位置
@@ -355,7 +354,8 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
             refreshTextView(i, curPosition, itemView, textView);
         }
     }
-//刷新文本设置
+
+    //刷新文本设置
     private void refreshTextView(int position, int curPosition, View
             itemView, TextView textView) {
         //LogUtils.verbose("position=" + position + ", curPosition=" + curPosition);
@@ -442,6 +442,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
             refreshCurrentPosition();
         }
     }
+
     @Override
     protected void onMeasure(int widthSpec, int heightSpec) {
         int width = getLayoutParams().width;
@@ -466,15 +467,14 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
     public interface OnWheelChangeListener {
         /**
          * 滑动选择回调
+         * <p>
+         * //         * @param isUserScroll 是否用户手动滚动，用于联动效果判断是否自动重置选中项
          *
-//         * @param isUserScroll 是否用户手动滚动，用于联动效果判断是否自动重置选中项
-         * @param index        当前选择项的索引
-         * @param item         当前选择项的值
+         * @param index 当前选择项的索引
+         * @param item  当前选择项的值
          */
         void onItemSelected(int index, String item);
     }
-
-
 
 
     private static class ItemView extends LinearLayout {
@@ -619,12 +619,21 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
             return convertView;
         }
 
-        public final WheelAdapter setLoop(boolean loop) {
-            if (loop != isLoop) {
-                isLoop = loop;
-                super.notifyDataSetChanged();
+        public List<String> getData() {
+            return data;
+        }
+
+        public final WheelAdapter setData(List<String> list) {
+            data.clear();
+            if (null != list) {
+                data.addAll(list);
             }
+            super.notifyDataSetChanged();
             return this;
+        }
+
+        public int getWheelSize() {
+            return wheelSize;
         }
 
         public final WheelAdapter setWheelSize(int wheelSize) {
@@ -637,25 +646,16 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
             return this;
         }
 
-        public final WheelAdapter setData(List<String> list) {
-            data.clear();
-            if (null != list) {
-                data.addAll(list);
-            }
-            super.notifyDataSetChanged();
-            return this;
-        }
-
-        public List<String> getData() {
-            return data;
-        }
-
-        public int getWheelSize() {
-            return wheelSize;
-        }
-
         public boolean isLoop() {
             return isLoop;
+        }
+
+        public final WheelAdapter setLoop(boolean loop) {
+            if (loop != isLoop) {
+                isLoop = loop;
+                super.notifyDataSetChanged();
+            }
+            return this;
         }
 
         /**
@@ -721,7 +721,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
         private Paint bgPaint, paint;
         private int wheelSize, itemHeight;
         private float ratio;
-        private LineConfig lineConfig ;
+        private LineConfig lineConfig;
 
         public HoloWheelDrawable(LineConfig config) {
             super(config);
@@ -747,7 +747,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
             // draw background
             canvas.drawRect(0, 0, width, height, bgPaint);
             //设置线可见时绘制两条线
-            if(lineConfig.isVisible()){
+            if (lineConfig.isVisible()) {
                 // draw select border
                 if (itemHeight != 0) {
                     canvas.drawLine(width * ratio, itemHeight * (wheelSize / 2), width * (1 - ratio),

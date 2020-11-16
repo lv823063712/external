@@ -18,11 +18,13 @@ public interface StartInterface {
 
     interface StartMoudle {
         void get(String url, Map<String, Object> head, Map<String, Object> map, Class kind, StartCallBack startCallBack);
+
         void postQueryBody(String url, Map<String, Object> head, Map<String, Object> map, RequestBody body, Class kind, StartCallBack startCallBack);
     }
 
     interface StartPresenter {
         void get(String url, Map<String, Object> head, Map<String, Object> map, Class kind);
+
         void postQueryBody(String url, Map<String, Object> head, Map<String, Object> map, RequestBody body, Class kind);
     }
 

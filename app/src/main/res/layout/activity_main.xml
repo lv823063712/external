@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.MainActivity">
+
     <FrameLayout
         android:id="@+id/home_yidian_fl_container"
         android:layout_width="match_parent"
@@ -18,48 +19,47 @@
         android:background="#FFB2B2B2" />
 
 
-        <com.yinglan.alphatabs.AlphaTabsIndicator
-            android:id="@+id/bottom_navigation"
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            android:layout_marginTop="1dp"
-            android:background="@color/white"
-            android:orientation="horizontal">
+    <com.yinglan.alphatabs.AlphaTabsIndicator
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
 
 
-            <com.yinglan.alphatabs.AlphaTabView
-                android:id="@+id/home_page"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingTop="6dp"
-                android:paddingBottom="@dimen/dp_4"
-                app:paddingTexwithIcon="6dp"
-                app:tabIconNormal="@mipmap/icon_home"
-                app:tabIconSelected="@mipmap/icon_home"
-                app:tabText="患者"
-                app:tabTextSize="11sp"
-                app:textColorNormal="@color/gray_666666"
-                app:textColorSelected="@color/blue_3254E6" />
+        <com.yinglan.alphatabs.AlphaTabView
+            android:id="@+id/home_page"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="6dp"
+            android:paddingBottom="@dimen/dp_4"
+            app:paddingTexwithIcon="6dp"
+            app:tabIconNormal="@mipmap/icon_home"
+            app:tabIconSelected="@mipmap/icon_home"
+            app:tabText="患者"
+            app:tabTextSize="11sp"
+            app:textColorNormal="@color/gray_666666"
+            app:textColorSelected="@color/blue_3254E6" />
 
-            <com.yinglan.alphatabs.AlphaTabView
-                android:id="@+id/me"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingTop="6dp"
-                android:paddingBottom="@dimen/dp_4"
-                app:paddingTexwithIcon="6dp"
-                app:tabIconNormal="@mipmap/icon_me"
-                app:tabIconSelected="@mipmap/icon_me"
-                app:tabText="我的"
-                app:tabTextSize="11sp"
-                app:textColorNormal="@color/gray_666666"
-                app:textColorSelected="@color/blue_3254E6" />
+        <com.yinglan.alphatabs.AlphaTabView
+            android:id="@+id/me"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="6dp"
+            android:paddingBottom="@dimen/dp_4"
+            app:paddingTexwithIcon="6dp"
+            app:tabIconNormal="@mipmap/icon_me"
+            app:tabIconSelected="@mipmap/icon_me"
+            app:tabText="我的"
+            app:tabTextSize="11sp"
+            app:textColorNormal="@color/gray_666666"
+            app:textColorSelected="@color/blue_3254E6" />
 
-        </com.yinglan.alphatabs.AlphaTabsIndicator>
-
+    </com.yinglan.alphatabs.AlphaTabsIndicator>
 
 
 </RelativeLayout>

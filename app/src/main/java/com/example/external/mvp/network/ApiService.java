@@ -3,7 +3,6 @@ package com.example.external.mvp.network;
 import java.util.Map;
 
 import io.reactivex.Observable;
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;

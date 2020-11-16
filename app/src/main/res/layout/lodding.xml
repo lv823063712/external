@@ -11,6 +11,6 @@
         android:layout_height="30dp"
         android:layout_centerInParent="true"
         android:indeterminateBehavior="repeat"
-        android:indeterminateOnly="true"
-        android:indeterminateDrawable="@drawable/loading_anim" />
+        android:indeterminateDrawable="@drawable/loading_anim"
+        android:indeterminateOnly="true" />
 </RelativeLayout>

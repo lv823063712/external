@@ -18,10 +18,6 @@ public class RequestCommon {
         return ViewHolder.REQUEST_COMMON;
     }
 
-    private static class ViewHolder {
-        private static final RequestCommon REQUEST_COMMON = new RequestCommon();
-    }
-
     public HashMap<String, Object> headers(Context context) {
 
         String deviceId = null;
@@ -41,5 +37,9 @@ public class RequestCommon {
         map.put("gps-adid","android");
         map.put("token","android");*/
         return map;
+    }
+
+    private static class ViewHolder {
+        private static final RequestCommon REQUEST_COMMON = new RequestCommon();
     }
 }

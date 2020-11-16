@@ -98,7 +98,6 @@ public abstract class BaseFragment extends SupportFragment {
     }
 
 
-
     protected abstract int getLayout();
 
 

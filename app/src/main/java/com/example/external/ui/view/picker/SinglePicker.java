@@ -27,7 +27,7 @@ public class SinglePicker<T> extends WheelPicker {
     private static final int ITEM_WIDTH_UNKNOWN = -99;
     private List<T> items = new ArrayList<>();
     private List<String> itemStrings = new ArrayList<>();
-    private WheelView wheelView ;
+    private WheelView wheelView;
     private float weightWidth = 0.0f;
     private OnSingleWheelListener onSingleWheelListener;
     private OnItemPickListener<T> onItemPickListener;
@@ -35,6 +35,7 @@ public class SinglePicker<T> extends WheelPicker {
     private String selectedItem = "";
     private String label = "";
     private int itemWidth = ITEM_WIDTH_UNKNOWN;
+
     public SinglePicker(Activity activity, T[] items) {
         this(activity, Arrays.asList(items));
     }
@@ -51,6 +52,7 @@ public class SinglePicker<T> extends WheelPicker {
         items.add(item);
         itemStrings.add(formatToString(item));
     }
+
     /**
      * 移除数据项
      */
@@ -77,10 +79,10 @@ public class SinglePicker<T> extends WheelPicker {
         for (T item : items) {
             itemStrings.add(formatToString(item));
         }
-            if (null != wheelView) {
-                wheelView.setAdapter(new ArrayWheelAdapter<>(itemStrings));
-                wheelView.setCurrentItem(selectedItemIndex);
-            }
+        if (null != wheelView) {
+            wheelView.setAdapter(new ArrayWheelAdapter<>(itemStrings));
+            wheelView.setCurrentItem(selectedItemIndex);
+        }
 
     }
 
@@ -92,44 +94,30 @@ public class SinglePicker<T> extends WheelPicker {
     }
 
     /**
-     * 设置默认选中的项的索引
-     */
-    public void setSelectedIndex(int index) {
-        if (index >= 0 && index < items.size()) {
-            selectedItemIndex = index;
-        }
-    }
-
-    /**
-     * 设置默认选中的项
-     */
-    public void setSelectedItem(@NonNull T item) {
-        setSelectedIndex(itemStrings.indexOf(formatToString(item)));
-    }
-    /**
      * 设置view的权重，总权重数为1 ,weightWidth范围（0.0f-1.0f）
-     * */
-    public void setWeightWidth(@FloatRange(from = 0, to = 1)float weightWidth) {
-        if(weightWidth<0){
+     */
+    public void setWeightWidth(@FloatRange(from = 0, to = 1) float weightWidth) {
+        if (weightWidth < 0) {
             weightWidth = 0;
         }
-        if(!TextUtils.isEmpty(label)){
-            if(weightWidth>=1){
+        if (!TextUtils.isEmpty(label)) {
+            if (weightWidth >= 1) {
                 weightWidth = 0.5f;
             }
         }
         this.weightWidth = weightWidth;
     }
+
     /**
      * 设置选项的宽(dp)
      */
     public void setItemWidth(int itemWidth) {
-            if (null != wheelView) {
-                int width = ConvertUtils.toPx(activity, itemWidth);
-                wheelView.setLayoutParams(new LinearLayout.LayoutParams(width, wheelView.getLayoutParams().height));
-            }else{
-                this.itemWidth = itemWidth;
-            }
+        if (null != wheelView) {
+            int width = ConvertUtils.toPx(activity, itemWidth);
+            wheelView.setLayoutParams(new LinearLayout.LayoutParams(width, wheelView.getLayoutParams().height));
+        } else {
+            this.itemWidth = itemWidth;
+        }
     }
 
     /**
@@ -157,7 +145,7 @@ public class SinglePicker<T> extends WheelPicker {
         layout.setOrientation(LinearLayout.HORIZONTAL);
         layout.setGravity(Gravity.CENTER);
         LinearLayout.LayoutParams wheelParams = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
-        if(weightEnable){
+        if (weightEnable) {
             //按权重分配宽度
             wheelParams = new LinearLayout.LayoutParams(0, WRAP_CONTENT);
             wheelParams.weight = 1;
@@ -184,16 +172,16 @@ public class SinglePicker<T> extends WheelPicker {
 //        wheelParams.gravity = Gravity.START;
         layout.addView(wheelView);
         if (!TextUtils.isEmpty(label)) {
-            if(isOuterLabelEnable()){
+            if (isOuterLabelEnable()) {
                 TextView labelView = new TextView(activity);
                 labelView.setLayoutParams(new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT));
                 labelView.setTextColor(textColorFocus);
                 labelView.setTextSize(textSize);
                 labelView.setText(label);
                 layout.addView(labelView);
-            }else {
+            } else {
 //                wheelView.setLabel(label);
-                wheelView.setLabel(label,false);
+                wheelView.setLabel(label, false);
             }
         }
         if (itemWidth != ITEM_WIDTH_UNKNOWN) {
@@ -219,18 +207,33 @@ public class SinglePicker<T> extends WheelPicker {
         }
     }
 
-    private  T getSelectedItem() {
+    private T getSelectedItem() {
         return items.get(selectedItemIndex);
+    }
+
+    /**
+     * 设置默认选中的项
+     */
+    public void setSelectedItem(@NonNull T item) {
+        setSelectedIndex(itemStrings.indexOf(formatToString(item)));
     }
 
     public int getSelectedIndex() {
         return selectedItemIndex;
     }
 
+    /**
+     * 设置默认选中的项的索引
+     */
+    public void setSelectedIndex(int index) {
+        if (index >= 0 && index < items.size()) {
+            selectedItemIndex = index;
+        }
+    }
+
 //    public View getWheelListView() {
 //        return wheelListView;
 //    }
-
 
 
 }

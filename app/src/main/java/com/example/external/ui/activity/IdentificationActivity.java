@@ -25,7 +25,7 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
     private NestedScrollView first_step;
     private View one_line, two_line;
     private TextView one_button, two_button, three_button, step_tv, birthday_et, gender_et, marital_et,
-            education_et,employment_type_et,your_monthly_salary_et,monthly_family_income_et;
+            education_et, employment_type_et, your_monthly_salary_et, monthly_family_income_et;
     private EditText full_name_et, email_et, second_step,
             ifsc_et, bank_name_et, bank_account;
     private LinearLayout second_steps, third_step;

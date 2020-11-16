@@ -2,8 +2,9 @@ package com.example.external.ui.view.picker;
 
 
 final public class OnItemPickedRunnable implements Runnable {
-    final private  WheelView wheelView;
+    final private WheelView wheelView;
     private OnItemPickListener onItemPickListener;
+
     public OnItemPickedRunnable(WheelView wheelView, OnItemPickListener onItemPickListener) {
         this.wheelView = wheelView;
         this.onItemPickListener = onItemPickListener;
@@ -11,6 +12,6 @@ final public class OnItemPickedRunnable implements Runnable {
 
     @Override
     public final void run() {
-        onItemPickListener.onItemPicked(wheelView.getCurrentPosition(),wheelView.getCurrentItem());
+        onItemPickListener.onItemPicked(wheelView.getCurrentPosition(), wheelView.getCurrentItem());
     }
 }

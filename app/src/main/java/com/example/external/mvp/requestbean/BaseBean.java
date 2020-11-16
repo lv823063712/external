@@ -6,7 +6,7 @@ package com.example.external.mvp.requestbean;
  * @CreateDate: 2020/11/14 20:24
  * @Creator: lf
  */
-public  class BaseBean {
+public class BaseBean {
     private String status;
     private Object dataobj;
 

@@ -2,8 +2,6 @@ package com.example.external.utils;
 
 import android.content.Context;
 
-import com.example.external.mvp.network.Constant;
-
 /**
  * @ClassName: UserUtils
  * @Description:
@@ -21,9 +19,6 @@ public class UserUtils {
         return ViewHolder.USER_UTILS;
     }
 
-    private static class ViewHolder {
-        private static final UserUtils USER_UTILS = new UserUtils();
-    }
     //客服邮箱
     public void saveEmail(Context context, String email) {
         SharedPreferencesUtil.getInstance(context).putString(ISEMAIL, email);
@@ -36,6 +31,7 @@ public class UserUtils {
     public void removeEmail(Context context) {
         SharedPreferencesUtil.getInstance(context).remove(ISEMAIL);
     }
+
     //客服备用邮箱
     public void saveEmails(Context context, String emails) {
         SharedPreferencesUtil.getInstance(context).putString(ISEMAILS, emails);
@@ -48,6 +44,7 @@ public class UserUtils {
     public void removeEmails(Context context) {
         SharedPreferencesUtil.getInstance(context).remove(ISEMAILS);
     }
+
     //客服时间
     public void saveServiceTime(Context context, String serviceTime) {
         SharedPreferencesUtil.getInstance(context).putString(SERVICETIME, serviceTime);
@@ -60,6 +57,7 @@ public class UserUtils {
     public void removeServiceTime(Context context) {
         SharedPreferencesUtil.getInstance(context).remove(SERVICETIME);
     }
+
     //审核成功
     public void saveCongratulations(Context context, String Congratulations) {
         SharedPreferencesUtil.getInstance(context).putString(CONGRATULATIONS, Congratulations);
@@ -72,6 +70,7 @@ public class UserUtils {
     public void removeCongratulations(Context context) {
         SharedPreferencesUtil.getInstance(context).remove(CONGRATULATIONS);
     }
+
     //支付渠道
     public void savePayChannel(Context context, String PayChannel) {
         SharedPreferencesUtil.getInstance(context).putString(PAY_CHANNEL, PayChannel);
@@ -85,10 +84,12 @@ public class UserUtils {
         SharedPreferencesUtil.getInstance(context).remove(PAY_CHANNEL);
     }
 
-
-
     //清除所有本地保存数据
     public void clearAllSp(Context context) {
         SharedPreferencesUtil.getInstance(context).clearSp();
+    }
+
+    private static class ViewHolder {
+        private static final UserUtils USER_UTILS = new UserUtils();
     }
 }

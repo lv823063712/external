@@ -85,10 +85,6 @@ public class MonthlyFamilyIncomePop extends BasePopupWindow implements View.OnCl
         this.selectAll = onClickListener;
     }
 
-    public interface selectAll {
-        void selectAll(String nameAb);
-    }
-
     public void selectAll(String nameAb) {
         selectAll.selectAll(nameAb);
     }
@@ -96,7 +92,7 @@ public class MonthlyFamilyIncomePop extends BasePopupWindow implements View.OnCl
     private View onSinglePicker() {
 //        String[] ss = (String[]) list.toArray();
         SinglePicker<String> picker = new SinglePicker<>(mContext, new String[]{"<20000", "20000～30000",
-                "30000～50000","50000～80000", ">80000"});
+                "30000～50000", "50000～80000", ">80000"});
         picker.setCanLoop(false);
         picker.setLineVisible(true);
         picker.setLineColor(ContextCompat.getColor(mContext, R.color.gray_cc));
@@ -114,5 +110,9 @@ public class MonthlyFamilyIncomePop extends BasePopupWindow implements View.OnCl
         });
 
         return picker.getContentView();
+    }
+
+    public interface selectAll {
+        void selectAll(String nameAb);
     }
 }

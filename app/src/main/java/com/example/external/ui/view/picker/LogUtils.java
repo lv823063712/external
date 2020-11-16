@@ -4,7 +4,6 @@ import android.os.Debug;
 import android.os.Environment;
 import android.util.Log;
 
-
 import com.example.external.BuildConfig;
 
 import java.io.File;
@@ -15,6 +14,7 @@ import java.io.StringWriter;
 /**
  * 将信息记录到控制台的LogCat，显示调用方法及所在的文件、行号，方便开发时调试查错。
  * 注意：在Debug状态下开启，在Release状态下关闭，敏感信息不宜打印，否则被非法之徒抓取贻害无穷。
+ *
  * @author matt
  * blog: addapp.cn
  */
@@ -33,12 +33,12 @@ public final class LogUtils {
         return isDebug;
     }
 
-    public static void setDebugTag(String debugTag) {
-        LogUtils.debugTag = debugTag;
-    }
-
     public static String getDebugTag() {
         return debugTag;
+    }
+
+    public static void setDebugTag(String debugTag) {
+        LogUtils.debugTag = debugTag;
     }
 
     /**

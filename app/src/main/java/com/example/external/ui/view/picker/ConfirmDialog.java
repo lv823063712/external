@@ -18,6 +18,7 @@ import androidx.annotation.StringRes;
 
 /**
  * 带确定及取消按钮的弹窗
+ *
  * @author matt
  * blog: addapp.cn
  */
@@ -29,11 +30,6 @@ public abstract class ConfirmDialog<V extends View> extends BaseDialog<View> {
     protected int topHeight = 40;//dp
     protected int topPadding = 15;//dp
     protected boolean cancelVisible = true;
-
-    public void setActionButtonTop(boolean actionButtonTop) {
-        isActionButtonTop = actionButtonTop;
-    }
-
     protected boolean isActionButtonTop = true;//确认取消按钮位置
     protected CharSequence cancelText = "";
     protected CharSequence submitText = "";
@@ -55,6 +51,10 @@ public abstract class ConfirmDialog<V extends View> extends BaseDialog<View> {
         super(activity);
         cancelText = activity.getString(android.R.string.cancel);
         submitText = activity.getString(android.R.string.ok);
+    }
+
+    public void setActionButtonTop(boolean actionButtonTop) {
+        isActionButtonTop = actionButtonTop;
     }
 
     /**
@@ -231,11 +231,9 @@ public abstract class ConfirmDialog<V extends View> extends BaseDialog<View> {
     public void setBackgroundColor(@ColorInt int backgroundColor) {
         this.backgroundColor = backgroundColor;
     }
+
     public void setBackgroundRes(@DrawableRes int res) {
         this.backgroundRes = res;
-    }
-    public void setTitleView(View titleView) {
-        this.titleView = titleView;
     }
 
     public View getTitleView() {
@@ -243,6 +241,10 @@ public abstract class ConfirmDialog<V extends View> extends BaseDialog<View> {
             throw new NullPointerException("please call show at first");
         }
         return titleView;
+    }
+
+    public void setTitleView(View titleView) {
+        this.titleView = titleView;
     }
 
     public TextView getCancelButton() {
@@ -269,14 +271,14 @@ public abstract class ConfirmDialog<V extends View> extends BaseDialog<View> {
         LinearLayout rootLayout = new LinearLayout(activity);
         rootLayout.setLayoutParams(new LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT));
         rootLayout.setBackgroundColor(backgroundColor);
-        if(0!=backgroundRes){
+        if (0 != backgroundRes) {
             rootLayout.setBackgroundResource(backgroundRes);
         }
         rootLayout.setOrientation(LinearLayout.VERTICAL);
         rootLayout.setGravity(Gravity.CENTER);
         rootLayout.setPadding(0, 0, 0, 0);
         rootLayout.setClipToPadding(false);
-        if(isActionButtonTop){
+        if (isActionButtonTop) {
             View headerView = makeHeaderView();
             if (headerView != null) {
                 rootLayout.addView(headerView);
@@ -289,11 +291,11 @@ public abstract class ConfirmDialog<V extends View> extends BaseDialog<View> {
                 rootLayout.addView(lineView);
             }
             LinearLayout.LayoutParams rootParams = new LinearLayout.LayoutParams(MATCH_PARENT, 0, 1.0f);
-            rootParams.setMargins(0,15,0,15);
+            rootParams.setMargins(0, 15, 0, 15);
             rootLayout.addView(makeCenterView(), rootParams);
-        }else{
+        } else {
             LinearLayout.LayoutParams rootParams = new LinearLayout.LayoutParams(MATCH_PARENT, 0, 1.0f);
-            rootParams.setMargins(0,15,0,15);
+            rootParams.setMargins(0, 15, 0, 15);
             rootLayout.addView(makeCenterView(), rootParams);
             if (topLineVisible) {
                 View lineView = new View(activity);
@@ -476,15 +478,17 @@ public abstract class ConfirmDialog<V extends View> extends BaseDialog<View> {
 
         return topButtonLayout;
     }
+
     /*
-    * 点击确定按钮的回调
-    * */
+     * 点击确定按钮的回调
+     * */
     protected void onSubmit() {
 
     }
+
     /*
-    * 点击取消按钮的回调
-    * */
+     * 点击取消按钮的回调
+     * */
     protected void onCancel() {
 
     }

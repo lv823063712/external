@@ -1,16 +1,12 @@
 package com.example.external.base;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 
 import androidx.annotation.Nullable;
 
 import com.example.external.R;
-import com.example.external.config.AppStatusConstant;
-import com.example.external.ui.activity.StartActivity;
-import com.example.external.utils.AppStatusManager;
 import com.example.external.utils.StatusBarUtil;
 
 import me.yokeyword.fragmentation.SupportActivity;

@@ -150,11 +150,6 @@ public abstract class BaseDialog<V extends View> implements DialogInterface.OnKe
     protected void setContentViewAfter(V contentView) {
     }
 
-    public void setContentView(View view) {
-        contentLayout.removeAllViews();
-        contentLayout.addView(view);
-    }
-
     public void setAnimationStyle(@StyleRes int animRes) {
         Window window = dialog.getWindow();
         if (window != null) {
@@ -307,6 +302,11 @@ public abstract class BaseDialog<V extends View> implements DialogInterface.OnKe
         // IllegalStateException: The specified child already has a parent.
         // You must call removeView() on the child's parent first.
         return contentLayout.getChildAt(0);
+    }
+
+    public void setContentView(View view) {
+        contentLayout.removeAllViews();
+        contentLayout.addView(view);
     }
 
     /**

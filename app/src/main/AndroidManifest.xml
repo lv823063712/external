@@ -61,6 +61,7 @@
         <activity android:name=".ui.activity.GetMoneyActivity"></activity>
         <activity android:name=".ui.activity.ReviewingActivity" />
         <activity android:name=".ui.activity.IdentificationActivity" />
+        <activity android:name=".ui.activity.FeedbackActivity"></activity>
         <activity
             android:name=".ui.activity.StartActivity"
             android:configChanges="orientation|screenSize"

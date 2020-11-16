@@ -39,7 +39,7 @@ public class MyApplication extends Application {
                 .trackActivities(false)
                 .minTimeBetweenCrashesMs(2000)
                 .errorActivity(StartActivity.class)
-            .restartActivity(StartActivity.class)
-            .apply();
+                .restartActivity(StartActivity.class)
+                .apply();
     }
 }

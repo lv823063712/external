@@ -52,11 +52,7 @@ public class RetrofitUtils {
         return ViewHolder.RETROFIT_UTILS;
     }
 
-    private static class ViewHolder {
-        private static final RetrofitUtils RETROFIT_UTILS = new RetrofitUtils();
-    }
-
-    public void get(String url, Map<String, Object> headerMap, Map<String, Object> map, final setHttpListener httpListener){
+    public void get(String url, Map<String, Object> headerMap, Map<String, Object> map, final setHttpListener httpListener) {
         apiService.get(url, headerMap, map).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
@@ -91,7 +87,7 @@ public class RetrofitUtils {
                 });
     }
 
-    public void postString(String url, Map<String, Object> headerMap, Map<String, Object> map, RequestBody body, final setHttpListener httpListener){
+    public void postString(String url, Map<String, Object> headerMap, Map<String, Object> map, RequestBody body, final setHttpListener httpListener) {
         apiService.postQueryBody(url, headerMap, map, body).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
@@ -130,6 +126,10 @@ public class RetrofitUtils {
         void success(T data);
 
         void error(T error);
+    }
+
+    private static class ViewHolder {
+        private static final RetrofitUtils RETROFIT_UTILS = new RetrofitUtils();
     }
 
 }

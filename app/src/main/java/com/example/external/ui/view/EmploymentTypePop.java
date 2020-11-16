@@ -85,10 +85,6 @@ public class EmploymentTypePop extends BasePopupWindow implements View.OnClickLi
         this.selectAll = onClickListener;
     }
 
-    public interface selectAll {
-        void selectAll(String nameAb);
-    }
-
     public void selectAll(String nameAb) {
         selectAll.selectAll(nameAb);
     }
@@ -113,5 +109,9 @@ public class EmploymentTypePop extends BasePopupWindow implements View.OnClickLi
         });
 
         return picker.getContentView();
+    }
+
+    public interface selectAll {
+        void selectAll(String nameAb);
     }
 }

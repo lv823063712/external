@@ -24,9 +24,9 @@ import java.util.regex.Pattern;
 @SuppressWarnings("unused")
 public class StatusBarUtil {
 
+    public static final int MIN_API = 19;
     public static int DEFAULT_COLOR = 0;
     public static float DEFAULT_ALPHA = 0;//Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? 0.2f : 0.3f;
-    public static final int MIN_API = 19;
 
     //<editor-fold desc="">
     public static void immersive(Activity activity) {
@@ -89,6 +89,7 @@ public class StatusBarUtil {
     public static void darkMode(Activity activity, int color, @FloatRange(from = 0.0, to = 1.0) float alpha) {
         darkMode(activity.getWindow(), color, alpha);
     }
+
     public static void darkMode(Window window, int color, @FloatRange(from = 0.0, to = 1.0) float alpha) {
         if (isFlyme4Later()) {
             darkModeForFlyme4(window, true);

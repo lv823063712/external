@@ -140,16 +140,16 @@ public class BillTimerPop extends BasePopupWindow implements View.OnClickListene
         this.mSelectTimeListener = mSelectTimeListener;
     }
 
-    public interface SelectTimeListener {
-        void selectModel(String start);
-
-    }
-
     public void darkenBackground(Float bgcolor) {
         WindowManager.LayoutParams lp = mContext.getWindow().getAttributes();
         lp.alpha = bgcolor;
         mContext.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         mContext.getWindow().setAttributes(lp);
+
+    }
+
+    public interface SelectTimeListener {
+        void selectModel(String start);
 
     }
 

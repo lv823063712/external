@@ -22,25 +22,17 @@ import java.io.File;
  * </ol>
  *
  * @author zhaokaiqiang
- *         github https://github.com/ZhaoKaiQiang/KLog
- *         15/11/17 扩展功能，添加对文件的支持
- *         15/11/18 扩展功能，增加对XML的支持，修复BUG
- *         15/12/8  扩展功能，添加对任意参数的支持
- *         15/12/11 扩展功能，增加对无限长字符串支持
- *         16/6/13  扩展功能，添加对自定义全局Tag的支持
+ * github https://github.com/ZhaoKaiQiang/KLog
+ * 15/11/17 扩展功能，添加对文件的支持
+ * 15/11/18 扩展功能，增加对XML的支持，修复BUG
+ * 15/12/8  扩展功能，添加对任意参数的支持
+ * 15/12/11 扩展功能，增加对无限长字符串支持
+ * 16/6/13  扩展功能，添加对自定义全局Tag的支持
  */
 public class LogUtil {
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
     public static final String NULL_TIPS = "Log with null object";
-
-    private static final String DEFAULT_MESSAGE = "time_line here";
-    private static final String PARAM = "Param";
-    private static final String NULL = "null";
-    private static final String TAG_DEFAULT = "mLogUtil";
-    private static final String SUFFIX = ".java";
-
     public static final int JSON_INDENT = 4;
-
     public static final int V = 0x1;
     public static final int D = 0x2;
     public static final int I = 0x3;
@@ -49,13 +41,12 @@ public class LogUtil {
     public static final int WTF = 0x6;
     public static final int JSON = 0x7;
     public static final int XML = 0x8;
-
-    @IntDef({V, D, I, W, E, WTF, JSON, XML})
-    public @interface LogType {
-    }
-
+    private static final String DEFAULT_MESSAGE = "time_line here";
+    private static final String PARAM = "Param";
+    private static final String NULL = "null";
+    private static final String TAG_DEFAULT = "mLogUtil";
+    private static final String SUFFIX = ".java";
     private static final int STACK_TRACE_INDEX = 6;
-
     public static String mGlobalTag = TAG_DEFAULT;
     private static boolean IS_SHOW_LOG = true;
 
@@ -202,10 +193,10 @@ public class LogUtil {
             case XML:
                 XmlLog.printXml(tag, msg, headString);
                 break;
-            default:break;
+            default:
+                break;
         }
     }
-
 
     private static void printFile(String tagStr, File targetDirectory, String fileName, Object objectMsg) {
 
@@ -290,5 +281,9 @@ public class LogUtil {
         } else {
             return NULL;
         }
+    }
+
+    @IntDef({V, D, I, W, E, WTF, JSON, XML})
+    public @interface LogType {
     }
 }

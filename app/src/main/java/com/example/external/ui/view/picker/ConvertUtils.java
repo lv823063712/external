@@ -15,7 +15,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.NinePatchDrawable;
 import android.net.Uri;
-import android.nfc.tech.Ndef;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
@@ -39,6 +38,7 @@ import java.util.List;
 
 /**
  * 数据类型转换、单位转换
+ *
  * @author matt
  * blog: addapp.cn
  */

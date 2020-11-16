@@ -10,9 +10,9 @@ import java.util.TimerTask;
  */
 final public class InertiaTimerTask extends TimerTask {
 
-    float a;
     final float velocityY;
     final WheelView wheelView;
+    float a;
 
     public InertiaTimerTask(WheelView wheelView, float velocityY) {
         super();
@@ -45,18 +45,17 @@ final public class InertiaTimerTask extends TimerTask {
             float itemHeight = wheelView.itemHeight;
             float top = (-wheelView.initPosition) * itemHeight;
             float bottom = (wheelView.getItemsCount() - 1 - wheelView.initPosition) * itemHeight;
-            if(wheelView.totalScrollY - itemHeight*0.25 < top){
+            if (wheelView.totalScrollY - itemHeight * 0.25 < top) {
                 top = wheelView.totalScrollY + i;
-            }
-            else if(wheelView.totalScrollY + itemHeight*0.25 > bottom){
+            } else if (wheelView.totalScrollY + itemHeight * 0.25 > bottom) {
                 bottom = wheelView.totalScrollY + i;
             }
 
-            if (wheelView.totalScrollY <= top){
+            if (wheelView.totalScrollY <= top) {
                 a = 40F;
-                wheelView.totalScrollY = (int)top;
+                wheelView.totalScrollY = (int) top;
             } else if (wheelView.totalScrollY >= bottom) {
-                wheelView.totalScrollY = (int)bottom;
+                wheelView.totalScrollY = (int) bottom;
                 a = -40F;
             }
         }

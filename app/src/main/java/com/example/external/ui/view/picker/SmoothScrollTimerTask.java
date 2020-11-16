@@ -4,15 +4,15 @@ package com.example.external.ui.view.picker;
 import java.util.TimerTask;
 
 /**
- * @TODO<平滑滚动的实现>
  * @author matt
+ * @TODO<平滑滚动的实现>
  */
 final public class SmoothScrollTimerTask extends TimerTask {
 
+    final private WheelView wheelView;
     private int realTotalOffset;
     private int realOffset;
     private int offset;
-    final private WheelView wheelView;
 
     public SmoothScrollTimerTask(WheelView wheelView, int offset) {
         this.wheelView = wheelView;
@@ -48,7 +48,7 @@ final public class SmoothScrollTimerTask extends TimerTask {
                 float itemHeight = wheelView.itemHeight;
                 float top = (float) (-wheelView.initPosition) * itemHeight;
                 float bottom = (float) (wheelView.getItemsCount() - 1 - wheelView.initPosition) * itemHeight;
-                if (wheelView.totalScrollY <= top||wheelView.totalScrollY >= bottom) {
+                if (wheelView.totalScrollY <= top || wheelView.totalScrollY >= bottom) {
                     wheelView.totalScrollY = wheelView.totalScrollY - realOffset;
                     wheelView.cancelFuture();
                     wheelView.handler.sendEmptyMessage(MessageHandler.WHAT_ITEM_SELECTED);

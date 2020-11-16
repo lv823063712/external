@@ -8,10 +8,7 @@ import androidx.annotation.IntRange;
  * @author matt
  * blog: addapp.cn
  */
-public  class LineConfig {
-    public enum DividerType { // 分隔线类型
-        FILL, WRAP
-    }
+public class LineConfig {
     private static final int LINE_ALPHA = 220;
     private static final int LINE_COLOR = 0XFF83CDE6;
     private static final float LINE_THICK = 1f;//px
@@ -25,15 +22,6 @@ public  class LineConfig {
     private int height = 0;
     private int itemHeight = 0;
     private int wheelSize = 0;
-
-    public DividerType getDividerType() {
-        return dividerType;
-    }
-
-    public void setDividerType(DividerType dividerType) {
-        this.dividerType = dividerType;
-    }
-
     private DividerType dividerType = DividerType.WRAP;
 
     public LineConfig() {
@@ -44,11 +32,12 @@ public  class LineConfig {
         this.ratio = ratio;
     }
 
-    /**
-     * 线是否可见
-     */
-    public void setVisible(boolean visible) {
-        this.visible = visible;
+    public DividerType getDividerType() {
+        return dividerType;
+    }
+
+    public void setDividerType(DividerType dividerType) {
+        this.dividerType = dividerType;
     }
 
     public boolean isVisible() {
@@ -56,14 +45,21 @@ public  class LineConfig {
     }
 
     /**
-     * 阴影是否可见
+     * 线是否可见
      */
-    public void setShadowVisible(boolean shadowVisible) {
-        this.shadowVisible = shadowVisible;
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 
     public boolean isShadowVisible() {
         return shadowVisible;
+    }
+
+    /**
+     * 阴影是否可见
+     */
+    public void setShadowVisible(boolean shadowVisible) {
+        this.shadowVisible = shadowVisible;
     }
 
     @ColorInt
@@ -90,6 +86,10 @@ public  class LineConfig {
         this.alpha = alpha;
     }
 
+    public float getThick() {
+        return thick;
+    }
+
 //    @FloatRange(from = 0, to = 1)
 //    public float getRatio() {
 //        return ratio;
@@ -101,10 +101,6 @@ public  class LineConfig {
 //    public void setRatio(@FloatRange(from = 0, to = 1) float ratio) {
 //        this.ratio = ratio;
 //    }
-
-    public float getThick() {
-        return thick;
-    }
 
     /**
      * 线粗
@@ -149,6 +145,10 @@ public  class LineConfig {
     public String toString() {
         return "visible=" + visible + "color=" + color + ", alpha=" + alpha
                 + ", thick=" + thick + ", width=" + width;
+    }
+
+    public enum DividerType { // 分隔线类型
+        FILL, WRAP
     }
 
 }

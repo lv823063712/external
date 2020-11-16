@@ -145,7 +145,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     }
                 }.start();
                 break;
-            default:break;
+            default:
+                break;
         }
     }
 

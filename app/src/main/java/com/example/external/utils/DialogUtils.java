@@ -3,7 +3,6 @@ package com.example.external.utils;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.WindowManager;
 
 import com.example.external.R;

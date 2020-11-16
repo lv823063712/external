@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 /**
  * 滑轮选择器
+ *
  * @author matt
  * blog: addapp.cn
  */
@@ -29,6 +30,7 @@ public abstract class WheelPicker extends ConfirmDialog<View> {
     public WheelPicker(Activity activity) {
         super(activity);
     }
+
     public boolean isOuterLabelEnable() {
         return outerLabelEnable;
     }
@@ -36,6 +38,7 @@ public abstract class WheelPicker extends ConfirmDialog<View> {
     public void setOuterLabelEnable(boolean outerLabelEnable) {
         this.outerLabelEnable = outerLabelEnable;
     }
+
     /**
      * 设置文字大小
      */
@@ -49,12 +52,14 @@ public abstract class WheelPicker extends ConfirmDialog<View> {
     public void setUnSelectedTextColor(@ColorInt int unSelectedTextColor) {
         this.textColorNormal = unSelectedTextColor;
     }
+
     /**
      * 设置选中文字颜色
      */
     public void setSelectedTextColor(@ColorInt int selectedTextColor) {
         this.textColorFocus = selectedTextColor;
     }
+
     public boolean isOnlyCenterLabel() {
         return onlyCenterLabel;
     }
@@ -62,6 +67,7 @@ public abstract class WheelPicker extends ConfirmDialog<View> {
     public void setOnlyCenterLabel(boolean onlyCenterLabel) {
         this.onlyCenterLabel = onlyCenterLabel;
     }
+
     /**
      * 设置分隔线是否可见
      */
@@ -82,12 +88,14 @@ public abstract class WheelPicker extends ConfirmDialog<View> {
 //        }
 //        lineConfig.setShadowVisible(shadowVisible);
 //    }
+
     /**
      * 设置是否自动联动
-     * */
+     */
     public void setCanLinkage(boolean canLinkage) {
         this.canLinkage = canLinkage;
     }
+
     /**
      * 设置分隔线颜色
      */
@@ -129,7 +137,6 @@ public abstract class WheelPicker extends ConfirmDialog<View> {
     }
 
     /**
-     *
      * 线性布局设置是否启用权重
      * true 启用 false 自适应width
      */

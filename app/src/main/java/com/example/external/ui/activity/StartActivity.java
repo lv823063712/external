@@ -5,9 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,9 +70,9 @@ public class StartActivity extends BaseActivity implements StartInterface.Strart
             ConfigBean configBean = (ConfigBean) data;
             if (configBean.getStatus() == 1) {
                 UserUtils.getInstance().saveEmail(mActivity, configBean.getData().getSys_service_email());
-                UserUtils.getInstance().saveEmails(mActivity,configBean.getData().getSys_service_email_bak());
-                UserUtils.getInstance().saveServiceTime(mActivity,configBean.getData().getSys_service_time());
-                UserUtils.getInstance().savePayChannel(mActivity,configBean.getData().getPay_channel());
+                UserUtils.getInstance().saveEmails(mActivity, configBean.getData().getSys_service_email_bak());
+                UserUtils.getInstance().saveServiceTime(mActivity, configBean.getData().getSys_service_time());
+                UserUtils.getInstance().savePayChannel(mActivity, configBean.getData().getPay_channel());
                 AndPermission.with(mActivity)
                         .runtime()
                         .permission(strings)

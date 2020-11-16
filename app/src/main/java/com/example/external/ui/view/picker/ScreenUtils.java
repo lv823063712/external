@@ -8,6 +8,7 @@ import android.view.WindowManager;
 
 /**
  * 获取屏幕宽高等信息、全屏切换、保持屏幕常亮、截屏等
+ *
  * @author matt
  * blog: addapp.cn
  */

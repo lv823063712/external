@@ -2,16 +2,16 @@
 <resources>
     <declare-styleable name="mWheelview">
         <attr name="mWheelview_gravity">
-            <enum name="center" value="17"/>
-            <enum name="left" value="3"/>
-            <enum name="right" value="5"/>
+            <enum name="center" value="17" />
+            <enum name="left" value="3" />
+            <enum name="right" value="5" />
         </attr>
-        <attr name="mWheelview_textSize" format="dimension"/>
-        <attr name="mWheelview_textColorOut" format="color"/>
-        <attr name="mWheelview_textColorCenter" format="color"/>
-        <attr name="mWheelview_dividerColor" format="color"/>
-        <attr name="mWheelview_dividerWidth" format="dimension"/>
-        <attr name="mWheelview_lineSpacingMultiplier" format="float"/>
+        <attr name="mWheelview_textSize" format="dimension" />
+        <attr name="mWheelview_textColorOut" format="color" />
+        <attr name="mWheelview_textColorCenter" format="color" />
+        <attr name="mWheelview_dividerColor" format="color" />
+        <attr name="mWheelview_dividerWidth" format="dimension" />
+        <attr name="mWheelview_lineSpacingMultiplier" format="float" />
     </declare-styleable>
 
 </resources>

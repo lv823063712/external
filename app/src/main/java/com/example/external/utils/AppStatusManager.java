@@ -5,9 +5,8 @@ import com.example.external.config.AppStatusConstant;
 
 public class AppStatusManager {
 
-    public int appStatus = AppStatusConstant.STATUS_FORCE_KILLED;
-
     public static AppStatusManager appStatusManager;
+    public int appStatus = AppStatusConstant.STATUS_FORCE_KILLED;
 
     private AppStatusManager() {
 
