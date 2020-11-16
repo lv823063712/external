@@ -58,7 +58,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.External"
         tools:targetApi="n">
-        <activity android:name=".ui.activity.GetMoneyActivity"></activity>
+        <activity android:name=".ui.activity.BankInformationActivity"></activity>
+        <activity android:name=".ui.activity.WorkInformationActivity" />
+        <activity android:name=".ui.activity.MyProfileActivity" />
+        <activity android:name=".ui.activity.BasicInformationActivity" />
+        <activity android:name=".ui.activity.GetMoneyActivity" />
         <activity android:name=".ui.activity.ReviewingActivity" />
         <activity android:name=".ui.activity.IdentificationActivity" />
         <activity android:name=".ui.activity.FeedbackActivity"></activity>

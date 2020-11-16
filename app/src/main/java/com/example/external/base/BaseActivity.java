@@ -2,6 +2,7 @@ package com.example.external.base;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.InflateException;
 import android.view.Window;
 
 import androidx.annotation.Nullable;
@@ -9,6 +10,8 @@ import androidx.annotation.Nullable;
 import com.example.external.R;
 import com.example.external.utils.StatusBarUtil;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportActivity;
 
 /**
@@ -18,6 +21,7 @@ import me.yokeyword.fragmentation.SupportActivity;
  */
 public abstract class BaseActivity extends SupportActivity {
     protected Activity mActivity = this;
+    private Unbinder mUnbinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,11 +48,20 @@ public abstract class BaseActivity extends SupportActivity {
     protected abstract void preLogic();
 
     void init() {
-        if (getLayout() != 0) {
-            setContentView(getLayout());
-            initData();
-            setClick();
-            preLogic();
+        try {
+            if (getLayout() != 0) {
+                setContentView(getLayout());
+                //绑定到butterknife
+                mUnbinder = ButterKnife.bind(this);
+                initData();
+                setClick();
+                preLogic();
+            }
+        } catch (Exception e) {
+            if (e instanceof InflateException) {
+                throw e;
+            }
+            e.printStackTrace();
         }
     }
 
@@ -59,5 +72,14 @@ public abstract class BaseActivity extends SupportActivity {
     protected void backActivity() {
         finish();
         overridePendingTransition(R.anim.not_exit_push_left_in, R.anim.push_right_out);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
+            mUnbinder.unbind();
+        }
+        this.mUnbinder = null;
     }
 }

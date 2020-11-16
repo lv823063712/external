@@ -29,41 +29,32 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/feed_textemail"
-        android:layout_width="315dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/feed_text"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:text="E-mail: service@xxCash.com"
-        android:textColor="#ff6d83f2"
-        android:textSize="19sp" />
-
-    <TextView
         android:id="@+id/feed_text"
         android:layout_width="315dp"
-        android:layout_height="wrap_content"
+        android:layout_height="114dp"
         android:layout_below="@id/feed_relative"
         android:layout_marginStart="40dp"
         android:layout_marginTop="59dp"
-        android:text="Any questions about the App, please contact us by E-mail,"
+        android:text="Any questions about the App, please contact us by E-mail.
+        \n\nE-mail: service@xxCash.com"
         android:textColor="#ff6d83f2"
         android:textSize="19sp" />
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/feed_edit"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/feed_textemail">
+        android:layout_below="@id/feed_text">
 
         <ImageView
-            android:layout_width="94.11dp"
-            android:layout_height="94.11dp"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
             android:layout_centerInParent="true"
             android:background="@mipmap/paintbrush" />
 
         <EditText
             android:id="@+id/add_content"
-            android:layout_width="fill_parent"
+            android:layout_width="335dp"
             android:layout_height="426dp"
             android:layout_marginStart="22dp"
             android:layout_marginTop="40dp"
@@ -79,4 +70,12 @@
             android:scrollbars="vertical" />
     </RelativeLayout>
 
+    <ImageView
+        android:layout_width="335dp"
+        android:layout_height="58dp"
+        android:layout_below="@id/feed_edit"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginTop="761dp"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:src="@mipmap/icon_feedjx" />
 </RelativeLayout>
