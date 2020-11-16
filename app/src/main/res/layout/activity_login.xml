@@ -123,12 +123,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="154dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_20"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="@dimen/dp_2">
@@ -144,30 +144,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_13"
-                    android:text="I have read and agreed to the"
-                    android:textColor="#929292"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_20"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp">
-
-                <View
-                    android:id="@+id/bottom_check"
-                    android:layout_width="19dp"
-                    android:layout_height="19dp"
-                    android:background="@drawable/shape_hollow_circle" />
-
-                <TextView
-                    android:id="@+id/bottom_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_13"
-                    android:text="Terms of service and privacy policy."
+                    android:text="I have read and agreed to the\nTerms of service &amp; privacy policy."
                     android:textColor="#929292"
                     android:textSize="16sp" />
 
@@ -178,7 +155,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="58dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="23dp"
                 android:background="@drawable/shape_jb_bg"

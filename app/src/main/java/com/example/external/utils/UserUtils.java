@@ -14,9 +14,19 @@ public class UserUtils {
     private String SERVICETIME = "serviceTime";//客服时间
     private String CONGRATULATIONS = "congratulations";//审核成功
     private String PAY_CHANNEL = "pay_channel";//支付渠道
+    private String USER_ID = "user_id";//用户ID
+    private String ACTION = "action";//区分注册还是登陆
+    private String MOBILE = "mobile";//手机号码
+    private String AUTHORIZED = "authorized";//是否认证
+    private String TOKEN = "token";//Token
+    private String NAME = "name";//用户名
 
     public static UserUtils getInstance() {
         return ViewHolder.USER_UTILS;
+    }
+
+    private static class ViewHolder {
+        private static final UserUtils USER_UTILS = new UserUtils();
     }
 
     //客服邮箱
@@ -84,12 +94,88 @@ public class UserUtils {
         SharedPreferencesUtil.getInstance(context).remove(PAY_CHANNEL);
     }
 
+    //用户id
+    public void saveUserId(Context context, String userId) {
+        SharedPreferencesUtil.getInstance(context).putString(USER_ID, userId);
+    }
+
+    public String getUserId(Context context) {
+        return SharedPreferencesUtil.getInstance(context).getString(USER_ID);
+    }
+
+    public void removeUserId(Context context) {
+        SharedPreferencesUtil.getInstance(context).remove(USER_ID);
+    }
+
+    //注册 or 登陆
+    public void saveAction(Context context, String action) {
+        SharedPreferencesUtil.getInstance(context).putString(ACTION, action);
+    }
+
+    public String getAction(Context context) {
+        return SharedPreferencesUtil.getInstance(context).getString(ACTION);
+    }
+
+    public void removeAction(Context context) {
+        SharedPreferencesUtil.getInstance(context).remove(ACTION);
+    }
+
+    //手机号码
+    public void saveMobile(Context context, String mobile) {
+        SharedPreferencesUtil.getInstance(context).putString(MOBILE, mobile);
+    }
+
+    public String getMobile(Context context) {
+        return SharedPreferencesUtil.getInstance(context).getString(MOBILE);
+    }
+
+    public void removeMobile(Context context) {
+        SharedPreferencesUtil.getInstance(context).remove(MOBILE);
+    }
+
+    //是否认证
+    public void saveAuthorized(Context context, String authorized) {
+        SharedPreferencesUtil.getInstance(context).putString(AUTHORIZED, authorized);
+    }
+
+    public String getAuthorized(Context context) {
+        return SharedPreferencesUtil.getInstance(context).getString(AUTHORIZED);
+    }
+
+    public void removeAuthorized(Context context) {
+        SharedPreferencesUtil.getInstance(context).remove(AUTHORIZED);
+    }
+
+    //TOKEN
+    public void saveToken(Context context, String token) {
+        SharedPreferencesUtil.getInstance(context).putString(TOKEN, token);
+    }
+
+    public String getToken(Context context) {
+        return SharedPreferencesUtil.getInstance(context).getString(TOKEN);
+    }
+
+    public void removeToken(Context context) {
+        SharedPreferencesUtil.getInstance(context).remove(TOKEN);
+    }
+
+    //NAME
+    public void saveName(Context context, String name) {
+        SharedPreferencesUtil.getInstance(context).putString(NAME, name);
+    }
+
+    public String getName(Context context) {
+        return SharedPreferencesUtil.getInstance(context).getString(NAME);
+    }
+
+    public void removeName(Context context) {
+        SharedPreferencesUtil.getInstance(context).remove(NAME);
+    }
+
     //清除所有本地保存数据
     public void clearAllSp(Context context) {
         SharedPreferencesUtil.getInstance(context).clearSp();
     }
 
-    private static class ViewHolder {
-        private static final UserUtils USER_UTILS = new UserUtils();
-    }
+
 }
