@@ -100,12 +100,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 Map<String, Object> headers = RequestCommon.getInstance().headers(mActivity);
                 Map<String, Object> bodys = new HashMap<>();
                 LoginRequestBean bean = new LoginRequestBean();
-                if (user_input_phone.getText() != null && !user_input_phone.getText().toString().equals("")) {
+                if (user_input_phone.getText() != null && !"".equals(user_input_phone.getText().toString())) {
                     bean.setMobile(user_input_phone.getText().toString());
                 } else {
                     Toast.makeText(mActivity, "Please enter your mobile phone number", Toast.LENGTH_SHORT).show();
                 }
-                if (user_input_code.getText() != null && !user_input_code.getText().toString().equals("")) {
+                if (user_input_code.getText() != null && !"".equals(user_input_code.getText().toString())) {
                     bean.setCode("8888");
                 } else {
                     Toast.makeText(mActivity, "Please enter the SMS verification code", Toast.LENGTH_SHORT).show();
@@ -118,7 +118,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             case R.id.get_send_code:
                 Map<String, Object> header = new HashMap<>();
                 Map<String, Object> body = new HashMap<>();
-                if (user_input_phone.getText() != null && !user_input_phone.getText().toString().equals("")) {
+                if (user_input_phone.getText() != null && !"".equals(user_input_phone.getText().toString())) {
                     body.put("mobile", user_input_phone.getText().toString());
                 } else {
                     Toast.makeText(mActivity, "Please enter your mobile phone number", Toast.LENGTH_SHORT).show();
@@ -145,6 +145,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     }
                 }.start();
                 break;
+            default:break;
         }
     }
 
