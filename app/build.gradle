@@ -76,4 +76,6 @@ dependencies {
     //xpopup
     implementation rootProject.ext.compilelibs['xpopup']
 
+    implementation rootProject.ext.compilelibs['BasePopup']
+    implementation rootProject.ext.compilelibs['PickerView']
 }

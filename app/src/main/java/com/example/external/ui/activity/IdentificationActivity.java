@@ -10,6 +10,14 @@ import androidx.core.widget.NestedScrollView;
 
 import com.example.external.R;
 import com.example.external.base.BaseActivity;
+import com.example.external.common.SystemCommon;
+import com.example.external.ui.view.BillTimerPop;
+import com.example.external.ui.view.EducationPop;
+import com.example.external.ui.view.EmploymentTypePop;
+import com.example.external.ui.view.MaritalPop;
+import com.example.external.ui.view.MonthlyFamilyIncomePop;
+import com.example.external.ui.view.SexPicker;
+import com.example.external.ui.view.YourMonthlySalaryPop;
 import com.example.external.utils.StatusBarUtil;
 
 public class IdentificationActivity extends BaseActivity implements View.OnClickListener {
@@ -22,6 +30,7 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
             ifsc_et, bank_name_et, bank_account;
     private LinearLayout second_steps, third_step;
     private int next_step = 0;
+    private BillTimerPop billTimerPop;
 
     @Override
     protected int getLayout() {
@@ -64,6 +73,13 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
     protected void setClick() {
         iden_back.setOnClickListener(this);
         step_tv.setOnClickListener(this);
+        birthday_et.setOnClickListener(this);
+        gender_et.setOnClickListener(this);
+        marital_et.setOnClickListener(this);
+        education_et.setOnClickListener(this);
+        employment_type_et.setOnClickListener(this);
+        your_monthly_salary_et.setOnClickListener(this);
+        monthly_family_income_et.setOnClickListener(this);
     }
 
     @Override
@@ -74,6 +90,48 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.birthday_et:
+                SystemCommon.getInstance().keyBoard(mActivity);
+                billTimerPop.showPopupWindow();
+                billTimerPop.darkenBackground(0.5f);
+                billTimerPop.setSelectTimeListener(start -> {
+                    birthday_et.setText(start);
+                });
+                break;
+            case R.id.gender_et:
+                SystemCommon.getInstance().keyBoard(mActivity);
+                SexPicker meCutPicker = new SexPicker(this);
+                meCutPicker.showPopupWindow();
+                meCutPicker.mySelectAll(nameAb -> gender_et.setText(nameAb));
+                break;
+            case R.id.marital_et:
+                SystemCommon.getInstance().keyBoard(mActivity);
+                MaritalPop maritalPop = new MaritalPop(this);
+                maritalPop.showPopupWindow();
+                maritalPop.mySelectAll(nameAb -> marital_et.setText(nameAb));
+                break;
+            case R.id.education_et:
+                SystemCommon.getInstance().keyBoard(mActivity);
+                EducationPop educationPop = new EducationPop(this);
+                educationPop.showPopupWindow();
+                educationPop.mySelectAll(nameAb -> education_et.setText(nameAb));
+                break;
+            case R.id.employment_type_et:
+                SystemCommon.getInstance().keyBoard(mActivity);
+                EmploymentTypePop employmentTypePop = new EmploymentTypePop(this);
+                employmentTypePop.showPopupWindow();
+                employmentTypePop.mySelectAll(nameAb -> employment_type_et.setText(nameAb));
+                break;
+            case R.id.your_monthly_salary_et:
+                YourMonthlySalaryPop salaryPop = new YourMonthlySalaryPop(this);
+                salaryPop.showPopupWindow();
+                salaryPop.mySelectAll(nameAb -> your_monthly_salary_et.setText(nameAb));
+                break;
+            case R.id.monthly_family_income_et:
+                MonthlyFamilyIncomePop incomePop = new MonthlyFamilyIncomePop(this);
+                incomePop.showPopupWindow();
+                incomePop.mySelectAll(nameAb -> your_monthly_salary_et.setText(nameAb));
+                break;
             case R.id.iden_back:
                 backActivity();
                 break;

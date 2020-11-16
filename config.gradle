@@ -47,5 +47,8 @@ ext {
             'permission'              : 'com.yanzhenjie:permission:2.0.3',
             "utilcode"                : "com.blankj:utilcode:1.23.7",
 
+            "BasePopup"               : "com.github.razerdp:BasePopup:2.2.7",
+            'PickerView'              : 'com.contrarywind:Android-PickerView:4.1.8',
+
     ]
 }
