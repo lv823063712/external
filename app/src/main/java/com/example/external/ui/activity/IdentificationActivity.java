@@ -24,9 +24,9 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
     private ImageView iden_back;
     private NestedScrollView first_step;
     private View one_line, two_line;
-    private TextView one_button, two_button, three_button, step_tv;
-    private EditText full_name_et, birthday_et, gender_et, marital_et, education_et, email_et, second_step,
-            employment_type_et, your_monthly_salary_et, monthly_family_income_et,
+    private TextView one_button, two_button, three_button, step_tv, birthday_et, gender_et, marital_et,
+            education_et,employment_type_et,your_monthly_salary_et,monthly_family_income_et;
+    private EditText full_name_et, email_et, second_step,
             ifsc_et, bank_name_et, bank_account;
     private LinearLayout second_steps, third_step;
     private int next_step = 0;
@@ -92,6 +92,7 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
         switch (v.getId()) {
             case R.id.birthday_et:
                 SystemCommon.getInstance().keyBoard(mActivity);
+                billTimerPop = new BillTimerPop(this);
                 billTimerPop.showPopupWindow();
                 billTimerPop.darkenBackground(0.5f);
                 billTimerPop.setSelectTimeListener(start -> {
@@ -155,7 +156,8 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                     three_button.setBackground(getResources().getDrawable(R.drawable.shape_10_white));
                 }
                 break;
-            default:break;
+            default:
+                break;
         }
     }
 }

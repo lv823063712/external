@@ -109,7 +109,7 @@
                     android:textColorHint="#6D83F2"
                     android:textSize="16sp" />
 
-                <EditText
+                <TextView
                     android:id="@+id/birthday_et"
                     android:layout_width="match_parent"
                     android:layout_height="53dp"
@@ -118,6 +118,7 @@
                     android:layout_marginEnd="@dimen/dp_30"
                     android:background="@drawable/shape_6c82f0_26"
                     android:drawableEnd="@mipmap/icon_blue_jiantou"
+                    android:gravity="center_vertical"
                     android:hint="Birthday"
                     android:paddingStart="24dp"
                     android:paddingEnd="17dp"
@@ -125,7 +126,7 @@
                     android:textColorHint="#6D83F2"
                     android:textSize="16sp" />
 
-                <EditText
+                <TextView
                     android:id="@+id/gender_et"
                     android:layout_width="match_parent"
                     android:layout_height="53dp"
@@ -134,6 +135,7 @@
                     android:layout_marginEnd="@dimen/dp_30"
                     android:background="@drawable/shape_6c82f0_26"
                     android:drawableEnd="@mipmap/icon_blue_jiantou"
+                    android:gravity="center_vertical"
                     android:hint="Gender"
                     android:paddingStart="24dp"
                     android:paddingEnd="17dp"
@@ -141,7 +143,7 @@
                     android:textColorHint="#6D83F2"
                     android:textSize="16sp" />
 
-                <EditText
+                <TextView
                     android:id="@+id/marital_et"
                     android:layout_width="match_parent"
                     android:layout_height="53dp"
@@ -150,6 +152,7 @@
                     android:layout_marginEnd="@dimen/dp_30"
                     android:background="@drawable/shape_6c82f0_26"
                     android:drawableEnd="@mipmap/icon_blue_jiantou"
+                    android:gravity="center_vertical"
                     android:hint="Marital"
                     android:paddingStart="24dp"
                     android:paddingEnd="17dp"
@@ -157,7 +160,7 @@
                     android:textColorHint="#6D83F2"
                     android:textSize="16sp" />
 
-                <EditText
+                <TextView
                     android:id="@+id/education_et"
                     android:layout_width="match_parent"
                     android:layout_height="53dp"
@@ -166,6 +169,7 @@
                     android:layout_marginEnd="@dimen/dp_30"
                     android:background="@drawable/shape_6c82f0_26"
                     android:drawableEnd="@mipmap/icon_blue_jiantou"
+                    android:gravity="center_vertical"
                     android:hint="Education"
                     android:paddingStart="24dp"
                     android:paddingEnd="17dp"
@@ -203,12 +207,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_30"
                 android:layout_marginTop="47dp"
+                android:gravity="center_vertical"
                 android:text="Work information"
                 android:textColor="#041D98"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <EditText
+            <TextView
                 android:id="@+id/employment_type_et"
                 android:layout_width="match_parent"
                 android:layout_height="53dp"
@@ -217,6 +222,7 @@
                 android:layout_marginEnd="@dimen/dp_30"
                 android:background="@drawable/shape_6c82f0_26"
                 android:drawableEnd="@mipmap/icon_blue_jiantou"
+                android:gravity="center_vertical"
                 android:hint="Employment Type "
                 android:paddingStart="24dp"
                 android:paddingEnd="17dp"
@@ -224,7 +230,7 @@
                 android:textColorHint="#6D83F2"
                 android:textSize="16sp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/your_monthly_salary_et"
                 android:layout_width="match_parent"
                 android:layout_height="53dp"
@@ -233,6 +239,7 @@
                 android:layout_marginEnd="@dimen/dp_30"
                 android:background="@drawable/shape_6c82f0_26"
                 android:drawableEnd="@mipmap/icon_blue_jiantou"
+                android:gravity="center_vertical"
                 android:hint="Your Monthly Salary"
                 android:paddingStart="24dp"
                 android:paddingEnd="17dp"
@@ -240,7 +247,7 @@
                 android:textColorHint="#6D83F2"
                 android:textSize="16sp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/monthly_family_income_et"
                 android:layout_width="match_parent"
                 android:layout_height="53dp"
@@ -249,6 +256,7 @@
                 android:layout_marginEnd="@dimen/dp_30"
                 android:background="@drawable/shape_6c82f0_26"
                 android:drawableEnd="@mipmap/icon_blue_jiantou"
+                android:gravity="center_vertical"
                 android:hint="Monthly Family Income"
                 android:paddingStart="24dp"
                 android:paddingEnd="17dp"
