@@ -20,7 +20,7 @@ import android.view.View;
 
 import androidx.annotation.RequiresApi;
 
-import com.arrail.app.R;
+import com.example.external.R;
 
 import java.util.Locale;
 import java.util.concurrent.Executors;
