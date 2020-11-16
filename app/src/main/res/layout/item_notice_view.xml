@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="97dp"
+    android:background="@drawable/shape_bg_home"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+        <TextView
+            android:id="@+id/home_some_user"
+            android:layout_width="100dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="@dimen/dp_14"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="21sp"
+            tools:text="982****261" />
+
+        <TextView
+            android:id="@+id/home_some_user_content"
+            android:layout_width="200dp"
+            android:layout_height="36dp"
+            android:layout_below="@+id/home_some_user"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="7dp"
+            android:maxLines="2"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            tools:text="become a member and just borrowed 33,000" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="51dp"
+            android:layout_height="51dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="24dp"
+            android:src="@mipmap/icon_team26" />
+
+</RelativeLayout>
