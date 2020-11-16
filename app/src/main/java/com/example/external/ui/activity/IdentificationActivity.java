@@ -1,16 +1,28 @@
 package com.example.external.ui.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.widget.NestedScrollView;
 
 import com.example.external.R;
 import com.example.external.base.BaseActivity;
+import com.example.external.common.RequestCommon;
 import com.example.external.common.SystemCommon;
+import com.example.external.common.TextViewCommon;
+import com.example.external.mvp.bean.LoginBean;
+import com.example.external.mvp.bean.SuccessCommon;
+import com.example.external.mvp.myinterface.StartInterface;
+import com.example.external.mvp.network.Constant;
+import com.example.external.mvp.presenter.StartPresenter;
+import com.example.external.mvp.requestbean.BankInfoRequestBean;
+import com.example.external.mvp.requestbean.BaseInfoRequestBean;
+import com.example.external.mvp.requestbean.SalaryRequestBean;
 import com.example.external.ui.view.BillTimerPop;
 import com.example.external.ui.view.EducationPop;
 import com.example.external.ui.view.EmploymentTypePop;
@@ -18,9 +30,17 @@ import com.example.external.ui.view.MaritalPop;
 import com.example.external.ui.view.MonthlyFamilyIncomePop;
 import com.example.external.ui.view.SexPicker;
 import com.example.external.ui.view.YourMonthlySalaryPop;
+import com.example.external.utils.DialogUtils;
 import com.example.external.utils.StatusBarUtil;
+import com.google.gson.Gson;
 
-public class IdentificationActivity extends BaseActivity implements View.OnClickListener {
+import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+
+public class IdentificationActivity extends BaseActivity implements View.OnClickListener, StartInterface.StrartView {
     private ImageView iden_back;
     private NestedScrollView first_step;
     private View one_line, two_line;
@@ -31,6 +51,7 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
     private LinearLayout second_steps, third_step;
     private int next_step = 0;
     private BillTimerPop billTimerPop;
+    private DialogUtils utils;
 
     @Override
     protected int getLayout() {
@@ -39,8 +60,35 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected void initData() {
+        utils = new DialogUtils(mActivity, R.style.CustomDialog);
         StatusBarUtil.setTextColor(this);
         initView();
+        Intent intent = getIntent();
+        int action = intent.getIntExtra("next_step", 0);
+        next_step = action;
+        if (next_step == 1) {
+            first_step.setVisibility(View.VISIBLE);
+            second_steps.setVisibility(View.GONE);
+            third_step.setVisibility(View.GONE);
+
+        } else if (next_step == 2) {
+            first_step.setVisibility(View.GONE);
+            second_steps.setVisibility(View.VISIBLE);
+            third_step.setVisibility(View.GONE);
+            one_button.setText(null);
+            one_line.setBackground(getResources().getDrawable(R.color.white));
+            two_button.setText("2");
+            two_button.setBackground(getResources().getDrawable(R.drawable.shape_10_white));
+        } else if (next_step == 3) {
+            first_step.setVisibility(View.GONE);
+            second_steps.setVisibility(View.GONE);
+            third_step.setVisibility(View.VISIBLE);
+            two_button.setText(null);
+            two_line.setBackground(getResources().getDrawable(R.color.white));
+            three_button.setText("3");
+            three_button.setBackground(getResources().getDrawable(R.drawable.shape_10_white));
+        }
+
     }
 
     private void initView() {
@@ -131,22 +179,122 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
             case R.id.monthly_family_income_et:
                 MonthlyFamilyIncomePop incomePop = new MonthlyFamilyIncomePop(this);
                 incomePop.showPopupWindow();
-                incomePop.mySelectAll(nameAb -> your_monthly_salary_et.setText(nameAb));
+                incomePop.mySelectAll(nameAb -> monthly_family_income_et.setText(nameAb));
                 break;
             case R.id.iden_back:
                 backActivity();
                 break;
             case R.id.step_tv:
-                if (next_step == 0) {
+                if (next_step == 1) {
+                    BaseInfoRequestBean bean = new BaseInfoRequestBean();
+                    if (!full_name_et.getText().toString().equals("") && full_name_et.getText().toString() != null) {
+                        bean.setName(full_name_et.getText().toString());
+                    } else {
+                        Toast.makeText(mActivity, "Please enter Full Name", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (!birthday_et.getText().toString().equals("") && birthday_et.getText().toString() != null) {
+                        bean.setBirthday(birthday_et.getText().toString());
+                    } else {
+                        Toast.makeText(mActivity, "Please choose your birthday", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (!gender_et.getText().toString().equals("") && gender_et.getText().toString() != null) {
+                        bean.setGender(gender_et.getText().toString());
+                    } else {
+                        Toast.makeText(mActivity, "Please choose gender", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (!marital_et.getText().toString().equals("") && marital_et.getText().toString() != null) {
+                        bean.setMarital(marital_et.getText().toString());
+                    } else {
+                        Toast.makeText(mActivity, "Please choose marital status", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (!education_et.getText().toString().equals("") && education_et.getText().toString() != null) {
+                        bean.setEducation(education_et.getText().toString());
+                    } else {
+                        Toast.makeText(mActivity, "Please select education background", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (!email_et.getText().toString().equals("") && email_et.getText().toString() != null) {
+                        bean.setEmail(email_et.getText().toString());
+                    } else {
+                        Toast.makeText(mActivity, "Please enter email address", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    StartPresenter presenter = new StartPresenter(this);
+                    Gson gson = new Gson();
+                    String s = gson.toJson(bean);
+                    RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"), s);
+                    Map<String, Object> headers = RequestCommon.getInstance().headers(mActivity);
+                    Map<String, Object> bodys = new HashMap<>();
+                    utils.show();
+                    presenter.postQueryBody(Constant.UPBASEINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
+                } else if (next_step == 2) {
+                    SalaryRequestBean requestBean = new SalaryRequestBean();
+                    if (employment_type_et.getText() != null && !employment_type_et.getText().toString().equals("")) {
+                        requestBean.setEmployment_type(employment_type_et.getText().toString());
+                    } else {
+                        Toast.makeText(mActivity, "Please select the type of occupation", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (your_monthly_salary_et.getText() != null && !your_monthly_salary_et.getText().toString().equals("")) {
+                        requestBean.setEmployment_type(your_monthly_salary_et.getText().toString());
+                    } else {
+                        Toast.makeText(mActivity, "Please fill in your income", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (monthly_family_income_et.getText() != null && !monthly_family_income_et.getText().toString().equals("")) {
+                        requestBean.setEmployment_type(monthly_family_income_et.getText().toString());
+                    } else {
+                        Toast.makeText(mActivity, "Please fill in your household income", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    StartPresenter presenter = new StartPresenter(this);
+                    Gson gson = new Gson();
+                    String s = gson.toJson(requestBean);
+                    RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"), s);
+                    Map<String, Object> headers = RequestCommon.getInstance().headers(mActivity);
+                    Map<String, Object> bodys = new HashMap<>();
+                    utils.show();
+                    presenter.postQueryBody(Constant.UPWORKINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
                     first_step.setVisibility(View.GONE);
                     second_steps.setVisibility(View.VISIBLE);
                     third_step.setVisibility(View.GONE);
-                    one_button.setText(null);
-                    one_line.setBackground(getResources().getDrawable(R.color.white));
-                    two_button.setText("2");
-                    two_button.setBackground(getResources().getDrawable(R.drawable.shape_10_white));
-                    next_step = 1;
-                } else if (next_step == 1) {
+                    two_button.setText(null);
+                    two_line.setBackground(getResources().getDrawable(R.color.white));
+                    three_button.setText("3");
+                    three_button.setBackground(getResources().getDrawable(R.drawable.shape_10_white));
+                    next_step = 3;
+                } else if (next_step == 3) {
+                    BankInfoRequestBean bankBean = new BankInfoRequestBean();
+                    if (ifsc_et.getText() != null && !ifsc_et.getText().toString().equals("")) {
+                        bankBean.setIfsc_code(ifsc_et.getText().toString());
+                    }else{
+                        Toast.makeText(mActivity, "Please fill in THE IFSC code", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (bank_name_et.getText() != null && !bank_name_et.getText().toString().equals("")) {
+                        bankBean.setBank_name(bank_name_et.getText().toString());
+                    }else{
+                        Toast.makeText(mActivity, "Please fill in the bank name", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (bank_account.getText() != null && !bank_account.getText().toString().equals("")) {
+                        bankBean.setBank_account_no(bank_account.getText().toString());
+                    }else{
+                        Toast.makeText(mActivity, "Please fill in your bank card number", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    StartPresenter presenter = new StartPresenter(this);
+                    Gson gson = new Gson();
+                    String s = gson.toJson(bankBean);
+                    RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"), s);
+                    Map<String, Object> headers = RequestCommon.getInstance().headers(mActivity);
+                    Map<String, Object> bodys = new HashMap<>();
+                    utils.show();
+                    presenter.postQueryBody(Constant.UPBANKINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
                     first_step.setVisibility(View.GONE);
                     second_steps.setVisibility(View.GONE);
                     third_step.setVisibility(View.VISIBLE);
@@ -159,5 +307,29 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
             default:
                 break;
         }
+    }
+
+    @Override
+    public void success(Object data) {
+        utils.dismissDialog(utils);
+        if (data instanceof SuccessCommon) {
+            SuccessCommon common = (SuccessCommon) data;
+            if (next_step == 1) {
+                first_step.setVisibility(View.VISIBLE);
+                second_steps.setVisibility(View.GONE);
+                third_step.setVisibility(View.GONE);
+                one_button.setText(null);
+                one_line.setBackground(getResources().getDrawable(R.color.white));
+                two_button.setText("2");
+                two_button.setBackground(getResources().getDrawable(R.drawable.shape_10_white));
+                next_step = 2;
+            }
+            Toast.makeText(mActivity, common.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void error(Object error) {
+        utils.dismissDialog(utils);
     }
 }

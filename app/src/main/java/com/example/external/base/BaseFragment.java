@@ -84,7 +84,7 @@ public abstract class BaseFragment extends SupportFragment {
     }
 
     protected void setStatusBar() {
-        StatusBarUtil.setStatusBar(mActivity);
+        StatusBarUtil.setTextColor(mActivity);
     }
 
     private void lazyLoad() {

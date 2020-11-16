@@ -77,7 +77,11 @@ public class StartActivity extends BaseActivity implements StartInterface.Strart
                         .runtime()
                         .permission(strings)
                         .onGranted(datas -> {
-                            startActivity(new Intent(mActivity, LoginActivity.class));
+                            if (UserUtils.getInstance().getToken(mActivity).length()==0) {
+                                startActivity(new Intent(mActivity, LoginActivity.class));
+                            }else{
+                                startActivity(new Intent(mActivity, MainActivity.class));
+                            }
                             finish();
                         }).onDenied(datas -> PermissionUtils.launchAppDetailsSettings()).start();
             } else if (configBean.getStatus() == 0) {

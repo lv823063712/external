@@ -13,6 +13,7 @@ import com.example.external.base.BaseFragment;
 import com.example.external.common.RequestCommon;
 import com.example.external.mvp.bean.ConfigBean;
 import com.example.external.mvp.bean.MarqueeBean;
+import com.example.external.mvp.bean.ProductBean;
 import com.example.external.mvp.myinterface.StartInterface;
 import com.example.external.mvp.network.Constant;
 import com.example.external.mvp.presenter.StartPresenter;
@@ -27,13 +28,17 @@ import java.util.List;
 import java.util.Map;
 
 
-public class HomePageFragment extends BaseFragment implements StartInterface.StrartView {
+public class HomePageFragment extends BaseFragment implements StartInterface.StrartView, View.OnClickListener {
 
     private DialogUtils utils;
-    private TextView home_some_user;
+    private TextView home_some_user, reduce_money, increase_money, home_borrow_money;
     private TextView home_some_user_content;
     private LuckyNoticeView testVf;
     private List<MarqueeBean.DataBean> dataBeans = new ArrayList<>();
+    private int money_show = 1;
+    private TextView borrow;
+    private int status;
+
     @Override
     protected int getLayout() {
         return R.layout.fragment_home_page;
@@ -42,19 +47,73 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     @Override
     protected void initView() {
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
-        TextView Borrow = mActivity.findViewById(R.id.Borrow);
+        borrow = mActivity.findViewById(R.id.Borrow);
         home_some_user = mActivity.findViewById(R.id.home_some_user);
+        reduce_money = mActivity.findViewById(R.id.reduce_money);
+        increase_money = mActivity.findViewById(R.id.increase_money);
+        home_borrow_money = mActivity.findViewById(R.id.home_borrow_money);
         testVf = mActivity.findViewById(R.id.testVf);
         home_some_user_content = mActivity.findViewById(R.id.home_some_user_content);
         AppCompatImageView test = mActivity.findViewById(R.id.test);
-        Borrow.setOnClickListener(v -> {
-            Intent intent = new Intent(mActivity, GetMoneyActivity.class);
-            startActivity(intent);
-        });
-        test.setOnClickListener(v -> {
+
+
+/*        test.setOnClickListener(v -> {
             Intent intent = new Intent(mActivity, IdentificationActivity.class);
             startActivity(intent);
-        });
+        });*/
+        initClick();
+    }
+
+    private void initClick() {
+        reduce_money.setOnClickListener(this);
+        increase_money.setOnClickListener(this);
+        borrow.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.Borrow:
+                if (status == 0) {
+                    Intent intent = new Intent(mActivity, GetMoneyActivity.class);
+                    startActivity(intent);
+                } else if (status == 1) {
+                    Intent intent = new Intent(mActivity, IdentificationActivity.class);
+                    intent.putExtra("next_step",status);
+                    startActivity(intent);
+                } else if (status == 2) {
+                    Intent intent = new Intent(mActivity, IdentificationActivity.class);
+                    intent.putExtra("next_step",2);
+                    startActivity(intent);
+                } else if (status == 3) {
+                    Intent intent = new Intent(mActivity, IdentificationActivity.class);
+                    intent.putExtra("next_step",status);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.reduce_money:
+                if (money_show == 3) {
+                    home_borrow_money.setText("₹ 80,000");
+                    money_show = 2;
+                } else if (money_show == 2) {
+                    home_borrow_money.setText("₹ 50,000");
+                    money_show = 1;
+                } else if (money_show == 1) {
+                    home_borrow_money.setText("₹ 30,000");
+                }
+                break;
+            case R.id.increase_money:
+                if (money_show == 1) {
+                    home_borrow_money.setText("₹ 50,000");
+                    money_show = 2;
+                } else if (money_show == 2) {
+                    home_borrow_money.setText("₹ 80,000");
+                    money_show = 3;
+                } else if (money_show == 3) {
+                    home_borrow_money.setText("₹ 150,000");
+                }
+                break;
+        }
     }
 
     @Override
@@ -63,22 +122,21 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
         Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
         Map<String, Object> body = new HashMap<>();
         utils.show();
-        startPresenter.get(Constant.HOMEPAGE, header, body, ConfigBean.class);
+        startPresenter.get(Constant.HOMEPAGE, header, body, ProductBean.class);
         startPresenter.get(Constant.MARQUEE_URL, header, body, MarqueeBean.class);
-
     }
 
     @Override
     protected void loadData() {
-
     }
 
     @Override
     public void success(Object data) {
         utils.dismissDialog(utils);
-        if (data instanceof ConfigBean) {
-            ConfigBean configBean = new ConfigBean();
-            Toast.makeText(mContext, configBean.getMessage(), Toast.LENGTH_SHORT).show();
+        if (data instanceof ProductBean) {
+            ProductBean productBean = (ProductBean) data;
+//            status = productBean.getData().getCertification();
+            status = 3;
         } else if (data instanceof MarqueeBean) {
             MarqueeBean bean = (MarqueeBean) data;
             dataBeans.addAll(bean.getData());
@@ -91,4 +149,5 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     public void error(Object error) {
         utils.dismissDialog(utils);
     }
+
 }

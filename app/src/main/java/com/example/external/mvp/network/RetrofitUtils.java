@@ -2,6 +2,8 @@ package com.example.external.mvp.network;
 
 import android.util.Log;
 
+import com.example.external.mvp.utils.HttpLoggingInterceptorM;
+import com.example.external.mvp.utils.LogInterceptor;
 import com.example.external.mvp.utils.MLogInterceptor;
 
 import java.io.IOException;
@@ -28,13 +30,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitUtils {
 
     private ApiService apiService;
-
     private RetrofitUtils() {
+        String HTTP_LOG_TAG = "http";
+        HttpLoggingInterceptorM interceptor = new HttpLoggingInterceptorM(new LogInterceptor(HTTP_LOG_TAG));
+        interceptor.setLevel(HttpLoggingInterceptorM.Level.BODY);
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .readTimeout(10, TimeUnit.SECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .connectTimeout(10, TimeUnit.SECONDS)
-                .addInterceptor(new MLogInterceptor())
+                .addInterceptor(interceptor)
                 .retryOnConnectionFailure(true)
                 .build();
 

@@ -169,6 +169,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             UserUtils.getInstance().saveName(mActivity, loginBean.getData().getName());
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+
         }
     }
 
