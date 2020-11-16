@@ -7,8 +7,6 @@ package com.example.external.mvp.bean;
  * @Creator: lf
  */
 public class LoginBean {
-
-
     /**
      * status : 1
      * code : 0001

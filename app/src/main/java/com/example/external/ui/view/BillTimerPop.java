@@ -31,8 +31,8 @@ import razerdp.util.animation.TranslationConfig;
  * @Creator: lf
  */
 public class BillTimerPop extends BasePopupWindow implements View.OnClickListener {
-    Date startData;
-    SelectTimeListener mSelectTimeListener;
+    private Date startData;
+    private SelectTimeListener mSelectTimeListener;
     private FragmentActivity mContext;
     private FrameLayout mFrameLayout;
     private TextView mTvOk;

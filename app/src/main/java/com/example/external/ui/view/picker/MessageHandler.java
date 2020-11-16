@@ -29,6 +29,7 @@ final public class MessageHandler extends Handler {
             case WHAT_ITEM_SELECTED:
                 wheelView.onItemPicked();
                 break;
+            default:break;
         }
     }
 

@@ -15,6 +15,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.NinePatchDrawable;
 import android.net.Uri;
+import android.nfc.tech.Ndef;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
@@ -101,7 +102,7 @@ public class ConvertUtils {
     }
 
     public static byte[] toByteArray(String hexData, boolean isHex) {
-        if (hexData == null || hexData.equals("")) {
+        if (hexData == null || "".equals(hexData)) {
             return null;
         }
         if (!isHex) {
@@ -125,8 +126,9 @@ public class ConvertUtils {
     }
 
     public static String toHexString(String str) {
-        if (TextUtils.isEmpty(str))
+        if (TextUtils.isEmpty(str)) {
             return "";
+        }
         StringBuilder builder = new StringBuilder();
         byte[] bytes = str.getBytes();
         for (byte aByte : bytes) {
@@ -356,7 +358,7 @@ public class ConvertUtils {
                 // ExternalStorageProvider
                 case "com.android.externalstorage.documents":
                     if ("primary".equalsIgnoreCase(type)) {
-                        return Environment.getExternalStorageDirectory() + "/" + split[1];
+                        return Environment.getExternalStorageState() + "/" + split[1];
                     }
                     break;
                 // DownloadsProvider
@@ -382,7 +384,7 @@ public class ConvertUtils {
         else {
             if ("content".equalsIgnoreCase(scheme)) {
                 // Return the remote address
-                if (authority.equals("com.google.android.apps.photos.content")) {
+                if ("com.google.android.apps.photos.content".equals(authority)) {
                     return uri.getLastPathSegment();
                 }
                 return _queryPathFromMediaStore(context, uri, null, null);

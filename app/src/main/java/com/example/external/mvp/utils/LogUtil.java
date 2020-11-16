@@ -202,6 +202,7 @@ public class LogUtil {
             case XML:
                 XmlLog.printXml(tag, msg, headString);
                 break;
+            default:break;
         }
     }
 

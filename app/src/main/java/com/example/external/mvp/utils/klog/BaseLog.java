@@ -44,6 +44,7 @@ public class BaseLog {
             case LogUtil.WTF:
                 Log.wtf(tag, sub);
                 break;
+            default:break;
         }
     }
 
