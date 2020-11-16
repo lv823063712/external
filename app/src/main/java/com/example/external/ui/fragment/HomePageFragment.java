@@ -36,19 +36,13 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
         TextView Borrow = mActivity.findViewById(R.id.Borrow);
         AppCompatImageView test = mActivity.findViewById(R.id.test);
-        Borrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mActivity, GetMoneyActivity.class);
-                startActivity(intent);
-            }
+        Borrow.setOnClickListener(v -> {
+            Intent intent = new Intent(mActivity, GetMoneyActivity.class);
+            startActivity(intent);
         });
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mActivity, IdentificationActivity.class);
-                startActivity(intent);
-            }
+        test.setOnClickListener(v -> {
+            Intent intent = new Intent(mActivity, IdentificationActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -73,7 +67,6 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
         if (data instanceof ConfigBean){
             ConfigBean configBean = new ConfigBean();
             Toast.makeText(mContext, configBean.getMessage(), Toast.LENGTH_SHORT).show();
-
         }
     }
 

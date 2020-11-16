@@ -17,6 +17,8 @@ import com.example.external.mvp.myinterface.StartInterface;
 import com.example.external.mvp.network.Constant;
 import com.example.external.mvp.presenter.StartPresenter;
 import com.example.external.mvp.requestbean.LoginRequestBean;
+import com.example.external.mvp.utils.GsonUtil;
+import com.example.external.mvp.utils.LogUtil;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.UserUtils;
 import com.google.gson.Gson;
@@ -131,6 +133,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         if (data instanceof SendCodeBean) {
             SendCodeBean bean = (SendCodeBean) data;
             Toast.makeText(mActivity, bean.getMessage(), Toast.LENGTH_SHORT).show();
+            LogUtil.d("SendCode+-+", GsonUtil.beanToJson(bean));
+
             new CountDownTimer(60 * 1000, 1000) {
                 @SuppressLint("SetTextI18n")
                 @Override
@@ -155,6 +159,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         } else if (data instanceof LoginBean) {
             LoginBean loginBean = (LoginBean) data;
 //            UserUtils.getInstance()
+            LogUtil.d("Login+-+", GsonUtil.beanToJson(loginBean));
 //            Toast.makeText(mActivity, loginBean.getMessage(), Toast.LENGTH_SHORT).show();
             UserUtils.getInstance().saveUserId(mActivity, loginBean.getData().getId());
             UserUtils.getInstance().saveAction(mActivity, loginBean.getData().getAction());

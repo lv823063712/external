@@ -78,4 +78,7 @@ dependencies {
 
     implementation rootProject.ext.compilelibs['BasePopup']
     implementation rootProject.ext.compilelibs['PickerView']
+
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 }

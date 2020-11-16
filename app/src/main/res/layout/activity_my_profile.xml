@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.MyProfileActivity">
+
+    <ImageView
+        android:id="@+id/profile_back"
+        android:layout_width="28dp"
+        android:layout_height="23dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="41dp"
+        android:background="@mipmap/backshape" />
+
+    <RelativeLayout
+        android:id="@+id/basic_Relative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profile_back"
+        android:layout_marginLeft="37dp"
+        android:layout_marginTop="63dp">
+
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="12dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="50dp"
+            android:background="@mipmap/next" />
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="27dp"
+            android:text="Basic information"
+            android:textColor="#ff000000"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/work_relative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/basic_Relative"
+        android:layout_marginLeft="37dp"
+        android:layout_marginTop="47dp">
+
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="12dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="50dp"
+            android:background="@mipmap/next" />
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="27dp"
+            android:text="Work information"
+            android:textColor="#ff000000"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bank_relative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/work_relative"
+        android:layout_marginLeft="37dp"
+        android:layout_marginTop="47dp">
+
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="12dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="50dp"
+            android:background="@mipmap/next" />
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="27dp"
+            android:text="Bank information"
+            android:textColor="#ff000000"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp"
+        android:text="My Profile"
+        android:textColor="#ff121624"
+        android:textSize="19sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/basic_Relative"
+        android:layout_marginLeft="37dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginRight="38dp"
+        android:layout_marginBottom="28dp"
+        android:background="#89C6C2" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/basic_Relative"
+        android:layout_marginLeft="37dp"
+        android:layout_marginTop="91dp"
+        android:layout_marginRight="38dp"
+        android:layout_marginBottom="28dp"
+        android:background="#89C6C2" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/basic_Relative"
+        android:layout_marginLeft="37dp"
+        android:layout_marginTop="163dp"
+        android:layout_marginRight="38dp"
+        android:layout_marginBottom="28dp"
+        android:background="#89C6C2" />
+</RelativeLayout>
