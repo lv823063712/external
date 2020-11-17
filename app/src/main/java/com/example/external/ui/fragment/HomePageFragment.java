@@ -69,10 +69,6 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
             netWork();
             home_page_refresh.finishRefresh();
         });
-/*        home_page_refresh.setOnLoadMoreListener(refreshLayout -> {
-            netWork();
-            home_page_refresh.finishLoadMore();
-        });*/
     }
 
     @Override
@@ -144,8 +140,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
         utils.dismissDialog(utils);
         if (data instanceof ProductBean) {
             ProductBean productBean = (ProductBean) data;
-//            status = productBean.getData().getCertification();
-            status = 3;
+            status = productBean.getData().getCertification();
         } else if (data instanceof MarqueeBean) {
             MarqueeBean bean = (MarqueeBean) data;
             dataBeans.addAll(bean.getData());

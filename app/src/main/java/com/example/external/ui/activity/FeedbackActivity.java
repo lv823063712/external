@@ -49,13 +49,8 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
-    }
-
-    @Override
     protected void initData() {
+        utils = new DialogUtils(mActivity, R.style.CustomDialog);
         initView();
     }
 

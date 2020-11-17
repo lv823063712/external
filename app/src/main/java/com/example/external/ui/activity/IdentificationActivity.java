@@ -68,7 +68,6 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
             first_step.setVisibility(View.VISIBLE);
             second_steps.setVisibility(View.GONE);
             third_step.setVisibility(View.GONE);
-
         } else if (next_step == 2) {
             first_step.setVisibility(View.GONE);
             second_steps.setVisibility(View.VISIBLE);
@@ -198,19 +197,39 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                         return;
                     }
                     if (!gender_et.getText().toString().equals("") && gender_et.getText().toString() != null) {
-                        bean.setGender(gender_et.getText().toString());
+                        if (gender_et.getText().toString().contains("MALE")) {
+                            bean.setGender(1);
+                        } else {
+                            bean.setGender(2);
+                        }
                     } else {
                         Toast.makeText(mActivity, "Please choose gender", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (!marital_et.getText().toString().equals("") && marital_et.getText().toString() != null) {
-                        bean.setMarital(marital_et.getText().toString());
+                        if (marital_et.getText().toString().contains("Married")) {
+                            bean.setMarital(1);
+                        } else if (marital_et.getText().toString().contains("Unmarried")) {
+                            bean.setMarital(2);
+                        } else if (marital_et.getText().toString().contains("Divorced")) {
+                            bean.setMarital(3);
+                        }
                     } else {
                         Toast.makeText(mActivity, "Please choose marital status", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (!education_et.getText().toString().equals("") && education_et.getText().toString() != null) {
-                        bean.setEducation(education_et.getText().toString());
+                        if (education_et.getText().toString().contains("Other")) {
+                            bean.setEducation(1);
+                        } else if (education_et.getText().toString().contains("High School Diploma")) {
+                            bean.setEducation(2);
+                        } else if (education_et.getText().toString().contains("Bachelor degree")) {
+                            bean.setEducation(3);
+                        } else if (education_et.getText().toString().contains("Master Diploma")) {
+                            bean.setEducation(4);
+                        } else if (education_et.getText().toString().contains("Doctoral Diploma")) {
+                            bean.setEducation(5);
+                        }
                     } else {
                         Toast.makeText(mActivity, "Please select education background", Toast.LENGTH_SHORT).show();
                         return;
@@ -232,19 +251,43 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                 } else if (next_step == 2) {
                     SalaryRequestBean requestBean = new SalaryRequestBean();
                     if (employment_type_et.getText() != null && !employment_type_et.getText().toString().equals("")) {
-                        requestBean.setEmployment_type(employment_type_et.getText().toString());
+                        if (employment_type_et.getText().toString().contains("Full-time")) {
+                            requestBean.setEmployment_type(1);
+                        } else if (employment_type_et.getText().toString().contains("Part-time job")) {
+                            requestBean.setEmployment_type(2);
+                        }
                     } else {
                         Toast.makeText(mActivity, "Please select the type of occupation", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (your_monthly_salary_et.getText() != null && !your_monthly_salary_et.getText().toString().equals("")) {
-                        requestBean.setEmployment_type(your_monthly_salary_et.getText().toString());
+                        if (your_monthly_salary_et.getText().toString().contains("0～8000")) {
+                            requestBean.setMonthly_salary(1);
+                        } else if (your_monthly_salary_et.getText().toString().contains("8000～20000")) {
+                            requestBean.setMonthly_salary(2);
+                        } else if (your_monthly_salary_et.getText().toString().contains("20000～30000")) {
+                            requestBean.setMonthly_salary(3);
+                        } else if (your_monthly_salary_et.getText().toString().contains("30000～50000")) {
+                            requestBean.setMonthly_salary(4);
+                        } else if (your_monthly_salary_et.getText().toString().contains(">50000")) {
+                            requestBean.setMonthly_salary(5);
+                        }
                     } else {
                         Toast.makeText(mActivity, "Please fill in your income", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (monthly_family_income_et.getText() != null && !monthly_family_income_et.getText().toString().equals("")) {
-                        requestBean.setEmployment_type(monthly_family_income_et.getText().toString());
+                        if (monthly_family_income_et.getText().toString().contains("<20000")) {
+                            requestBean.setMonthly_family_salary(1);
+                        } else if (monthly_family_income_et.getText().toString().contains("20000～30000")) {
+                            requestBean.setMonthly_family_salary(2);
+                        } else if (monthly_family_income_et.getText().toString().contains("30000～50000")) {
+                            requestBean.setMonthly_family_salary(3);
+                        } else if (monthly_family_income_et.getText().toString().contains("50000～80000")) {
+                            requestBean.setMonthly_family_salary(4);
+                        } else if (monthly_family_income_et.getText().toString().contains(">80000")) {
+                            requestBean.setMonthly_family_salary(5);
+                        }
                     } else {
                         Toast.makeText(mActivity, "Please fill in your household income", Toast.LENGTH_SHORT).show();
                         return;
@@ -264,7 +307,6 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                     two_line.setBackground(getResources().getDrawable(R.color.white));
                     three_button.setText("3");
                     three_button.setBackground(getResources().getDrawable(R.drawable.shape_10_white));
-                    next_step = 3;
                 } else if (next_step == 3) {
                     BankInfoRequestBean bankBean = new BankInfoRequestBean();
                     if (ifsc_et.getText() != null && !ifsc_et.getText().toString().equals("")) {
@@ -313,14 +355,27 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
         if (data instanceof SuccessCommon) {
             SuccessCommon common = (SuccessCommon) data;
             if (next_step == 1) {
-                first_step.setVisibility(View.VISIBLE);
-                second_steps.setVisibility(View.GONE);
+                next_step = 2;
+                first_step.setVisibility(View.GONE);
+                second_steps.setVisibility(View.VISIBLE);
                 third_step.setVisibility(View.GONE);
                 one_button.setText(null);
                 one_line.setBackground(getResources().getDrawable(R.color.white));
                 two_button.setText("2");
                 two_button.setBackground(getResources().getDrawable(R.drawable.shape_10_white));
-                next_step = 2;
+            } else if (next_step == 2) {
+                first_step.setVisibility(View.GONE);
+                second_steps.setVisibility(View.GONE);
+                third_step.setVisibility(View.VISIBLE);
+                two_button.setText(null);
+                Toast.makeText(mActivity, "执行了", Toast.LENGTH_SHORT).show();
+                two_line.setBackground(getResources().getDrawable(R.color.white));
+                three_button.setText("3");
+                three_button.setBackground(getResources().getDrawable(R.drawable.shape_10_white));
+                next_step = 3;
+            } else if (next_step == 3) {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
             }
             Toast.makeText(mActivity, common.getMessage(), Toast.LENGTH_SHORT).show();
         }

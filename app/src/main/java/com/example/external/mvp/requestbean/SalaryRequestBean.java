@@ -14,31 +14,31 @@ public class SalaryRequestBean {
      * monthly_family_salary :
      */
 
-    private String employment_type;
-    private String monthly_salary;
-    private String monthly_family_salary;
+    private int employment_type;
+    private int monthly_salary;
+    private int monthly_family_salary;
 
-    public String getEmployment_type() {
+    public int getEmployment_type() {
         return employment_type;
     }
 
-    public void setEmployment_type(String employment_type) {
+    public void setEmployment_type(int employment_type) {
         this.employment_type = employment_type;
     }
 
-    public String getMonthly_salary() {
+    public int getMonthly_salary() {
         return monthly_salary;
     }
 
-    public void setMonthly_salary(String monthly_salary) {
+    public void setMonthly_salary(int monthly_salary) {
         this.monthly_salary = monthly_salary;
     }
 
-    public String getMonthly_family_salary() {
+    public int getMonthly_family_salary() {
         return monthly_family_salary;
     }
 
-    public void setMonthly_family_salary(String monthly_family_salary) {
+    public void setMonthly_family_salary(int monthly_family_salary) {
         this.monthly_family_salary = monthly_family_salary;
     }
 }

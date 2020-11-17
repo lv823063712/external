@@ -18,34 +18,34 @@ public class BaseInfoRequestBean {
      * birthday :
      */
 
-    private String gender;
-    private String marital;
-    private String education;
+    private int gender;
+    private int marital;
+    private int education;
     private String email;
     private String name;
     private String birthday;
 
-    public String getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
-    public String getMarital() {
+    public int getMarital() {
         return marital;
     }
 
-    public void setMarital(String marital) {
+    public void setMarital(int marital) {
         this.marital = marital;
     }
 
-    public String getEducation() {
+    public int getEducation() {
         return education;
     }
 
-    public void setEducation(String education) {
+    public void setEducation(int education) {
         this.education = education;
     }
 
