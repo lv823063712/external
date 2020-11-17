@@ -10,11 +10,11 @@ import com.example.external.base.BaseActivity;
 
 /**
  * 个人中心
- * */
+ */
 public class MyProfileActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView mBack;
-    private RelativeLayout mBasicRelative,mWorkRelative,mBankRelative;
+    private RelativeLayout mBasicRelative, mWorkRelative, mBankRelative;
 
     @Override
     protected int getLayout() {
@@ -54,15 +54,15 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.basic_Relative:
-                Intent intent = new Intent(this,BasicInformationActivity.class);
+                Intent intent = new Intent(this, BasicInformationActivity.class);
                 startActivity(intent);
                 break;
             case R.id.work_relative:
-                Intent workIntent = new Intent(this,WorkInformationActivity.class);
+                Intent workIntent = new Intent(this, WorkInformationActivity.class);
                 startActivity(workIntent);
                 break;
             case R.id.bank_relative:
-                Intent bankIntent = new Intent(this,BankInformationActivity.class);
+                Intent bankIntent = new Intent(this, BankInformationActivity.class);
                 startActivity(bankIntent);
                 break;
         }

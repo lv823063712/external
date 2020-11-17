@@ -11,17 +11,10 @@ import androidx.annotation.Nullable;
 
 import com.example.external.R;
 import com.example.external.base.BaseFragment;
-import com.example.external.common.RequestCommon;
-import com.example.external.mvp.bean.ConfigBean;
-import com.example.external.mvp.network.Constant;
-import com.example.external.mvp.presenter.StartPresenter;
 import com.example.external.ui.activity.FeedbackActivity;
 import com.example.external.ui.activity.LoginActivity;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.UserUtils;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;

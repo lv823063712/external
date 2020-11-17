@@ -19,9 +19,6 @@ public class RequestCommon {
 
         return ViewHolder.REQUEST_COMMON;
     }
-    private static class ViewHolder {
-        private static final RequestCommon REQUEST_COMMON = new RequestCommon();
-    }
 
     public HashMap<String, Object> headers(Context context) {
 
@@ -43,6 +40,10 @@ public class RequestCommon {
         map.put("gps-adid","android");
         */
         return map;
+    }
+
+    private static class ViewHolder {
+        private static final RequestCommon REQUEST_COMMON = new RequestCommon();
     }
 
 

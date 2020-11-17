@@ -77,9 +77,9 @@ public class StartActivity extends BaseActivity implements StartInterface.Strart
                         .runtime()
                         .permission(strings)
                         .onGranted(datas -> {
-                            if (UserUtils.getInstance().getToken(mActivity).length()==0) {
+                            if (UserUtils.getInstance().getToken(mActivity).length() == 0) {
                                 startActivity(new Intent(mActivity, LoginActivity.class));
-                            }else{
+                            } else {
                                 startActivity(new Intent(mActivity, MainActivity.class));
                             }
                             finish();
