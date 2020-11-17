@@ -5,7 +5,7 @@ import com.example.external.base.BaseActivity;
 
 /**
  * 基础信息
- * */
+ */
 public class BasicInformationActivity extends BaseActivity {
 
     @Override

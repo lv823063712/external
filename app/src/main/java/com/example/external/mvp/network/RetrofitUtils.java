@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.example.external.mvp.utils.HttpLoggingInterceptorM;
 import com.example.external.mvp.utils.LogInterceptor;
-import com.example.external.mvp.utils.MLogInterceptor;
 
 import java.io.IOException;
 import java.util.Map;
@@ -30,6 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitUtils {
 
     private ApiService apiService;
+
     private RetrofitUtils() {
         String HTTP_LOG_TAG = "http";
         HttpLoggingInterceptorM interceptor = new HttpLoggingInterceptorM(new LogInterceptor(HTTP_LOG_TAG));

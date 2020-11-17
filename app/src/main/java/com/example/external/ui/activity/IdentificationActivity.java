@@ -14,8 +14,6 @@ import com.example.external.R;
 import com.example.external.base.BaseActivity;
 import com.example.external.common.RequestCommon;
 import com.example.external.common.SystemCommon;
-import com.example.external.common.TextViewCommon;
-import com.example.external.mvp.bean.LoginBean;
 import com.example.external.mvp.bean.SuccessCommon;
 import com.example.external.mvp.myinterface.StartInterface;
 import com.example.external.mvp.network.Constant;
@@ -271,19 +269,19 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                     BankInfoRequestBean bankBean = new BankInfoRequestBean();
                     if (ifsc_et.getText() != null && !ifsc_et.getText().toString().equals("")) {
                         bankBean.setIfsc_code(ifsc_et.getText().toString());
-                    }else{
+                    } else {
                         Toast.makeText(mActivity, "Please fill in THE IFSC code", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (bank_name_et.getText() != null && !bank_name_et.getText().toString().equals("")) {
                         bankBean.setBank_name(bank_name_et.getText().toString());
-                    }else{
+                    } else {
                         Toast.makeText(mActivity, "Please fill in the bank name", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (bank_account.getText() != null && !bank_account.getText().toString().equals("")) {
                         bankBean.setBank_account_no(bank_account.getText().toString());
-                    }else{
+                    } else {
                         Toast.makeText(mActivity, "Please fill in your bank card number", Toast.LENGTH_SHORT).show();
                         return;
                     }

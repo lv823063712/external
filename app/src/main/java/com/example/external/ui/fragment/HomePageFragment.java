@@ -3,8 +3,6 @@ package com.example.external.ui.fragment;
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -12,7 +10,6 @@ import androidx.appcompat.widget.AppCompatImageView;
 import com.example.external.R;
 import com.example.external.base.BaseFragment;
 import com.example.external.common.RequestCommon;
-import com.example.external.mvp.bean.ConfigBean;
 import com.example.external.mvp.bean.MarqueeBean;
 import com.example.external.mvp.bean.ProductBean;
 import com.example.external.mvp.myinterface.StartInterface;

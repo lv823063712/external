@@ -25,10 +25,6 @@ public class UserUtils {
         return ViewHolder.USER_UTILS;
     }
 
-    private static class ViewHolder {
-        private static final UserUtils USER_UTILS = new UserUtils();
-    }
-
     //客服邮箱
     public void saveEmail(Context context, String email) {
         SharedPreferencesUtil.getInstance(context).putString(ISEMAIL, email);
@@ -175,6 +171,10 @@ public class UserUtils {
     //清除所有本地保存数据
     public void clearAllSp(Context context) {
         SharedPreferencesUtil.getInstance(context).clearSp();
+    }
+
+    private static class ViewHolder {
+        private static final UserUtils USER_UTILS = new UserUtils();
     }
 
 

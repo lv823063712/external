@@ -16,10 +16,6 @@ public class TextViewCommon {
         return ViewHolder.REQUEST_COMMON;
     }
 
-    private static class ViewHolder {
-        private static final TextViewCommon REQUEST_COMMON = new TextViewCommon();
-    }
-
     public String setTextContent1(Context context, String content) {
         if (!content.equals("") && content != null) {
             et = content;
@@ -63,5 +59,9 @@ public class TextViewCommon {
             Toast.makeText(context, "Please enter email address", Toast.LENGTH_SHORT).show();
         }
         return et;
+    }
+
+    private static class ViewHolder {
+        private static final TextViewCommon REQUEST_COMMON = new TextViewCommon();
     }
 }
