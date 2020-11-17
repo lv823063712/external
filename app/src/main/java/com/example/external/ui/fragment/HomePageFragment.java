@@ -6,6 +6,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.example.external.R;
@@ -21,6 +22,10 @@ import com.example.external.ui.activity.GetMoneyActivity;
 import com.example.external.ui.activity.IdentificationActivity;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.LuckyNoticeView;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,13 +36,12 @@ import java.util.Map;
 public class HomePageFragment extends BaseFragment implements StartInterface.StrartView, View.OnClickListener {
 
     private DialogUtils utils;
-    private TextView home_some_user, reduce_money, increase_money, home_borrow_money;
-    private TextView home_some_user_content;
+    private TextView home_some_user, reduce_money, increase_money, home_borrow_money, borrow, home_some_user_content;
     private LuckyNoticeView testVf;
     private List<MarqueeBean.DataBean> dataBeans = new ArrayList<>();
     private int money_show = 1;
-    private TextView borrow;
     private int status;
+    private SmartRefreshLayout home_page_refresh;
 
     @Override
     protected int getLayout() {
@@ -53,14 +57,9 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
         increase_money = mActivity.findViewById(R.id.increase_money);
         home_borrow_money = mActivity.findViewById(R.id.home_borrow_money);
         testVf = mActivity.findViewById(R.id.testVf);
+        home_page_refresh = mActivity.findViewById(R.id.home_page_refresh);
         home_some_user_content = mActivity.findViewById(R.id.home_some_user_content);
         AppCompatImageView test = mActivity.findViewById(R.id.test);
-
-
-/*        test.setOnClickListener(v -> {
-            Intent intent = new Intent(mActivity, IdentificationActivity.class);
-            startActivity(intent);
-        });*/
         initClick();
     }
 
@@ -68,6 +67,15 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
         reduce_money.setOnClickListener(this);
         increase_money.setOnClickListener(this);
         borrow.setOnClickListener(this);
+        home_page_refresh.setEnableLoadMore(false);
+        home_page_refresh.setOnRefreshListener(refreshLayout -> {
+            netWork();
+            home_page_refresh.finishRefresh();
+        });
+/*        home_page_refresh.setOnLoadMoreListener(refreshLayout -> {
+            netWork();
+            home_page_refresh.finishLoadMore();
+        });*/
     }
 
     @Override
@@ -79,15 +87,15 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
                     startActivity(intent);
                 } else if (status == 1) {
                     Intent intent = new Intent(mActivity, IdentificationActivity.class);
-                    intent.putExtra("next_step",status);
+                    intent.putExtra("next_step", status);
                     startActivity(intent);
                 } else if (status == 2) {
                     Intent intent = new Intent(mActivity, IdentificationActivity.class);
-                    intent.putExtra("next_step",2);
+                    intent.putExtra("next_step", 2);
                     startActivity(intent);
                 } else if (status == 3) {
                     Intent intent = new Intent(mActivity, IdentificationActivity.class);
-                    intent.putExtra("next_step",status);
+                    intent.putExtra("next_step", status);
                     startActivity(intent);
                 }
                 break;
@@ -118,6 +126,10 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
 
     @Override
     protected void initData() {
+        netWork();
+    }
+
+    private void netWork() {
         StartPresenter startPresenter = new StartPresenter(this);
         Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
         Map<String, Object> body = new HashMap<>();
