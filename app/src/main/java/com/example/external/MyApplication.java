@@ -11,6 +11,7 @@ import java.util.LinkedHashSet;
 
 import cat.ereza.customactivityoncrash.config.CaocConfig;
 import me.jessyan.autosize.AutoSize;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * @ClassName: MyApplication
@@ -25,10 +26,15 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this;
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/montserrat_bold.otf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
         //dex 65535
         MultiDex.install(this);
         AutoSize.initCompatMultiProcess(this);
         initCrash();
+
     }
 
     private void initCrash() {

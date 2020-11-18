@@ -58,14 +58,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.External"
         tools:targetApi="n">
-        <activity android:name=".ui.activity.BankInformationActivity"></activity>
-        <activity android:name=".ui.activity.WorkInformationActivity" />
-        <activity android:name=".ui.activity.MyProfileActivity" />
-        <activity android:name=".ui.activity.BasicInformationActivity" />
-        <activity android:name=".ui.activity.GetMoneyActivity" />
-        <activity android:name=".ui.activity.ReviewingActivity" />
-        <activity android:name=".ui.activity.IdentificationActivity" />
-        <activity android:name=".ui.activity.FeedbackActivity"></activity>
+
         <activity
             android:name=".ui.activity.StartActivity"
             android:configChanges="orientation|screenSize"
@@ -77,8 +70,57 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.LoginActivity" />
-        <activity android:name=".ui.activity.MainActivity" />
+        <activity android:name=".ui.activity.LoginActivity"
+            android:label="Login"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".ui.activity.MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Home"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".ui.activity.BankInformationActivity"
+            android:label="Bank Information"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".ui.activity.WorkInformationActivity"
+            android:label="Work Information"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".ui.activity.MyProfileActivity"
+            android:label="My Profile"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".ui.activity.BasicInformationActivity"
+            android:label="Basic Information"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".ui.activity.GetMoneyActivity"
+            android:label="Get Money"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".ui.activity.ReviewingActivity"
+            android:label="Reviewing"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".ui.activity.IdentificationActivity"
+            android:label="Identification"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".ui.activity.FeedbackActivity"
+            android:label="Feedback"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
