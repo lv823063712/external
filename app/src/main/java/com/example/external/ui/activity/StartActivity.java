@@ -21,6 +21,7 @@ import com.example.external.mvp.network.Constant;
 import com.example.external.mvp.presenter.StartPresenter;
 import com.example.external.ui.view.CustomDialog;
 import com.example.external.utils.AppStatusManager;
+import com.example.external.utils.DialogUtils;
 import com.example.external.utils.UserUtils;
 import com.yanzhenjie.permission.AndPermission;
 
@@ -34,6 +35,7 @@ public class StartActivity extends BaseActivity implements StartInterface.Strart
     };
     private StartPresenter startPresenter;
     private CustomDialog dialog;
+    private DialogUtils utils;
     ;
 
     @Override
@@ -50,7 +52,7 @@ public class StartActivity extends BaseActivity implements StartInterface.Strart
 
     @Override
     protected void initData() {
-
+        utils = new DialogUtils(mActivity, R.style.CustomDialog);
     }
 
     @Override
@@ -66,6 +68,7 @@ public class StartActivity extends BaseActivity implements StartInterface.Strart
 
     @Override
     public void success(Object data) {
+        utils.dismissDialog(utils);
         if (data instanceof ConfigBean) {
             ConfigBean configBean = (ConfigBean) data;
             if (configBean.getStatus() == 1) {
@@ -73,6 +76,12 @@ public class StartActivity extends BaseActivity implements StartInterface.Strart
                 UserUtils.getInstance().saveEmails(mActivity, configBean.getData().getSys_service_email_bak());
                 UserUtils.getInstance().saveServiceTime(mActivity, configBean.getData().getSys_service_time());
                 UserUtils.getInstance().savePayChannel(mActivity, configBean.getData().getPay_channel());
+                UserUtils.getInstance().savetips_processing(mActivity, configBean.getData().getTips_processing());
+                UserUtils.getInstance().savetips_congratulations(mActivity, configBean.getData().getTips_congratulations());
+                UserUtils.getInstance().savetips_pay(mActivity, configBean.getData().getTips_pay());
+                UserUtils.getInstance().savesys_service_email_bak(mActivity, configBean.getData().getSys_service_email_bak());
+                UserUtils.getInstance().savesys_service_email(mActivity, configBean.getData().getSys_service_email());
+                UserUtils.getInstance().savesys_service_time(mActivity, configBean.getData().getSys_service_time());
                 AndPermission.with(mActivity)
                         .runtime()
                         .permission(strings)
@@ -93,6 +102,7 @@ public class StartActivity extends BaseActivity implements StartInterface.Strart
 
     @Override
     public void error(Object error) {
+        utils.dismissDialog(utils);
         showErrorDialog();
     }
 
@@ -120,12 +130,14 @@ public class StartActivity extends BaseActivity implements StartInterface.Strart
         startPresenter = new StartPresenter(this);
         Map<String, Object> header = new HashMap<>();
         Map<String, Object> body = new HashMap<>();
+        utils.show();
         startPresenter.get(Constant.CONFIG_URL, header, body, ConfigBean.class);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        utils.dismissDialog(utils);
         startPresenter.onDatacth();
     }
 }

@@ -421,7 +421,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_13"
-                        android:text="₹699"
+                        tools:text="₹699"
                         android:textColor="#FE9E80"
                         android:textSize="23sp" />
 
@@ -437,7 +437,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/dp_100"
-        android:text="If you fall,it be refunded to you within 5 days"
+        tools:text="If you fall,it be refunded to you within 5 days"
         android:textColor="#041D98"
         android:textSize="12sp" />
 

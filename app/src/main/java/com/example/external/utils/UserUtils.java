@@ -20,6 +20,12 @@ public class UserUtils {
     private String AUTHORIZED = "authorized";//是否认证
     private String TOKEN = "token";//Token
     private String NAME = "name";//用户名
+    private String TIPS_PROCESSING = "tips_processing";//审核中
+    private String TIPS_CONGRATULATIONS = "tips_congratulations";//审核成功
+    private String TIPS_PAY = "tips_pay";//支付底部
+    private String SYS_SERVICE_EMAIL_BAK = "sys_service_email_bak";//个人中心底部
+    private String SYS_SERVICE_EMAIL = "sys_service_email";//邮箱
+    private String SYS_SERVICE_TIME = "sys_service_time";//服务时间
 
     public static UserUtils getInstance() {
         return ViewHolder.USER_UTILS;
@@ -166,6 +172,82 @@ public class UserUtils {
 
     public void removeName(Context context) {
         SharedPreferencesUtil.getInstance(context).remove(NAME);
+    }
+
+    //审核中
+    public void savetips_processing(Context context, String name) {
+        SharedPreferencesUtil.getInstance(context).putString(TIPS_PROCESSING, name);
+    }
+
+    public String gettips_processing(Context context) {
+        return SharedPreferencesUtil.getInstance(context).getString(TIPS_PROCESSING);
+    }
+
+    public void removetips_processing(Context context) {
+        SharedPreferencesUtil.getInstance(context).remove(TIPS_PROCESSING);
+    }
+
+    //审核成功
+    public void savetips_congratulations(Context context, String name) {
+        SharedPreferencesUtil.getInstance(context).putString(TIPS_CONGRATULATIONS, name);
+    }
+
+    public String gettips_congratulations(Context context) {
+        return SharedPreferencesUtil.getInstance(context).getString(TIPS_CONGRATULATIONS);
+    }
+
+    public void removetips_congratulations(Context context) {
+        SharedPreferencesUtil.getInstance(context).remove(TIPS_CONGRATULATIONS);
+    }
+
+    //支付底部
+    public void savetips_pay(Context context, String name) {
+        SharedPreferencesUtil.getInstance(context).putString(TIPS_PAY, name);
+    }
+
+    public String gettips_pay(Context context) {
+        return SharedPreferencesUtil.getInstance(context).getString(TIPS_PAY);
+    }
+
+    public void removetips_pay(Context context) {
+        SharedPreferencesUtil.getInstance(context).remove(TIPS_PAY);
+    }
+
+    //个人中心底部
+    public void savesys_service_email_bak(Context context, String name) {
+        SharedPreferencesUtil.getInstance(context).putString(SYS_SERVICE_EMAIL_BAK, name);
+    }
+
+    public String getsys_service_email_bak(Context context) {
+        return SharedPreferencesUtil.getInstance(context).getString(SYS_SERVICE_EMAIL_BAK);
+    }
+
+    public void removesys_service_email_bak(Context context) {
+        SharedPreferencesUtil.getInstance(context).remove(SYS_SERVICE_EMAIL_BAK);
+    }
+    //feedback邮箱
+    public void savesys_service_email(Context context, String name) {
+        SharedPreferencesUtil.getInstance(context).putString(SYS_SERVICE_EMAIL, name);
+    }
+
+    public String getsys_service_email(Context context) {
+        return SharedPreferencesUtil.getInstance(context).getString(SYS_SERVICE_EMAIL);
+    }
+
+    public void removesys_service_email(Context context) {
+        SharedPreferencesUtil.getInstance(context).remove(SYS_SERVICE_EMAIL);
+    }
+    //服务时间
+    public void savesys_service_time(Context context, String name) {
+        SharedPreferencesUtil.getInstance(context).putString(SYS_SERVICE_TIME, name);
+    }
+
+    public String getsys_service_time(Context context) {
+        return SharedPreferencesUtil.getInstance(context).getString(SYS_SERVICE_TIME);
+    }
+
+    public void removesys_service_time(Context context) {
+        SharedPreferencesUtil.getInstance(context).remove(SYS_SERVICE_TIME);
     }
 
     //清除所有本地保存数据

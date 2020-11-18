@@ -1,5 +1,6 @@
 package com.example.external.ui.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import com.example.external.mvp.network.Constant;
 import com.example.external.mvp.presenter.StartPresenter;
 import com.example.external.mvp.requestbean.BankInfoRequestBean;
 import com.example.external.utils.DialogUtils;
+import com.example.external.utils.UserUtils;
 import com.google.gson.Gson;
 
 import org.w3c.dom.Text;
@@ -126,5 +128,10 @@ public class BankInformationActivity extends BaseActivity implements View.OnClic
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
+        if (error.toString().trim().equals("HTTP 401")) {
+            Intent intent = new Intent(mActivity, LoginActivity.class);
+            startActivity(intent);
+            UserUtils.getInstance().clearAllSp(mActivity);
+        }
     }
 }

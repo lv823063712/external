@@ -17,9 +17,11 @@ import com.example.external.mvp.network.Constant;
 import com.example.external.mvp.presenter.StartPresenter;
 import com.example.external.ui.activity.GetMoneyActivity;
 import com.example.external.ui.activity.IdentificationActivity;
+import com.example.external.ui.activity.LoginActivity;
 import com.example.external.ui.activity.ReviewingActivity;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.LuckyNoticeView;
+import com.example.external.utils.UserUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -81,7 +83,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
                 if (status == 0) {
                     if (phase == 0) {
                         Intent intent = new Intent(mActivity, GetMoneyActivity.class);
-                        intent.putParcelableArrayListExtra("ints",beans);
+                        intent.putParcelableArrayListExtra("ints", beans);
                         startActivity(intent);
                     } else if (phase == 1) {
                         Intent intent = new Intent(mActivity, ReviewingActivity.class);
@@ -89,11 +91,11 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
                         startActivity(intent);
                     } else if (phase == 2) {
                         Intent intent = new Intent(mActivity, GetMoneyActivity.class);
-                        intent.putParcelableArrayListExtra("ints",beans);
+                        intent.putParcelableArrayListExtra("ints", beans);
                         startActivity(intent);
                     } else if (phase == 3) {
                         Intent intent = new Intent(mActivity, GetMoneyActivity.class);
-                        intent.putParcelableArrayListExtra("ints",beans);
+                        intent.putParcelableArrayListExtra("ints", beans);
                         startActivity(intent);
                     }
                 } else if (status == 1) {
@@ -172,6 +174,16 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
+        if (error.toString().trim().equals("HTTP 401")) {
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+            UserUtils.getInstance().clearAllSp(mActivity);
+        }
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        utils.dismissDialog(utils);
+    }
 }

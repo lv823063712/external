@@ -1,5 +1,7 @@
 package com.example.external.ui.activity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.example.external.mvp.utils.GsonUtil;
 import com.example.external.mvp.utils.LogUtil;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.StatusBarUtil;
+import com.example.external.utils.UserUtils;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -40,6 +43,7 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     private TextView feed_save;
     private DialogUtils utils;
     private StartPresenter startPresenter;
+    private TextView feed_text;
 
     @Override
     protected int getLayout() {
@@ -53,11 +57,15 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
         initView();
     }
 
+    @SuppressLint("SetTextI18n")
     private void initView() {
         feed_msg_back = mActivity.findViewById(R.id.feed_msg_back);
         feed_images = mActivity.findViewById(R.id.feed_images);
+        feed_text = mActivity.findViewById(R.id.feed_text);
         add_content = mActivity.findViewById(R.id.add_content);
         feed_save = mActivity.findViewById(R.id.feed_save);
+        feed_text.setText("Any questions about the App, please contact us by E-mail.\n\n" +
+                "E-mail: " + UserUtils.getInstance().getsys_service_email(mActivity));
     }
 
     @Override
@@ -110,6 +118,11 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
+        if (error.toString().trim().equals("HTTP 401")) {
+            Intent intent = new Intent(mActivity, LoginActivity.class);
+            startActivity(intent);
+            UserUtils.getInstance().clearAllSp(mActivity);
+        }
     }
 
     @Override

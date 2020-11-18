@@ -39,7 +39,7 @@
             app:paddingTexwithIcon="6dp"
             app:tabIconNormal="@mipmap/icon_home"
             app:tabIconSelected="@mipmap/icon_home"
-            app:tabText="患者"
+            app:tabText="Home"
             app:tabTextSize="11sp"
             app:textColorNormal="@color/gray_666666"
             app:textColorSelected="@color/blue_3254E6" />
@@ -54,7 +54,7 @@
             app:paddingTexwithIcon="6dp"
             app:tabIconNormal="@mipmap/icon_me"
             app:tabIconSelected="@mipmap/icon_select_me"
-            app:tabText="我的"
+            app:tabText="Me"
             app:tabTextSize="11sp"
             app:textColorNormal="@color/gray_666666"
             app:textColorSelected="@color/blue_3254E6" />

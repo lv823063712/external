@@ -43,8 +43,7 @@
         android:layout_marginStart="@dimen/dp_30"
         android:layout_marginTop="@dimen/dp_30"
         android:layout_marginEnd="@dimen/dp_30"
-        android:text="Any questions about the App, please contact us by E-mail.
-        \n\nE-mail: service@xxCash.com"
+        android:text=""
         android:textColor="#ff6d83f2"
         android:textSize="19sp" />
 

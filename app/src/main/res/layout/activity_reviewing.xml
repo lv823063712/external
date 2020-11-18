@@ -22,8 +22,7 @@
         android:id="@+id/first_show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/first_reviewing"
-        android:visibility="gone">
+        android:layout_below="@+id/first_reviewing">
 
         <RelativeLayout
             android:id="@+id/image_show"
@@ -43,6 +42,7 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/under_review_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/image_show"
@@ -61,6 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/first_reviewing"
         android:layout_marginStart="@dimen/dp_30"
+        android:visibility="gone"
         android:layout_marginEnd="@dimen/dp_30">
 
         <RelativeLayout

@@ -1,5 +1,6 @@
 package com.example.external.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Parcelable;
@@ -13,13 +14,24 @@ import android.widget.TextView;
 
 import com.example.external.R;
 import com.example.external.base.BaseActivity;
+import com.example.external.common.RequestCommon;
+import com.example.external.mvp.bean.GetMoneyBean;
 import com.example.external.mvp.bean.ProductBean;
+import com.example.external.mvp.bean.SuccessCommon;
+import com.example.external.mvp.bean.UserInfoBean;
+import com.example.external.mvp.myinterface.StartInterface;
+import com.example.external.mvp.network.Constant;
+import com.example.external.mvp.presenter.StartPresenter;
 import com.example.external.utils.AppUtils;
+import com.example.external.utils.DialogUtils;
 import com.example.external.utils.StatusBarUtil;
+import com.example.external.utils.UserUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class GetMoneyActivity extends BaseActivity implements View.OnClickListener {
+public class GetMoneyActivity extends BaseActivity implements View.OnClickListener, StartInterface.StrartView {
 
     private TextView show_money;
     private TextView get_loan, month_show, loan_term, loan_interest, monthly_payment, monthly_principal, monthly_inerest,
@@ -30,6 +42,9 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
     private int isShow = 0;
     private ImageView details_img;
     private ArrayList<ProductBean> ints;
+    private DialogUtils utils;
+
+    private String idNet;
 
     @Override
     protected int getLayout() {
@@ -39,9 +54,17 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void initData() {
         StatusBarUtil.setTextColor(this);
+        utils = new DialogUtils(mActivity, R.style.CustomDialog);
         initView();
+        hint_textview.setText(UserUtils.getInstance().gettips_pay(mActivity));
         Intent intent = getIntent();
         ints = intent.getParcelableArrayListExtra("ints");
+
+        if (ints.get(0) == null) {
+            netWork();
+        } else {
+            setData(ints.get(0));
+        }
 
     }
 
@@ -77,17 +100,13 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void setClick() {
         original_money.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        original_money.setText("₹666");
         get_loan.setOnClickListener(this);
         details_show.setOnClickListener(this);
         money_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 setMBackGround(progress, show_money);
-                for (int i = 0; i < ints.get(0).getData().getLimits().size(); i++) {
 
-
-                }
             }
 
             @Override
@@ -96,6 +115,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                setData(ints.get(0));
             }
         });
         plan_months.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -111,21 +131,27 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                setData(ints.get(0));
             }
         });
     }
 
     @Override
     protected void preLogic() {
-
+        StartPresenter startPresenter = new StartPresenter(this);
+        Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
+        Map<String, Object> body = new HashMap<>();
+        utils.show();
+        startPresenter.get(Constant.PROFILE_URL, header, body, UserInfoBean.class);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.details_show:
                 if (isShow == 0) {
+                    setData(ints.get(0));
                     list_content.setVisibility(View.VISIBLE);
                     details_img.setImageDrawable(getResources().getDrawable(R.mipmap.icon_xsj));
                     my_background.setBackground(getResources().getDrawable(R.drawable.icon_back_bg));
@@ -146,10 +172,52 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
                 }
                 break;
             case R.id.get_loan:
-                break;
-            default:
+                razNetWork();
                 break;
         }
+    }
+
+    private void razNetWork() {
+        StartPresenter startPresenter = new StartPresenter(this);
+        Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
+        Map<String, Object> body = new HashMap<>();
+        body.put("id", idNet);
+        utils.show();
+        if (UserUtils.getInstance().getPayChannel(mActivity).equals("razorpay")) {
+            startPresenter.get(Constant.CREATERAZORPAY_URL, header, body, GetMoneyBean.class);
+        } else if (UserUtils.getInstance().getPayChannel(mActivity).equals("cashfree")) {
+            startPresenter.get(Constant.CREATECASHFREEPAY_URL, header, body, GetMoneyBean.class);
+        }
+
+    }
+
+    private void netWork() {
+        StartPresenter startPresenter = new StartPresenter(this);
+        Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
+        Map<String, Object> body = new HashMap<>();
+        utils.show();
+        startPresenter.get(Constant.HOMEPAGE, header, body, ProductBean.class);
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void setData(ProductBean data) {
+        for (int i = 0; i < data.getData().getLimits().size(); i++) {
+            if (data.getData().getLimits().get(i).getAmount() == Integer.parseInt(show_money.getText().toString().split("₹")[1].replace(",", ""))) {
+                for (int j = 0; j < data.getData().getLimits().get(i).getDurations().size(); j++) {
+                    if (data.getData().getLimits().get(i).getDurations().get(j).getDuration().contains(month_show.getText().toString().replace("Months", "month"))) {
+                        idNet = data.getData().getLimits().get(i).getDurations().get(j).getId();
+                        loan_term.setText(data.getData().getLimits().get(i).getDurations().get(j).getDuration());
+                        loan_interest.setText(data.getData().getLimits().get(i).getDurations().get(j).getInterest() + "");
+                        monthly_payment.setText(data.getData().getLimits().get(i).getDurations().get(j).getMonthly_payment() + "");
+                        monthly_principal.setText(data.getData().getLimits().get(i).getDurations().get(j).getMonthly_principal() + "");
+                        monthly_inerest.setText(data.getData().getLimits().get(i).getDurations().get(j).getMonthly_inerest() + "");
+                        original_money.setText("₹" + data.getData().getLimits().get(i).getDurations().get(j).getMember_ori_fee());
+                        reality_money.setText("₹" + data.getData().getLimits().get(i).getDurations().get(j).getMember_fee());
+                    }
+                }
+            }
+        }
+
     }
 
     private void setMBackGround(int plan, TextView textView) {
@@ -206,5 +274,42 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
             months_four.setBackground(getResources().getDrawable(R.color.red_6D83F2));
             textView.setText("12 Months");
         }
+    }
+
+    @Override
+    public void success(Object data) {
+        utils.dismissDialog(utils);
+        if (data instanceof UserInfoBean) {
+            UserInfoBean bean = (UserInfoBean) data;
+            if (bean.getData() != null) {
+                bank_card_num.setText(bean.getData().getBank_account_no());
+            }
+        } else if (data instanceof ProductBean) {
+            ProductBean bean = (ProductBean) data;
+            ints.add(bean);
+        } else if (data instanceof GetMoneyBean) {
+            GetMoneyBean moneyBean = (GetMoneyBean) data;
+            if (moneyBean.getStatus() == 1) {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                backActivity();
+            }
+        }
+    }
+
+    @Override
+    public void error(Object error) {
+        utils.dismissDialog(utils);
+        if (error.toString().trim().equals("HTTP 401")) {
+            Intent intent = new Intent(mActivity, LoginActivity.class);
+            startActivity(intent);
+            UserUtils.getInstance().clearAllSp(mActivity);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        utils.dismissDialog(utils);
     }
 }

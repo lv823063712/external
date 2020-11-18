@@ -1,5 +1,6 @@
 package com.example.external.ui.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -19,6 +20,7 @@ import com.example.external.ui.view.EmploymentTypePop;
 import com.example.external.ui.view.MonthlyFamilyIncomePop;
 import com.example.external.ui.view.YourMonthlySalaryPop;
 import com.example.external.utils.DialogUtils;
+import com.example.external.utils.UserUtils;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -172,5 +174,10 @@ public class WorkInformationActivity extends BaseActivity implements View.OnClic
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
+        if (error.toString().trim().equals("HTTP 401")) {
+            Intent intent = new Intent(mActivity, LoginActivity.class);
+            startActivity(intent);
+            UserUtils.getInstance().clearAllSp(mActivity);
+        }
     }
 }

@@ -31,7 +31,7 @@ import butterknife.OnClick;
 public class MeFragment extends BaseFragment implements View.OnClickListener, StartInterface.StrartView {
 
     private DialogUtils utils;
-    private TextView log_out, my_name;
+    private TextView log_out, my_name, bottom_wenan;
     private StartPresenter startPresenter;
     private SmartRefreshLayout me_refresh;
     private LinearLayout my_profile, my_customer, my_aboutus, ll_feedback;
@@ -51,6 +51,8 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
         my_profile = getActivity().findViewById(R.id.my_profile);
         my_customer = getActivity().findViewById(R.id.my_customer);
         my_aboutus = getActivity().findViewById(R.id.my_aboutus);
+        bottom_wenan = getActivity().findViewById(R.id.bottom_wenan);
+        bottom_wenan.setText(UserUtils.getInstance().getsys_service_email_bak(mActivity));
         netWork();
         me_refresh.setEnableLoadMore(false);
         me_refresh.setOnRefreshListener(new OnRefreshListener() {
@@ -122,6 +124,11 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
+        if (error.toString().trim().equals("HTTP 401")) {
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+            UserUtils.getInstance().clearAllSp(mActivity);
+        }
     }
 
     @Override

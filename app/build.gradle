@@ -10,30 +10,93 @@ android {
         applicationId "com.example.external"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        multiDexEnabled true
         ndk {
-            abiFilters 'armeabi-v7a', 'arm64-v8a'
+            abiFilters 'armeabi-v7a'/*, 'arm64-v8a'*/
 //            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
             //  'armeabi', 'x86','armeabi-v7a', 'arm64-v8a', 'x86_64', 'mips', 'mips64'
         }
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-}
 
+    dexOptions {
+        javaMaxHeapSize "2G"
+        incremental true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    lintOptions {
+        abortOnError false //lint时候终止错误上报,防止编译的时候莫名的失败
+        checkReleaseBuilds false
+        disable 'MissingTranslation'
+    }
+    signingConfigs{
+        beta {
+            storePassword store_password
+            keyAlias key_alias
+            keyPassword key_password
+            v1SigningEnabled true
+            v2SigningEnabled true
+            storeFile file('E:\\external\\doc\\sinature\\external.jks')
+        }
+        release {
+            storePassword store_password
+            keyAlias key_alias
+            keyPassword key_password
+            v1SigningEnabled true
+            v2SigningEnabled true
+            storeFile file('E:\\external\\doc\\sinature\\external.jks')
+        }
+    }
+
+    buildTypes {
+        beta {
+            minifyEnabled false//混淆处理
+            debuggable true// 保留debug信息
+            signingConfig signingConfigs.beta
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true//混淆处理
+            debuggable true// 保留debug信息
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //修改生成的apk名字及输出文件夹
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            //新名字
+            def newName
+            //时间戳
+            def timeNow
+            //输出文件夹
+            def outDirectory
+            //本机打包输出在本机路径
+            timeNow = getDate()
+            outDirectory = timeNow
+            newName = rootProject.ext.buildAppName + "-v" + rootProject.ext.versionName + '-' + variant.buildType.name + '.apk'
+            outputFileName = new File(outDirectory, newName)
+        }
+    }
+}
+def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMddHHmm')
+    return formattedDate
+}
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation rootProject.ext.compilelibs['appcompat']

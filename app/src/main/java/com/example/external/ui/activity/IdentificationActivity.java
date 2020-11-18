@@ -31,6 +31,7 @@ import com.example.external.ui.view.SexPicker;
 import com.example.external.ui.view.YourMonthlySalaryPop;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.StatusBarUtil;
+import com.example.external.utils.UserUtils;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -384,5 +385,10 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
+        if (error.toString().trim().equals("HTTP 401")) {
+            Intent intent = new Intent(mActivity, LoginActivity.class);
+            startActivity(intent);
+            UserUtils.getInstance().clearAllSp(mActivity);
+        }
     }
 }

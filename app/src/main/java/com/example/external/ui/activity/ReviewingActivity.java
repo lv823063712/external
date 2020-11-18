@@ -18,6 +18,7 @@ import com.example.external.mvp.presenter.StartPresenter;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.LuckyNoticeView;
 import com.example.external.utils.StatusBarUtil;
+import com.example.external.utils.UserUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,13 +26,14 @@ import java.util.List;
 import java.util.Map;
 
 public class ReviewingActivity extends BaseActivity implements StartInterface.StrartView {
-    private TextView first_reviewing, step_tv, some_user, some_user_dollor;
+    private TextView first_reviewing, step_tv, some_user, some_user_dollor, vip_hint, under_review_hint;
     private RelativeLayout first_show, second_reviewing;
     private int next_int = 0;
     private DialogUtils utils;
     private StartPresenter startPresenter;
     private LuckyNoticeView testVfs;
     private List<MarqueeBean.DataBean> dataBeans = new ArrayList<>();
+
     @Override
     protected int getLayout() {
         return R.layout.activity_reviewing;
@@ -55,10 +57,15 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
         first_reviewing = findViewById(R.id.first_reviewing);
         first_show = findViewById(R.id.first_show);
         second_reviewing = findViewById(R.id.second_reviewing);
+        vip_hint = findViewById(R.id.vip_hint);
+        under_review_hint = findViewById(R.id.under_review_hint);
         testVfs = findViewById(R.id.testVfs);
-
+        under_review_hint.setText(UserUtils.getInstance().gettips_processing(mActivity));
+        vip_hint.setText(UserUtils.getInstance().gettips_congratulations(mActivity));
         step_tv = findViewById(R.id.step_tvs);
         step_tv.setEnabled(false);
+        netWork();
+        netWorks();
     }
 
     @Override
@@ -82,7 +89,7 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
         startPresenter.get(Constant.HOMEPAGE, header, body, ProductBean.class);
     }
 
-    private void netWorks(){
+    private void netWorks() {
         startPresenter = new StartPresenter(this);
         Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
         Map<String, Object> body = new HashMap<>();
@@ -129,7 +136,7 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
                     }
                 }.start();
             }
-        }else if (data instanceof MarqueeBean){
+        } else if (data instanceof MarqueeBean) {
             MarqueeBean bean = (MarqueeBean) data;
             dataBeans.addAll(bean.getData());
             testVfs.addNotice(dataBeans);
@@ -140,6 +147,10 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
 
     @Override
     public void error(Object error) {
-
+        if (error.toString().trim().equals("HTTP 401")) {
+            Intent intent = new Intent(mActivity, LoginActivity.class);
+            startActivity(intent);
+            UserUtils.getInstance().clearAllSp(mActivity);
+        }
     }
 }

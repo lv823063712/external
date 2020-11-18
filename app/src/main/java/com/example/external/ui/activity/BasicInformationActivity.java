@@ -1,5 +1,6 @@
 package com.example.external.ui.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,6 +22,7 @@ import com.example.external.ui.view.EducationPop;
 import com.example.external.ui.view.MaritalPop;
 import com.example.external.ui.view.SexPicker;
 import com.example.external.utils.DialogUtils;
+import com.example.external.utils.UserUtils;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -213,6 +215,11 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
+        if (error.toString().trim().equals("HTTP 401")) {
+            Intent intent = new Intent(mActivity, LoginActivity.class);
+            startActivity(intent);
+            UserUtils.getInstance().clearAllSp(mActivity);
+        }
     }
 
     @Override
