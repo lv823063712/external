@@ -16,4 +16,13 @@
         <item name="android:backgroundDimAmount">0.5</item>
         <item name="android:backgroundDimEnabled" tools:targetApi="cupcake">true</item>
     </style>
+
+    <style name="AppTheme.Toolbar" parent="Widget.AppCompat.ActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/title_height</item>
+        <!--        <item name="android:background">?attr/colorPrimary</item>-->
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetEnd">0dp</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
 </resources>

@@ -17,6 +17,7 @@ import com.example.external.mvp.network.Constant;
 import com.example.external.mvp.presenter.StartPresenter;
 import com.example.external.ui.activity.GetMoneyActivity;
 import com.example.external.ui.activity.IdentificationActivity;
+import com.example.external.ui.activity.ReviewingActivity;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.LuckyNoticeView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -36,8 +37,10 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     private TextView home_some_user, reduce_money, increase_money, home_borrow_money, borrow, home_some_user_content;
     private LuckyNoticeView testVf;
     private List<MarqueeBean.DataBean> dataBeans = new ArrayList<>();
+    private ArrayList<ProductBean> beans = new ArrayList<>();
     private int money_show = 1;
     private int status;
+    private int phase;
     private SmartRefreshLayout home_page_refresh;
 
     @Override
@@ -76,15 +79,30 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
         switch (v.getId()) {
             case R.id.Borrow:
                 if (status == 0) {
-                    Intent intent = new Intent(mActivity, GetMoneyActivity.class);
-                    startActivity(intent);
+                    if (phase == 0) {
+                        Intent intent = new Intent(mActivity, GetMoneyActivity.class);
+                        intent.putParcelableArrayListExtra("ints",beans);
+                        startActivity(intent);
+                    } else if (phase == 1) {
+                        Intent intent = new Intent(mActivity, ReviewingActivity.class);
+                        intent.putExtra("attestation", phase);
+                        startActivity(intent);
+                    } else if (phase == 2) {
+                        Intent intent = new Intent(mActivity, GetMoneyActivity.class);
+                        intent.putParcelableArrayListExtra("ints",beans);
+                        startActivity(intent);
+                    } else if (phase == 3) {
+                        Intent intent = new Intent(mActivity, GetMoneyActivity.class);
+                        intent.putParcelableArrayListExtra("ints",beans);
+                        startActivity(intent);
+                    }
                 } else if (status == 1) {
                     Intent intent = new Intent(mActivity, IdentificationActivity.class);
                     intent.putExtra("next_step", status);
                     startActivity(intent);
                 } else if (status == 2) {
                     Intent intent = new Intent(mActivity, IdentificationActivity.class);
-                    intent.putExtra("next_step", 2);
+                    intent.putExtra("next_step", status);
                     startActivity(intent);
                 } else if (status == 3) {
                     Intent intent = new Intent(mActivity, IdentificationActivity.class);
@@ -140,7 +158,9 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
         utils.dismissDialog(utils);
         if (data instanceof ProductBean) {
             ProductBean productBean = (ProductBean) data;
+            beans.add(productBean);
             status = productBean.getData().getCertification();
+            phase = productBean.getData().getCertification();
         } else if (data instanceof MarqueeBean) {
             MarqueeBean bean = (MarqueeBean) data;
             dataBeans.addAll(bean.getData());

@@ -6,232 +6,250 @@
     android:background="@mipmap/background"
     tools:context=".ui.activity.BasicInformationActivity">
 
-    <EditText
-        android:id="@+id/full_name_edit"
-        android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:layout_below="@id/full_name"
-        android:layout_marginLeft="31dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="33dp"
-        android:background="@drawable/shape_edit_basic"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/header_titles"
+        style="@style/AppTheme.Toolbar"
+        android:layout_height="74dp">
 
-    <EditText
-        android:id="@+id/email_edit"
-        android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:layout_below="@id/email"
-        android:layout_marginLeft="31dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="33dp"
-        android:background="@drawable/shape_edit_basic"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
+        <RelativeLayout
+            android:id="@+id/basic_relative"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginTop="24dp">
 
-    <RelativeLayout
-        android:id="@+id/basic_relative"
+            <ImageView
+                android:id="@+id/msg_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/dp_15"
+                android:src="@mipmap/icon_back"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Basic information"
+                android:textColor="#ffffffff"
+                android:textSize="19sp" />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="17dp"
-        android:layout_marginTop="39dp">
+        android:layout_above="@+id/tv_save"
+        android:layout_below="@+id/header_titles">
 
-        <ImageView
-            android:id="@+id/basic_back"
-            android:layout_width="12dp"
-            android:layout_height="19dp"
-            android:background="@mipmap/icon_back" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Basic information"
-            android:textColor="#ffffffff"
-            android:textSize="19sp" />
-    </RelativeLayout>
+            android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/birthday_relative"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/birthday"
-        android:layout_marginTop="8dp">
 
-        <ImageView
-            android:id="@+id/birthday_image"
-            android:layout_width="8dp"
-            android:layout_height="14dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="54dp"
-            android:background="@mipmap/next_basic" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="27dp"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/birthday_text"
-            android:layout_width="match_parent"
-            android:layout_height="53dp"
-            android:layout_marginLeft="31dp"
-            android:layout_marginRight="33dp"
-            android:background="@drawable/shape_edit_basic" />
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/full_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Full Name"
+                    android:textColor="#ff1e2f4b"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-    <RelativeLayout
-        android:id="@+id/gender_relative"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/gender"
-        android:layout_marginTop="8dp">
+                <EditText
+                    android:id="@+id/full_name_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/shape_edit_basic"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="#ff1e2f4b"
+                    android:textSize="20sp" />
 
-        <ImageView
-            android:id="@+id/gender_image"
-            android:layout_width="8dp"
-            android:layout_height="14dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="54dp"
-            android:background="@mipmap/next_basic" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/gender_text"
-            android:layout_width="match_parent"
-            android:layout_height="53dp"
-            android:layout_marginLeft="31dp"
-            android:layout_marginRight="33dp"
-            android:background="@drawable/shape_edit_basic" />
-    </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="@dimen/dp_14"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/marital_relative"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/marital"
-        android:layout_marginTop="8dp">
+                <TextView
+                    android:id="@+id/birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_14"
+                    android:text="Birthday"
+                    android:textColor="#ff1e2f4b"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/marital_image"
-            android:layout_width="8dp"
-            android:layout_height="14dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="54dp"
-            android:background="@mipmap/next_basic" />
+                <TextView
+                    android:id="@+id/birthday_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:background="@drawable/shape_edit_basic"
+                    android:drawableEnd="@mipmap/next_basic"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/dp_8"
+                    android:paddingEnd="@dimen/dp_20"
+                    android:textColor="#ff1e2f4b"
+                    android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/marital_text"
-            android:layout_width="match_parent"
-            android:layout_height="53dp"
-            android:layout_marginLeft="31dp"
-            android:layout_marginRight="33dp"
-            android:background="@drawable/shape_edit_basic" />
-    </RelativeLayout>
+            </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/education_relative"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/education"
-        android:layout_marginTop="8dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="@dimen/dp_14"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/education_image"
-            android:layout_width="8dp"
-            android:layout_height="14dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="54dp"
-            android:background="@mipmap/next_basic" />
+                <TextView
+                    android:id="@+id/gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gender"
+                    android:textColor="#ff1e2f4b"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/education_text"
-            android:layout_width="match_parent"
-            android:layout_height="53dp"
-            android:layout_marginLeft="31dp"
-            android:layout_marginRight="33dp"
-            android:background="@drawable/shape_edit_basic" />
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/gender_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:layout_marginTop="@dimen/dp_14"
+                    android:background="@drawable/shape_edit_basic"
+                    android:drawableEnd="@mipmap/next_basic"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dp_8"
+                    android:paddingEnd="@dimen/dp_20"
+                    android:textColor="#ff1e2f4b"
+                    android:textSize="20sp" />
 
-    <TextView
-        android:layout_width="108dp"
-        android:layout_height="19dp"
-        android:text="Full Name"
-        android:textColor="#ff1e2f4b"
-        android:textSize="16sp" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/full_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/basic_relative"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="42dp"
-        android:text="Full Name"
-        android:textColor="#ff1e2f4b"
-        android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="@dimen/dp_14"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/birthday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/full_name_edit"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="14dp"
-        android:text="Birthday"
-        android:textColor="#ff1e2f4b"
-        android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/marital"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Marital"
+                    android:textColor="#ff1e2f4b"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/birthday_relative"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="14dp"
-        android:text="Gender"
-        android:textColor="#ff1e2f4b"
-        android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/marital"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/gender_relative"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="14dp"
-        android:text="Marital"
-        android:textColor="#ff1e2f4b"
-        android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/marital_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:layout_marginTop="@dimen/dp_14"
+                    android:background="@drawable/shape_edit_basic"
+                    android:drawableEnd="@mipmap/next_basic"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dp_8"
+                    android:paddingEnd="@dimen/dp_20"
+                    android:textColor="#ff1e2f4b"
+                    android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/education"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/marital_relative"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="14dp"
-        android:text="Marital"
-        android:textColor="#ff1e2f4b"
-        android:textSize="16sp" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/education_relative"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="13dp"
-        android:text="E-mail"
-        android:textColor="#ff1e2f4b"
-        android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="@dimen/dp_14"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/education"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Education"
+                    android:textColor="#ff1e2f4b"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/education_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:layout_marginTop="@dimen/dp_14"
+                    android:background="@drawable/shape_edit_basic"
+                    android:drawableEnd="@mipmap/next_basic"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/dp_8"
+                    android:paddingEnd="@dimen/dp_20"
+                    android:textColor="#ff1e2f4b"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="@dimen/dp_14"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="E-mail"
+                    android:textColor="#ff1e2f4b"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/email_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:layout_marginTop="@dimen/dp_14"
+                    android:background="@drawable/shape_edit_basic"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="#ff1e2f4b"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <TextView
         android:id="@+id/tv_save"
         android:layout_width="335dp"
         android:layout_height="58dp"
-        android:layout_below="@id/email_edit"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="66dp"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginBottom="28dp"
         android:background="@mipmap/save_basic"
         android:gravity="center"
         android:text="Save"

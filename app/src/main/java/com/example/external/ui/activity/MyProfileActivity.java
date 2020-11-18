@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 
 import com.example.external.R;
 import com.example.external.base.BaseActivity;
+import com.example.external.utils.StatusBarUtil;
 
 /**
  * 个人中心
@@ -23,6 +24,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     protected void initData() {
+        StatusBarUtil.setTextColor(this);
         initView();
         mBack.setOnClickListener(this);
         mBasicRelative.setOnClickListener(this);

@@ -15,6 +15,7 @@ import com.example.external.base.BaseActivity;
 import com.example.external.common.RequestCommon;
 import com.example.external.common.SystemCommon;
 import com.example.external.mvp.bean.SuccessCommon;
+import com.example.external.mvp.bean.UserInfoBean;
 import com.example.external.mvp.myinterface.StartInterface;
 import com.example.external.mvp.network.Constant;
 import com.example.external.mvp.presenter.StartPresenter;
@@ -163,7 +164,6 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                 educationPop.mySelectAll(nameAb -> education_et.setText(nameAb));
                 break;
             case R.id.employment_type_et:
-                SystemCommon.getInstance().keyBoard(mActivity);
                 EmploymentTypePop employmentTypePop = new EmploymentTypePop(this);
                 employmentTypePop.showPopupWindow();
                 employmentTypePop.mySelectAll(nameAb -> employment_type_et.setText(nameAb));

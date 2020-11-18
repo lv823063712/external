@@ -22,7 +22,8 @@
         android:id="@+id/first_show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/first_reviewing">
+        android:layout_below="@+id/first_reviewing"
+        android:visibility="gone">
 
         <RelativeLayout
             android:id="@+id/image_show"
@@ -60,8 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/first_reviewing"
         android:layout_marginStart="@dimen/dp_30"
-        android:layout_marginEnd="@dimen/dp_30"
-        android:visibility="gone">
+        android:layout_marginEnd="@dimen/dp_30">
 
         <RelativeLayout
             android:id="@+id/borrow_money"
@@ -101,44 +101,15 @@
             android:textColor="#041D98"
             android:textSize="14sp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <com.example.external.utils.LuckyNoticeView
+            android:id="@+id/testVfs"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/dp_100"
             android:layout_below="@+id/vip_hint"
             android:layout_marginTop="@dimen/dp_30"
-            android:background="@drawable/shape_vip_bg">
-
-            <TextView
-                android:id="@+id/some_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_15"
-                android:textColor="@color/white"
-                android:textSize="21sp"
-                tools:text="982****261" />
-
-            <TextView
-                android:id="@+id/some_user_dollor"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/some_user"
-                android:layout_marginStart="@dimen/dp_20"
-                android:layout_marginTop="6dp"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                tools:text="become a member and just borrowed ₹33,000" />
+            android:layout_marginEnd="33dp" />
 
 
-            <ImageView
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_50"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/dp_30"
-                android:src="@mipmap/icon_rupe" />
-
-        </RelativeLayout>
     </RelativeLayout>
 
     <TextView

@@ -1,16 +1,23 @@
 package com.example.external.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.external.R;
 import com.example.external.base.BaseActivity;
+import com.example.external.mvp.bean.ProductBean;
 import com.example.external.utils.AppUtils;
 import com.example.external.utils.StatusBarUtil;
+
+import java.util.ArrayList;
 
 public class GetMoneyActivity extends BaseActivity implements View.OnClickListener {
 
@@ -21,6 +28,8 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
     private View money_one, money_two, money_three, money_four, months_one, months_two, months_three, months_four;
     private SeekBar money_bar, plan_months;
     private int isShow = 0;
+    private ImageView details_img;
+    private ArrayList<ProductBean> ints;
 
     @Override
     protected int getLayout() {
@@ -31,6 +40,9 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
     protected void initData() {
         StatusBarUtil.setTextColor(this);
         initView();
+        Intent intent = getIntent();
+        ints = intent.getParcelableArrayListExtra("ints");
+
     }
 
     private void initView() {
@@ -59,6 +71,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
         reality_money = findViewById(R.id.reality_money);
         hint_textview = findViewById(R.id.hint_textview);
         get_loan = findViewById(R.id.get_loan);
+        details_img = findViewById(R.id.details_img);
     }
 
     @Override
@@ -71,6 +84,10 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 setMBackGround(progress, show_money);
+                for (int i = 0; i < ints.get(0).getData().getLimits().size(); i++) {
+
+
+                }
             }
 
             @Override
@@ -110,6 +127,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
             case R.id.details_show:
                 if (isShow == 0) {
                     list_content.setVisibility(View.VISIBLE);
+                    details_img.setImageDrawable(getResources().getDrawable(R.mipmap.icon_xsj));
                     my_background.setBackground(getResources().getDrawable(R.drawable.icon_back_bg));
                     ViewGroup.LayoutParams layoutParams = my_background.getLayoutParams();
                     int i = AppUtils.dip2px(mActivity, 258);
@@ -118,6 +136,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
                     isShow = 1;
                 } else {
                     list_content.setVisibility(View.GONE);
+                    details_img.setImageDrawable(getResources().getDrawable(R.mipmap.icon_hxsj));
                     my_background.setBackground(getResources().getDrawable(R.drawable.shape_bg_home));
                     ViewGroup.LayoutParams layoutParams = my_background.getLayoutParams();
                     int i = AppUtils.dip2px(mActivity, 48);

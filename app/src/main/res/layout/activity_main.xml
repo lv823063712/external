@@ -53,7 +53,7 @@
             android:paddingBottom="@dimen/dp_4"
             app:paddingTexwithIcon="6dp"
             app:tabIconNormal="@mipmap/icon_me"
-            app:tabIconSelected="@mipmap/icon_me"
+            app:tabIconSelected="@mipmap/icon_select_me"
             app:tabText="我的"
             app:tabTextSize="11sp"
             app:textColorNormal="@color/gray_666666"

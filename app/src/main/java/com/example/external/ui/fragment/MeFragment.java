@@ -16,6 +16,7 @@ import com.example.external.mvp.network.Constant;
 import com.example.external.mvp.presenter.StartPresenter;
 import com.example.external.ui.activity.FeedbackActivity;
 import com.example.external.ui.activity.LoginActivity;
+import com.example.external.ui.activity.MyProfileActivity;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.UserUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -33,6 +34,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     private TextView log_out, my_name;
     private StartPresenter startPresenter;
     private SmartRefreshLayout me_refresh;
+    private LinearLayout my_profile, my_customer, my_aboutus, ll_feedback;
 
     @Override
     protected int getLayout() {
@@ -42,11 +44,13 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     @Override
     protected void initView() {
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
-        LinearLayout ll_ll_feedback = getActivity().findViewById(R.id.ll_feedback);
+        ll_feedback = getActivity().findViewById(R.id.ll_feedback);
         log_out = getActivity().findViewById(R.id.log_out);
         my_name = getActivity().findViewById(R.id.my_name);
         me_refresh = getActivity().findViewById(R.id.me_refresh);
-        ll_ll_feedback.setOnClickListener(v -> startActivity(new Intent(getActivity(), FeedbackActivity.class)));
+        my_profile = getActivity().findViewById(R.id.my_profile);
+        my_customer = getActivity().findViewById(R.id.my_customer);
+        my_aboutus = getActivity().findViewById(R.id.my_aboutus);
         netWork();
         me_refresh.setEnableLoadMore(false);
         me_refresh.setOnRefreshListener(new OnRefreshListener() {
@@ -71,6 +75,10 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     @Override
     protected void initData() {
         log_out.setOnClickListener(this);
+        my_profile.setOnClickListener(this);
+        ll_feedback.setOnClickListener(this);
+        my_customer.setOnClickListener(this);
+        my_aboutus.setOnClickListener(this);
 
     }
 
@@ -79,7 +87,6 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
 
     }
 
-    @OnClick({R.id.my_profile, R.id.ll_feedback, R.id.my_customer, R.id.my_aboutus})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.log_out:
@@ -88,6 +95,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
                 mActivity.finish();
                 break;
             case R.id.my_profile:
+                startActivity(new Intent(getActivity(), MyProfileActivity.class));
                 break;
             case R.id.ll_feedback:
                 startActivity(new Intent(getActivity(), FeedbackActivity.class));

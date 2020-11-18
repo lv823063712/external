@@ -200,6 +200,14 @@
                         android:text="Interest details"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/details_img"
+                        android:layout_width="@dimen/dp_13"
+                        android:layout_height="@dimen/dp_13"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="@dimen/dp_15"
+                        android:src="@mipmap/icon_hxsj" />
                 </LinearLayout>
 
                 <LinearLayout
