@@ -369,7 +369,6 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                 second_steps.setVisibility(View.GONE);
                 third_step.setVisibility(View.VISIBLE);
                 two_button.setText(null);
-                Toast.makeText(mActivity, "执行了", Toast.LENGTH_SHORT).show();
                 two_line.setBackground(getResources().getDrawable(R.color.white));
                 three_button.setText("3");
                 three_button.setBackground(getResources().getDrawable(R.drawable.shape_10_white));

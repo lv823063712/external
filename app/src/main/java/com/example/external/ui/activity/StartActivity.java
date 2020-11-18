@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.PermissionUtils;
 import com.example.external.R;
-import com.example.external.base.BaseActivity;
+import com.example.external.base.BaseActivitys;
 import com.example.external.config.AppStatusConstant;
 import com.example.external.mvp.bean.ConfigBean;
 import com.example.external.mvp.myinterface.StartInterface;
@@ -28,7 +28,7 @@ import com.yanzhenjie.permission.AndPermission;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StartActivity extends BaseActivity implements StartInterface.StrartView {
+public class StartActivity extends BaseActivitys implements StartInterface.StrartView {
     private String[] strings = new String[]{
             Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_PHONE_NUMBERS,
             Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE

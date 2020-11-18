@@ -35,7 +35,7 @@ public class MyApplication extends Application {
         CaocConfig.Builder.create()
                 .enabled(true)
                 .showErrorDetails(false)
-                .showRestartButton(true)
+                .showRestartButton(false)
                 .trackActivities(false)
                 .minTimeBetweenCrashesMs(2000)
                 .errorActivity(StartActivity.class)

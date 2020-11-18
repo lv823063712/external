@@ -37,7 +37,7 @@
             android:paddingTop="6dp"
             android:paddingBottom="@dimen/dp_4"
             app:paddingTexwithIcon="6dp"
-            app:tabIconNormal="@mipmap/icon_home"
+            app:tabIconNormal="@mipmap/icon_unhome"
             app:tabIconSelected="@mipmap/icon_home"
             app:tabText="Home"
             app:tabTextSize="11sp"
