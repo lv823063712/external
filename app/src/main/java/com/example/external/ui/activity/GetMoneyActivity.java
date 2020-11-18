@@ -59,7 +59,6 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
         hint_textview.setText(UserUtils.getInstance().gettips_pay(mActivity));
         Intent intent = getIntent();
         ints = intent.getParcelableArrayListExtra("ints");
-
         if (ints.get(0) == null) {
             netWork();
         } else {

@@ -375,7 +375,7 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                 three_button.setBackground(getResources().getDrawable(R.drawable.shape_10_white));
                 next_step = 3;
             } else if (next_step == 3) {
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, GetMoneyActivity.class);
                 startActivity(intent);
             }
             Toast.makeText(mActivity, common.getMessage(), Toast.LENGTH_SHORT).show();
