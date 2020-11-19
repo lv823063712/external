@@ -52,6 +52,7 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void initData() {
+        startPresenter = new StartPresenter(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
         StatusBarUtil.setTextColor(this);
         initView();
@@ -83,7 +84,6 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.feed_save:
-                startPresenter = new StartPresenter(this);
                 Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
                 Map<String, Object> body = new HashMap<>();
                 FeedbackRequestBean bean = new FeedbackRequestBean();
@@ -128,8 +128,12 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        utils.dismissDialog(utils);
-        startPresenter.onDatacth();
+        if (utils!=null) {
+            utils.dismissDialog(utils);
+        }
+        if (startPresenter!=null) {
+            startPresenter.onDatacth();
+        }
     }
 
 

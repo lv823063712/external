@@ -50,6 +50,7 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
 
     @Override
     protected void initData() {
+        startPresenter = new StartPresenter(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
         initView();
     }
@@ -77,7 +78,6 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
 
     @Override
     protected void preLogic() {
-        startPresenter = new StartPresenter(this);
         Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
         Map<String, Object> body = new HashMap<>();
         utils.show();
@@ -148,14 +148,13 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
                     Toast.makeText(mActivity, "Please enter email address", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                StartPresenter presenter = new StartPresenter(this);
                 Gson gson = new Gson();
                 String s = gson.toJson(bean);
                 RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"), s);
                 Map<String, Object> headers = RequestCommon.getInstance().headers(mActivity);
                 Map<String, Object> bodys = new HashMap<>();
                 utils.show();
-                presenter.postQueryBody(Constant.UPBASEINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
+                startPresenter.postQueryBody(Constant.UPBASEINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
                 break;
             case R.id.birthday_text:
                 SystemCommon.getInstance().keyBoard(mActivity);
@@ -225,7 +224,11 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        utils.dismissDialog(utils);
-        startPresenter.onDatacth();
+        if (utils!=null) {
+            utils.dismissDialog(utils);
+        }
+        if (startPresenter != null) {
+            startPresenter.onDatacth();
+        }
     }
 }

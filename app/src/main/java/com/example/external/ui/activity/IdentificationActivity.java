@@ -52,6 +52,7 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
     private int next_step = 0;
     private BillTimerPop billTimerPop;
     private DialogUtils utils;
+    private StartPresenter startPresenter;
 
     @Override
     protected int getLayout() {
@@ -60,6 +61,7 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected void initData() {
+        startPresenter = new StartPresenter(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
         StatusBarUtil.setTextColor(this);
         initView();
@@ -241,14 +243,13 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                         Toast.makeText(mActivity, "Please enter email address", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    StartPresenter presenter = new StartPresenter(this);
                     Gson gson = new Gson();
                     String s = gson.toJson(bean);
                     RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"), s);
                     Map<String, Object> headers = RequestCommon.getInstance().headers(mActivity);
                     Map<String, Object> bodys = new HashMap<>();
                     utils.show();
-                    presenter.postQueryBody(Constant.UPBASEINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
+                    startPresenter.postQueryBody(Constant.UPBASEINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
                 } else if (next_step == 2) {
                     SalaryRequestBean requestBean = new SalaryRequestBean();
                     if (employment_type_et.getText() != null && !employment_type_et.getText().toString().equals("")) {
@@ -293,14 +294,13 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                         Toast.makeText(mActivity, "Please fill in your household income", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    StartPresenter presenter = new StartPresenter(this);
                     Gson gson = new Gson();
                     String s = gson.toJson(requestBean);
                     RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"), s);
                     Map<String, Object> headers = RequestCommon.getInstance().headers(mActivity);
                     Map<String, Object> bodys = new HashMap<>();
                     utils.show();
-                    presenter.postQueryBody(Constant.UPWORKINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
+                    startPresenter.postQueryBody(Constant.UPWORKINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
                     first_step.setVisibility(View.GONE);
                     second_steps.setVisibility(View.VISIBLE);
                     third_step.setVisibility(View.GONE);
@@ -328,14 +328,13 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                         Toast.makeText(mActivity, "Please fill in your bank card number", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    StartPresenter presenter = new StartPresenter(this);
                     Gson gson = new Gson();
                     String s = gson.toJson(bankBean);
                     RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"), s);
                     Map<String, Object> headers = RequestCommon.getInstance().headers(mActivity);
                     Map<String, Object> bodys = new HashMap<>();
                     utils.show();
-                    presenter.postQueryBody(Constant.UPBANKINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
+                    startPresenter.postQueryBody(Constant.UPBANKINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
                     first_step.setVisibility(View.GONE);
                     second_steps.setVisibility(View.GONE);
                     third_step.setVisibility(View.VISIBLE);
@@ -344,8 +343,6 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                     three_button.setText("3");
                     three_button.setBackground(getResources().getDrawable(R.drawable.shape_10_white));
                 }
-                break;
-            default:
                 break;
         }
     }
@@ -388,6 +385,17 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
             UserUtils.getInstance().clearAllSp(mActivity);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (utils!=null) {
+            utils.dismissDialog(utils);
+        }
+        if (startPresenter!=null){
+            startPresenter.onDatacth();
         }
     }
 }

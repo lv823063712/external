@@ -52,6 +52,7 @@ public class StartActivity extends BaseActivitys implements StartInterface.Strar
 
     @Override
     protected void initData() {
+        startPresenter = new StartPresenter(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
     }
 
@@ -127,7 +128,6 @@ public class StartActivity extends BaseActivitys implements StartInterface.Strar
     }
 
     private void network() {
-        startPresenter = new StartPresenter(this);
         Map<String, Object> header = new HashMap<>();
         Map<String, Object> body = new HashMap<>();
         utils.show();
@@ -137,7 +137,11 @@ public class StartActivity extends BaseActivitys implements StartInterface.Strar
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        utils.dismissDialog(utils);
-        startPresenter.onDatacth();
+        if (utils!=null) {
+            utils.dismissDialog(utils);
+        }
+        if (startPresenter!=null){
+            startPresenter.onDatacth();
+        }
     }
 }

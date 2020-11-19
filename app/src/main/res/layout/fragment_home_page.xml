@@ -168,6 +168,7 @@
                 android:textStyle="bold" />
 
             <LinearLayout
+                android:id="@+id/my_infor"
                 android:layout_width="match_parent"
                 android:layout_height="81dp"
                 android:layout_below="@+id/biaoshi"
@@ -202,6 +203,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/my_get_money"
                     android:layout_width="0dp"
                     android:layout_height="81dp"
                     android:layout_marginEnd="6dp"

@@ -2,6 +2,7 @@ package com.example.external.ui.fragment;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,6 +45,8 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     private int status;
     private int phase;
     private SmartRefreshLayout home_page_refresh;
+    private LinearLayout my_infor, my_get_money;
+    private StartPresenter startPresenter;
 
     @Override
     protected int getLayout() {
@@ -52,6 +55,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
 
     @Override
     protected void initView() {
+        startPresenter = new StartPresenter(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
         borrow = mActivity.findViewById(R.id.Borrow);
         home_some_user = mActivity.findViewById(R.id.home_some_user);
@@ -60,6 +64,8 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
         home_borrow_money = mActivity.findViewById(R.id.home_borrow_money);
         testVf = mActivity.findViewById(R.id.testVf);
         home_page_refresh = mActivity.findViewById(R.id.home_page_refresh);
+        my_infor = mActivity.findViewById(R.id.my_infor);
+        my_get_money = mActivity.findViewById(R.id.my_get_money);
         home_some_user_content = mActivity.findViewById(R.id.home_some_user_content);
         AppCompatImageView test = mActivity.findViewById(R.id.test);
         initClick();
@@ -68,6 +74,8 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     private void initClick() {
         reduce_money.setOnClickListener(this);
         increase_money.setOnClickListener(this);
+        my_infor.setOnClickListener(this);
+        my_get_money.setOnClickListener(this);
         borrow.setOnClickListener(this);
         home_page_refresh.setEnableLoadMore(false);
         home_page_refresh.setOnRefreshListener(refreshLayout -> {
@@ -79,11 +87,35 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.my_get_money:
+                if (phase == 0) {
+                    Intent intent = new Intent(mActivity, GetMoneyActivity.class);
+                    intent.putParcelableArrayListExtra("ints", beans);
+                    intent.putExtra("money",home_borrow_money.getText().toString());
+                    startActivity(intent);
+                } else if (phase == 1) {
+                    Intent intent = new Intent(mActivity, ReviewingActivity.class);
+                    intent.putExtra("attestation", phase);
+                    intent.putExtra("money",home_borrow_money.getText().toString());
+                    startActivity(intent);
+                } else if (phase == 2) {
+                    Intent intent = new Intent(mActivity, GetMoneyActivity.class);
+                    intent.putParcelableArrayListExtra("ints", beans);
+                    intent.putExtra("money",home_borrow_money.getText().toString());
+                    startActivity(intent);
+                } else if (phase == 3) {
+                    Intent intent = new Intent(mActivity, GetMoneyActivity.class);
+                    intent.putParcelableArrayListExtra("ints", beans);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.my_infor:
             case R.id.Borrow:
                 if (status == 0) {
                     if (phase == 0) {
                         Intent intent = new Intent(mActivity, GetMoneyActivity.class);
                         intent.putParcelableArrayListExtra("ints", beans);
+                        intent.putExtra("money",home_borrow_money.getText().toString());
                         startActivity(intent);
                     } else if (phase == 1) {
                         Intent intent = new Intent(mActivity, ReviewingActivity.class);
@@ -91,10 +123,12 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
                         startActivity(intent);
                     } else if (phase == 2) {
                         Intent intent = new Intent(mActivity, GetMoneyActivity.class);
+                        intent.putExtra("money",home_borrow_money.getText().toString());
                         intent.putParcelableArrayListExtra("ints", beans);
                         startActivity(intent);
                     } else if (phase == 3) {
                         Intent intent = new Intent(mActivity, GetMoneyActivity.class);
+                        intent.putExtra("money",home_borrow_money.getText().toString());
                         intent.putParcelableArrayListExtra("ints", beans);
                         startActivity(intent);
                     }
@@ -143,7 +177,6 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     }
 
     private void netWork() {
-        StartPresenter startPresenter = new StartPresenter(this);
         Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
         Map<String, Object> body = new HashMap<>();
         utils.show();
@@ -185,5 +218,8 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     public void onDestroyView() {
         super.onDestroyView();
         utils.dismissDialog(utils);
+        if (startPresenter!=null){
+            startPresenter.onDatacth();
+        }
     }
 }

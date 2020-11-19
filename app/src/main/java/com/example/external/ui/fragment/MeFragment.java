@@ -43,14 +43,15 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
 
     @Override
     protected void initView() {
+        startPresenter = new StartPresenter(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
         ll_feedback = getActivity().findViewById(R.id.ll_feedback);
         log_out = getActivity().findViewById(R.id.log_out);
         my_name = getActivity().findViewById(R.id.my_name);
         me_refresh = getActivity().findViewById(R.id.me_refresh);
         my_profile = getActivity().findViewById(R.id.my_profile);
-        my_customer = getActivity().findViewById(R.id.my_customer);
-        my_aboutus = getActivity().findViewById(R.id.my_aboutus);
+//        my_customer = getActivity().findViewById(R.id.my_customer);
+//        my_aboutus = getActivity().findViewById(R.id.my_aboutus);
         bottom_wenan = getActivity().findViewById(R.id.bottom_wenan);
         bottom_wenan.setText(UserUtils.getInstance().getsys_service_email_bak(mActivity));
         netWork();
@@ -67,7 +68,6 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     }
 
     private void netWork() {
-        startPresenter = new StartPresenter(this);
         Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
         Map<String, Object> body = new HashMap<>();
         utils.show();
@@ -102,10 +102,10 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
             case R.id.ll_feedback:
                 startActivity(new Intent(getActivity(), FeedbackActivity.class));
                 break;
-            case R.id.my_customer:
+            /*case R.id.my_customer:
                 break;
             case R.id.my_aboutus:
-                break;
+                break;*/
             default:
                 break;
         }
@@ -134,6 +134,11 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     @Override
     public void onDestroy() {
         super.onDestroy();
-        startPresenter.onDatacth();
+        if (utils != null) {
+            utils.dismissDialog(utils);
+        }
+        if (startPresenter!=null) {
+            startPresenter.onDatacth();
+        }
     }
 }

@@ -43,6 +43,7 @@ public class BankInformationActivity extends BaseActivity implements View.OnClic
 
     @Override
     protected void initData() {
+        startPresenter = new StartPresenter(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
         bank_msg_back = findViewById(R.id.bank_msg_back);
         code_edit = findViewById(R.id.code_edit);
@@ -59,7 +60,6 @@ public class BankInformationActivity extends BaseActivity implements View.OnClic
 
     @Override
     protected void preLogic() {
-        startPresenter = new StartPresenter(this);
         Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
         Map<String, Object> body = new HashMap<>();
         utils.show();
@@ -92,14 +92,13 @@ public class BankInformationActivity extends BaseActivity implements View.OnClic
                     Toast.makeText(mActivity, "Please fill in your bank card number", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                StartPresenter presenter = new StartPresenter(this);
                 Gson gson = new Gson();
                 String s = gson.toJson(bankBean);
                 RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"), s);
                 Map<String, Object> headers = RequestCommon.getInstance().headers(mActivity);
                 Map<String, Object> bodys = new HashMap<>();
                 utils.show();
-                presenter.postQueryBody(Constant.UPBANKINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
+                startPresenter.postQueryBody(Constant.UPBANKINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
                 break;
         }
     }
@@ -132,6 +131,17 @@ public class BankInformationActivity extends BaseActivity implements View.OnClic
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
             UserUtils.getInstance().clearAllSp(mActivity);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (utils!=null) {
+            utils.dismissDialog(utils);
+        }
+        if (startPresenter != null) {
+            startPresenter.onDatacth();
         }
     }
 }
