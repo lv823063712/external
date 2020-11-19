@@ -304,9 +304,11 @@ public class StatusBarUtil {
     }
 
     public static void setTextColor(Activity activity) {
-        Window window = activity.getWindow();
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            StatusBarUtil.immersive(activity, activity.getResources().getColor(R.color.white), 0F);
+            StatusBarUtil.darkMode(activity, true);
+            Window window = activity.getWindow();
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//此处设定状态栏文字颜色为白色
     }
 
     public static void setTransColorStatusBar(Activity activity) {

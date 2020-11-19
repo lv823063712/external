@@ -50,8 +50,8 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
         my_name = getActivity().findViewById(R.id.my_name);
         me_refresh = getActivity().findViewById(R.id.me_refresh);
         my_profile = getActivity().findViewById(R.id.my_profile);
-//        my_customer = getActivity().findViewById(R.id.my_customer);
-//        my_aboutus = getActivity().findViewById(R.id.my_aboutus);
+        my_customer = getActivity().findViewById(R.id.my_customer);
+        my_aboutus = getActivity().findViewById(R.id.my_aboutus);
         bottom_wenan = getActivity().findViewById(R.id.bottom_wenan);
         bottom_wenan.setText(UserUtils.getInstance().getsys_service_email_bak(mActivity));
         netWork();
