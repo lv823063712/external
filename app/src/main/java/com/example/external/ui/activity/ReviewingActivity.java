@@ -146,7 +146,7 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if (error.toString().trim().equals("HTTP 401")) {
+        if ("HTTP 401".equals(error.toString().trim())) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
             UserUtils.getInstance().clearAllSp(mActivity);

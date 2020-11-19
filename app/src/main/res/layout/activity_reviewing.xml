@@ -80,7 +80,6 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/borrow_money_limit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/hint_text"

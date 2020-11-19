@@ -74,19 +74,19 @@ public class BankInformationActivity extends BaseActivity implements View.OnClic
                 break;
             case R.id.tv_save:
                 BankInfoRequestBean bankBean = new BankInfoRequestBean();
-                if (code_edit.getText() != null && !code_edit.getText().toString().equals("")) {
+                if (code_edit.getText() != null && !"".equals(code_edit.getText().toString())) {
                     bankBean.setIfsc_code(code_edit.getText().toString());
                 } else {
                     Toast.makeText(mActivity, "Please fill in THE IFSC code", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (bank_edit.getText() != null && !bank_edit.getText().toString().equals("")) {
+                if (bank_edit.getText() != null && !"".equals(bank_edit.getText().toString())) {
                     bankBean.setBank_name(bank_edit.getText().toString());
                 } else {
                     Toast.makeText(mActivity, "Please fill in the bank name", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (account_edit.getText() != null && !account_edit.getText().toString().equals("")) {
+                if (account_edit.getText() != null && !"".equals(account_edit.getText().toString())) {
                     bankBean.setBank_account_no(account_edit.getText().toString());
                 } else {
                     Toast.makeText(mActivity, "Please fill in your bank card number", Toast.LENGTH_SHORT).show();
@@ -100,6 +100,7 @@ public class BankInformationActivity extends BaseActivity implements View.OnClic
                 utils.show();
                 startPresenter.postQueryBody(Constant.UPBANKINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
                 break;
+            default:break;
         }
     }
 
@@ -127,7 +128,7 @@ public class BankInformationActivity extends BaseActivity implements View.OnClic
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if (error.toString().trim().equals("HTTP 401")) {
+        if ("HTTP 401".equals(error.toString().trim())) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
             UserUtils.getInstance().clearAllSp(mActivity);

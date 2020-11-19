@@ -30,7 +30,6 @@
 
 
         <com.yinglan.alphatabs.AlphaTabView
-            android:id="@+id/home_page"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -45,7 +44,6 @@
             app:textColorSelected="@color/blue_3254E6" />
 
         <com.yinglan.alphatabs.AlphaTabView
-            android:id="@+id/me"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

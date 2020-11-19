@@ -20,13 +20,9 @@ import com.example.external.ui.activity.MyProfileActivity;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.UserUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import butterknife.OnClick;
 
 public class MeFragment extends BaseFragment implements View.OnClickListener, StartInterface.StrartView {
 
@@ -55,13 +51,17 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
 //        my_aboutus = getActivity().findViewById(R.id.my_aboutus);
         bottom_wenan = getActivity().findViewById(R.id.bottom_wenan);
         bottom_wenan.setText(UserUtils.getInstance().getsys_service_email_bak(mActivity));
+        log_out.setOnClickListener(this);
+        my_profile.setOnClickListener(this);
+        ll_feedback.setOnClickListener(this);
+//        my_customer.setOnClickListener(this);
+//        my_aboutus.setOnClickListener(this);
         netWork();
         me_refresh.setEnableLoadMore(false);
         me_refresh.setOnRefreshListener(refreshLayout -> {
             netWork();
             me_refresh.finishRefresh();
         });
-
 
     }
 
@@ -74,11 +74,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
 
     @Override
     protected void initData() {
-        log_out.setOnClickListener(this);
-        my_profile.setOnClickListener(this);
-        ll_feedback.setOnClickListener(this);
-        my_customer.setOnClickListener(this);
-        my_aboutus.setOnClickListener(this);
+
 
     }
 

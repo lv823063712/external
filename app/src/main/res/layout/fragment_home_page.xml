@@ -15,7 +15,6 @@
         android:scrollbars="vertical">
 
         <com.scwang.smartrefresh.layout.header.ClassicsHeader
-            android:id="@+id/c_header_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:srlTextPulling="下拉可以刷新"

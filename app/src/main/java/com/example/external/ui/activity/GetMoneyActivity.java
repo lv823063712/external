@@ -285,19 +285,19 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
             months_three.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             months_four.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             textView.setText("1 Months");
-        } else if (plan > 25 && plan <= 50) {
+        } else if (plan <= 50) {
             months_one.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             months_two.setBackground(getResources().getDrawable(R.color.red_6D83F2));
             months_three.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             months_four.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             textView.setText("3 Months");
-        } else if (plan > 50 && plan <= 75) {
+        } else if (plan <= 75) {
             months_one.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             months_two.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             months_three.setBackground(getResources().getDrawable(R.color.red_6D83F2));
             months_four.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             textView.setText("6 Months");
-        } else if (plan > 75 && plan <= 100) {
+        } else if (plan <= 100) {
             months_one.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             months_two.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             months_three.setBackground(getResources().getDrawable(R.color.green_6D83F2));

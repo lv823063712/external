@@ -48,7 +48,7 @@ android {
             keyPassword key_password
             v1SigningEnabled true
             v2SigningEnabled true
-            storeFile file('E:\\external\\doc\\sinature\\external.jks')
+            storeFile file('doc\\sinature\\external.jks')
         }
         release {
             storePassword store_password
@@ -56,7 +56,7 @@ android {
             keyPassword key_password
             v1SigningEnabled true
             v2SigningEnabled true
-            storeFile file('E:\\external\\doc\\sinature\\external.jks')
+            storeFile file('doc\\sinature\\external.jks')
         }
     }
 
@@ -141,9 +141,6 @@ dependencies {
 
     implementation rootProject.ext.compilelibs['BasePopup']
     implementation rootProject.ext.compilelibs['PickerView']
-
-    implementation 'com.jakewharton:butterknife:10.2.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
 }

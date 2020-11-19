@@ -14,8 +14,6 @@ import com.example.external.ui.activity.StartActivity;
 import com.example.external.utils.AppStatusManager;
 import com.example.external.utils.StatusBarUtil;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportActivity;
 
 /**
@@ -25,7 +23,6 @@ import me.yokeyword.fragmentation.SupportActivity;
  */
 public abstract class BaseActivity extends SupportActivity {
     protected Activity mActivity = this;
-    private Unbinder mUnbinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,8 +52,6 @@ public abstract class BaseActivity extends SupportActivity {
         try {
             if (getLayout() != 0) {
                 setContentView(getLayout());
-                //绑定到butterknife
-                mUnbinder = ButterKnife.bind(this);
                 initData();
                 setClick();
                 preLogic();
@@ -81,9 +76,5 @@ public abstract class BaseActivity extends SupportActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
-            mUnbinder.unbind();
-        }
-        this.mUnbinder = null;
     }
 }
