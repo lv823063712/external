@@ -45,6 +45,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     protected void initData() {
+        startPresenter = new StartPresenter(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
         initView();
     }
@@ -67,7 +68,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     protected void preLogic() {
-        startPresenter = new StartPresenter(this);
+
     }
 
     @Override
@@ -186,7 +187,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        utils.dismissDialog(utils);
-        startPresenter.onDatacth();
+        if (utils!=null) {
+            utils.dismissDialog(utils);
+        }
+        if (startPresenter != null) {
+            startPresenter.onDatacth();
+        }
     }
 }

@@ -52,6 +52,7 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void initData() {
+        startPresenter = new StartPresenter(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
         startPresenter = new StartPresenter(this);
 
@@ -130,8 +131,12 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        utils.dismissDialog(utils);
-        startPresenter.onDatacth();
+        if (utils!=null) {
+            utils.dismissDialog(utils);
+        }
+        if (startPresenter!=null) {
+            startPresenter.onDatacth();
+        }
     }
 
 }

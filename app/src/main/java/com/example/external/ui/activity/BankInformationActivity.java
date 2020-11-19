@@ -20,6 +20,8 @@ import com.example.external.utils.DialogUtils;
 import com.example.external.utils.UserUtils;
 import com.google.gson.Gson;
 
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +35,6 @@ public class BankInformationActivity extends BaseActivity implements View.OnClic
     private EditText code_edit, bank_edit, account_edit;
     private DialogUtils utils;
     private StartPresenter startPresenter;
-    private StartPresenter presenter;
 
     @Override
     protected int getLayout() {
@@ -42,8 +43,8 @@ public class BankInformationActivity extends BaseActivity implements View.OnClic
 
     @Override
     protected void initData() {
+        startPresenter = new StartPresenter(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
-        presenter = new StartPresenter(this);
         bank_msg_back = findViewById(R.id.bank_msg_back);
         code_edit = findViewById(R.id.code_edit);
         bank_edit = findViewById(R.id.bank_edit);
@@ -59,7 +60,6 @@ public class BankInformationActivity extends BaseActivity implements View.OnClic
 
     @Override
     protected void preLogic() {
-        startPresenter = new StartPresenter(this);
         Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
         Map<String, Object> body = new HashMap<>();
         utils.show();
@@ -74,19 +74,19 @@ public class BankInformationActivity extends BaseActivity implements View.OnClic
                 break;
             case R.id.tv_save:
                 BankInfoRequestBean bankBean = new BankInfoRequestBean();
-                if (code_edit.getText() != null && !"".equals(code_edit.getText().toString())) {
+                if (code_edit.getText() != null && !code_edit.getText().toString().equals("")) {
                     bankBean.setIfsc_code(code_edit.getText().toString());
                 } else {
                     Toast.makeText(mActivity, "Please fill in THE IFSC code", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (bank_edit.getText() != null && !"".equals(bank_edit.getText().toString())) {
+                if (bank_edit.getText() != null && !bank_edit.getText().toString().equals("")) {
                     bankBean.setBank_name(bank_edit.getText().toString());
                 } else {
                     Toast.makeText(mActivity, "Please fill in the bank name", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (account_edit.getText() != null && !"".equals(account_edit.getText().toString())) {
+                if (account_edit.getText() != null && !account_edit.getText().toString().equals("")) {
                     bankBean.setBank_account_no(account_edit.getText().toString());
                 } else {
                     Toast.makeText(mActivity, "Please fill in your bank card number", Toast.LENGTH_SHORT).show();
@@ -98,9 +98,8 @@ public class BankInformationActivity extends BaseActivity implements View.OnClic
                 Map<String, Object> headers = RequestCommon.getInstance().headers(mActivity);
                 Map<String, Object> bodys = new HashMap<>();
                 utils.show();
-                presenter.postQueryBody(Constant.UPBANKINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
+                startPresenter.postQueryBody(Constant.UPBANKINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
                 break;
-            default:break;
         }
     }
 
@@ -128,16 +127,21 @@ public class BankInformationActivity extends BaseActivity implements View.OnClic
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if ("HTTP 401".equals(error.toString().trim())) {
+        if (error.toString().trim().equals("HTTP 401")) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
             UserUtils.getInstance().clearAllSp(mActivity);
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        utils.dismissDialog(utils);
-        startPresenter.onDatacth();
+        if (utils!=null) {
+            utils.dismissDialog(utils);
+        }
+        if (startPresenter != null) {
+            startPresenter.onDatacth();
+        }
     }
 }

@@ -52,7 +52,7 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
     private int next_step = 0;
     private BillTimerPop billTimerPop;
     private DialogUtils utils;
-    private StartPresenter presenter;
+    private StartPresenter startPresenter;
 
     @Override
     protected int getLayout() {
@@ -61,8 +61,8 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected void initData() {
+        startPresenter = new StartPresenter(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
-        presenter = new StartPresenter(this);
         StatusBarUtil.setTextColor(this);
         initView();
         Intent intent = getIntent();
@@ -187,19 +187,19 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
             case R.id.step_tv:
                 if (next_step == 1) {
                     BaseInfoRequestBean bean = new BaseInfoRequestBean();
-                    if (!"".equals(full_name_et.getText().toString()) && full_name_et.getText().toString() != null) {
+                    if (!full_name_et.getText().toString().equals("") && full_name_et.getText().toString() != null) {
                         bean.setName(full_name_et.getText().toString());
                     } else {
                         Toast.makeText(mActivity, "Please enter Full Name", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (!"".equals(birthday_et.getText().toString()) && birthday_et.getText().toString() != null) {
+                    if (!birthday_et.getText().toString().equals("") && birthday_et.getText().toString() != null) {
                         bean.setBirthday(birthday_et.getText().toString());
                     } else {
                         Toast.makeText(mActivity, "Please choose your birthday", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (!"".equals(gender_et.getText().toString()) && gender_et.getText().toString() != null) {
+                    if (!gender_et.getText().toString().equals("") && gender_et.getText().toString() != null) {
                         if (gender_et.getText().toString().contains("MALE")) {
                             bean.setGender(1);
                         } else {
@@ -209,7 +209,7 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                         Toast.makeText(mActivity, "Please choose gender", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (!"".equals(marital_et.getText().toString()) && marital_et.getText().toString() != null) {
+                    if (!marital_et.getText().toString().equals("") && marital_et.getText().toString() != null) {
                         if (marital_et.getText().toString().contains("Married")) {
                             bean.setMarital(1);
                         } else if (marital_et.getText().toString().contains("Unmarried")) {
@@ -221,7 +221,7 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                         Toast.makeText(mActivity, "Please choose marital status", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (!"".equals(education_et.getText().toString()) && education_et.getText().toString() != null) {
+                    if (!education_et.getText().toString().equals("") && education_et.getText().toString() != null) {
                         if (education_et.getText().toString().contains("Other")) {
                             bean.setEducation(1);
                         } else if (education_et.getText().toString().contains("High School Diploma")) {
@@ -237,7 +237,7 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                         Toast.makeText(mActivity, "Please select education background", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (!"".equals(email_et.getText().toString()) && email_et.getText().toString() != null) {
+                    if (!email_et.getText().toString().equals("") && email_et.getText().toString() != null) {
                         bean.setEmail(email_et.getText().toString());
                     } else {
                         Toast.makeText(mActivity, "Please enter email address", Toast.LENGTH_SHORT).show();
@@ -249,10 +249,10 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                     Map<String, Object> headers = RequestCommon.getInstance().headers(mActivity);
                     Map<String, Object> bodys = new HashMap<>();
                     utils.show();
-                    presenter.postQueryBody(Constant.UPBASEINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
+                    startPresenter.postQueryBody(Constant.UPBASEINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
                 } else if (next_step == 2) {
                     SalaryRequestBean requestBean = new SalaryRequestBean();
-                    if (employment_type_et.getText() != null && !"".equals(employment_type_et.getText().toString())) {
+                    if (employment_type_et.getText() != null && !employment_type_et.getText().toString().equals("")) {
                         if (employment_type_et.getText().toString().contains("Full-time")) {
                             requestBean.setEmployment_type(1);
                         } else if (employment_type_et.getText().toString().contains("Part-time job")) {
@@ -262,7 +262,7 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                         Toast.makeText(mActivity, "Please select the type of occupation", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (your_monthly_salary_et.getText() != null && !"".equals(your_monthly_salary_et.getText().toString())) {
+                    if (your_monthly_salary_et.getText() != null && !your_monthly_salary_et.getText().toString().equals("")) {
                         if (your_monthly_salary_et.getText().toString().contains("0～8000")) {
                             requestBean.setMonthly_salary(1);
                         } else if (your_monthly_salary_et.getText().toString().contains("8000～20000")) {
@@ -278,7 +278,7 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                         Toast.makeText(mActivity, "Please fill in your income", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (monthly_family_income_et.getText() != null && !"".equals(monthly_family_income_et.getText().toString())) {
+                    if (monthly_family_income_et.getText() != null && !monthly_family_income_et.getText().toString().equals("")) {
                         if (monthly_family_income_et.getText().toString().contains("<20000")) {
                             requestBean.setMonthly_family_salary(1);
                         } else if (monthly_family_income_et.getText().toString().contains("20000～30000")) {
@@ -294,14 +294,13 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                         Toast.makeText(mActivity, "Please fill in your household income", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    StartPresenter presenter = new StartPresenter(this);
                     Gson gson = new Gson();
                     String s = gson.toJson(requestBean);
                     RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"), s);
                     Map<String, Object> headers = RequestCommon.getInstance().headers(mActivity);
                     Map<String, Object> bodys = new HashMap<>();
                     utils.show();
-                    presenter.postQueryBody(Constant.UPWORKINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
+                    startPresenter.postQueryBody(Constant.UPWORKINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
                     first_step.setVisibility(View.GONE);
                     second_steps.setVisibility(View.VISIBLE);
                     third_step.setVisibility(View.GONE);
@@ -311,32 +310,31 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                     three_button.setBackground(getResources().getDrawable(R.drawable.shape_10_white));
                 } else if (next_step == 3) {
                     BankInfoRequestBean bankBean = new BankInfoRequestBean();
-                    if (ifsc_et.getText() != null && !"".equals(ifsc_et.getText().toString())) {
+                    if (ifsc_et.getText() != null && !ifsc_et.getText().toString().equals("")) {
                         bankBean.setIfsc_code(ifsc_et.getText().toString());
                     } else {
                         Toast.makeText(mActivity, "Please fill in THE IFSC code", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (bank_name_et.getText() != null && !"".equals(bank_name_et.getText().toString())) {
+                    if (bank_name_et.getText() != null && !bank_name_et.getText().toString().equals("")) {
                         bankBean.setBank_name(bank_name_et.getText().toString());
                     } else {
                         Toast.makeText(mActivity, "Please fill in the bank name", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (bank_account.getText() != null && !"".equals(bank_account.getText().toString())) {
+                    if (bank_account.getText() != null && !bank_account.getText().toString().equals("")) {
                         bankBean.setBank_account_no(bank_account.getText().toString());
                     } else {
                         Toast.makeText(mActivity, "Please fill in your bank card number", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    StartPresenter presenter = new StartPresenter(this);
                     Gson gson = new Gson();
                     String s = gson.toJson(bankBean);
                     RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"), s);
                     Map<String, Object> headers = RequestCommon.getInstance().headers(mActivity);
                     Map<String, Object> bodys = new HashMap<>();
                     utils.show();
-                    presenter.postQueryBody(Constant.UPBANKINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
+                    startPresenter.postQueryBody(Constant.UPBANKINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
                     first_step.setVisibility(View.GONE);
                     second_steps.setVisibility(View.GONE);
                     third_step.setVisibility(View.VISIBLE);
@@ -345,8 +343,6 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                     three_button.setText("3");
                     three_button.setBackground(getResources().getDrawable(R.drawable.shape_10_white));
                 }
-                break;
-            default:
                 break;
         }
     }
@@ -385,10 +381,21 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if ("HTTP 401".equals(error.toString().trim())) {
+        if (error.toString().trim().equals("HTTP 401")) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
             UserUtils.getInstance().clearAllSp(mActivity);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (utils!=null) {
+            utils.dismissDialog(utils);
+        }
+        if (startPresenter!=null){
+            startPresenter.onDatacth();
         }
     }
 }

@@ -41,6 +41,7 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
 
     @Override
     protected void initData() {
+        startPresenter = new StartPresenter(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
         StatusBarUtil.setTextColor(this);
         initView();
@@ -82,7 +83,6 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
     }
 
     private void netWork() {
-        startPresenter = new StartPresenter(this);
         Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
         Map<String, Object> body = new HashMap<>();
         utils.show();
@@ -90,7 +90,6 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
     }
 
     private void netWorks() {
-        startPresenter = new StartPresenter(this);
         Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
         Map<String, Object> body = new HashMap<>();
         utils.show();
@@ -142,15 +141,26 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
             testVfs.addNotice(dataBeans);
             testVfs.startFlipping();
         }
-
     }
 
     @Override
     public void error(Object error) {
-        if ("HTTP 401".equals(error.toString().trim())) {
+        utils.dismissDialog(utils);
+        if (error.toString().trim().equals("HTTP 401")) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
             UserUtils.getInstance().clearAllSp(mActivity);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (utils!=null) {
+            utils.dismissDialog(utils);
+        }
+        if (startPresenter!=null){
+            startPresenter.onDatacth();
         }
     }
 }

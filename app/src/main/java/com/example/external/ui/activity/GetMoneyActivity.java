@@ -54,6 +54,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void initData() {
+        startPresenter = new StartPresenter(this);
         StatusBarUtil.setTextColor(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
         startPresenter = new StartPresenter(this);
@@ -61,11 +62,41 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
         hint_textview.setText(UserUtils.getInstance().gettips_pay(mActivity));
         Intent intent = getIntent();
         ints = intent.getParcelableArrayListExtra("ints");
-        if (ints.get(0) == null) {
-            netWork();
-        } else {
-            setData(ints.get(0));
+        String money = intent.getStringExtra("money");
+        if (money.contains("30,000")) {
+            show_money.setText(money);
+            money_bar.setProgress(15);
+            money_one.setBackground(getResources().getDrawable(R.color.red_6D83F2));
+            money_two.setBackground(getResources().getDrawable(R.color.green_6D83F2));
+            money_three.setBackground(getResources().getDrawable(R.color.green_6D83F2));
+            money_four.setBackground(getResources().getDrawable(R.color.green_6D83F2));
+        } else if (money.contains("50,000") &&!money.contains("150,000")) {
+            show_money.setText(money);
+            money_bar.setProgress(35);
+            money_one.setBackground(getResources().getDrawable(R.color.green_6D83F2));
+            money_two.setBackground(getResources().getDrawable(R.color.red_6D83F2));
+            money_three.setBackground(getResources().getDrawable(R.color.green_6D83F2));
+            money_four.setBackground(getResources().getDrawable(R.color.green_6D83F2));
+        } else if (money.contains("80,000")) {
+            show_money.setText(money);
+            money_bar.setProgress(65);
+            money_one.setBackground(getResources().getDrawable(R.color.green_6D83F2));
+            money_two.setBackground(getResources().getDrawable(R.color.green_6D83F2));
+            money_three.setBackground(getResources().getDrawable(R.color.red_6D83F2));
+            money_four.setBackground(getResources().getDrawable(R.color.green_6D83F2));
+        } else if (money.contains("150,000")) {
+            show_money.setText(money);
+            money_bar.setProgress(90);
+            money_one.setBackground(getResources().getDrawable(R.color.green_6D83F2));
+            money_two.setBackground(getResources().getDrawable(R.color.green_6D83F2));
+            money_three.setBackground(getResources().getDrawable(R.color.green_6D83F2));
+            money_four.setBackground(getResources().getDrawable(R.color.red_6D83F2));
         }
+//        if (ints.get(0) == null) {
+            netWork();
+//        } else {
+//            setData(ints.get(0));
+//        }
 
     }
 
@@ -139,7 +170,6 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void preLogic() {
-        StartPresenter startPresenter = new StartPresenter(this);
         Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
         Map<String, Object> body = new HashMap<>();
         utils.show();
@@ -193,7 +223,6 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void netWork() {
-        StartPresenter startPresenter = new StartPresenter(this);
         Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
         Map<String, Object> body = new HashMap<>();
         utils.show();
@@ -203,7 +232,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
     @SuppressLint("SetTextI18n")
     private void setData(ProductBean data) {
         for (int i = 0; i < data.getData().getLimits().size(); i++) {
-            if (data.getData().getLimits().get(i).getAmount() == Integer.parseInt(show_money.getText().toString().split("₹")[1].replace(",", ""))) {
+            if (data.getData().getLimits().get(i).getAmount() == Integer.parseInt(show_money.getText().toString().split("₹")[1].replace(",", "").trim())) {
                 for (int j = 0; j < data.getData().getLimits().get(i).getDurations().size(); j++) {
                     if (data.getData().getLimits().get(i).getDurations().get(j).getDuration().contains(month_show.getText().toString().replace("Months", "month"))) {
                         idNet = data.getData().getLimits().get(i).getDurations().get(j).getId();
@@ -311,6 +340,11 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        utils.dismissDialog(utils);
+        if (utils!=null) {
+            utils.dismissDialog(utils);
+        }
+        if (startPresenter != null) {
+            startPresenter.onDatacth();
+        }
     }
 }
