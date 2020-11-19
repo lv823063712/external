@@ -42,6 +42,7 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
     private BillTimerPop billTimerPop;
     private DialogUtils utils;
     private StartPresenter startPresenter;
+    private StartPresenter startPresenter1;
 
     @Override
     protected int getLayout() {
@@ -51,6 +52,7 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
     @Override
     protected void initData() {
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
+        startPresenter1 = new StartPresenter(this);
         initView();
     }
 
@@ -92,19 +94,19 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
                 break;
             case R.id.tv_save:
                 BaseInfoRequestBean bean = new BaseInfoRequestBean();
-                if (!full_name_edit.getText().toString().equals("") && full_name_edit.getText().toString() != null) {
+                if (!"".equals(full_name_edit.getText().toString()) && full_name_edit.getText().toString() != null) {
                     bean.setName(full_name_edit.getText().toString());
                 } else {
                     Toast.makeText(mActivity, "Please enter Full Name", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (!birthday_text.getText().toString().equals("") && birthday_text.getText().toString() != null) {
+                if (!"".equals(birthday_text.getText().toString()) && birthday_text.getText().toString() != null) {
                     bean.setBirthday(birthday_text.getText().toString());
                 } else {
                     Toast.makeText(mActivity, "Please choose your birthday", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (!gender_text.getText().toString().equals("") && gender_text.getText().toString() != null) {
+                if (!"".equals(gender_text.getText().toString()) && gender_text.getText().toString() != null) {
                     if (gender_text.getText().toString().contains("MALE")) {
                         bean.setGender(1);
                     } else {
@@ -114,7 +116,7 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
                     Toast.makeText(mActivity, "Please choose gender", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (!marital_text.getText().toString().equals("") && marital_text.getText().toString() != null) {
+                if (!"".equals(marital_text.getText().toString()) && marital_text.getText().toString() != null) {
                     if (marital_text.getText().toString().contains("Married")) {
                         bean.setMarital(1);
                     } else if (marital_text.getText().toString().contains("Unmarried")) {
@@ -126,7 +128,7 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
                     Toast.makeText(mActivity, "Please choose marital status", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (!education_text.getText().toString().equals("") && education_text.getText().toString() != null) {
+                if (!"".equals(education_text.getText().toString()) && education_text.getText().toString() != null) {
                     if (education_text.getText().toString().contains("Other")) {
                         bean.setEducation(1);
                     } else if (education_text.getText().toString().contains("High School Diploma")) {
@@ -142,20 +144,19 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
                     Toast.makeText(mActivity, "Please select education background", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (!email_edit.getText().toString().equals("") && email_edit.getText().toString() != null) {
+                if (!"".equals(email_edit.getText().toString()) && email_edit.getText().toString() != null) {
                     bean.setEmail(email_edit.getText().toString());
                 } else {
                     Toast.makeText(mActivity, "Please enter email address", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                StartPresenter presenter = new StartPresenter(this);
                 Gson gson = new Gson();
                 String s = gson.toJson(bean);
                 RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"), s);
                 Map<String, Object> headers = RequestCommon.getInstance().headers(mActivity);
                 Map<String, Object> bodys = new HashMap<>();
                 utils.show();
-                presenter.postQueryBody(Constant.UPBASEINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
+                startPresenter1.postQueryBody(Constant.UPBASEINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
                 break;
             case R.id.birthday_text:
                 SystemCommon.getInstance().keyBoard(mActivity);
@@ -184,6 +185,7 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
                 educationPop.showPopupWindow();
                 educationPop.mySelectAll(nameAb -> education_text.setText(nameAb));
                 break;
+            default:break;
         }
     }
 
@@ -215,7 +217,7 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if (error.toString().trim().equals("HTTP 401")) {
+        if ("HTTP 401".equals(error.toString().trim())) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
             UserUtils.getInstance().clearAllSp(mActivity);

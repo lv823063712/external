@@ -53,6 +53,8 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void initData() {
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
+        startPresenter = new StartPresenter(this);
+
         StatusBarUtil.setTextColor(this);
         initView();
     }
@@ -83,11 +85,10 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.feed_save:
-                startPresenter = new StartPresenter(this);
                 Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
                 Map<String, Object> body = new HashMap<>();
                 FeedbackRequestBean bean = new FeedbackRequestBean();
-                if (add_content.getText() != null && !add_content.getText().toString().equals("")) {
+                if (add_content.getText() != null && !"".equals(add_content.getText().toString())) {
                     bean.setContent(add_content.getText().toString());
                 } else {
                     Toast.makeText(mActivity, "Please fill in the feedback", Toast.LENGTH_SHORT).show();
@@ -102,6 +103,7 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
             case R.id.feed_msg_back:
                 backActivity();
                 break;
+            default:break;
         }
     }
 
@@ -118,7 +120,7 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if (error.toString().trim().equals("HTTP 401")) {
+        if ("HTTP 401".equals(error.toString().trim())) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
             UserUtils.getInstance().clearAllSp(mActivity);
@@ -131,6 +133,5 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
         utils.dismissDialog(utils);
         startPresenter.onDatacth();
     }
-
 
 }

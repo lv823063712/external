@@ -44,16 +44,12 @@ public class MainActivity extends BaseActivity {
         mFragments.add(new HomePageFragment());
         mFragments.add(new MeFragment());
         loadMultipleRootFragment(R.id.home_yidian_fl_container, 0, mFragments.get(0), mFragments.get(1));
-
     }
 
     private void initBottomNavigationView() {
-        bottom_navigation.setOnTabChangedListner(new OnTabChangedListner() {
-            @Override
-            public void onTabSelected(int tabNum) {
-                showHideFragment(mFragments.get(tabNum), mFragments.get(mTabPosition));
-                mTabPosition = tabNum;
-            }
+        bottom_navigation.setOnTabChangedListner(tabNum -> {
+            showHideFragment(mFragments.get(tabNum), mFragments.get(mTabPosition));
+            mTabPosition = tabNum;
         });
     }
 

@@ -36,6 +36,7 @@ public class WorkInformationActivity extends BaseActivity implements View.OnClic
     private TextView employment_text, monthly_text, family_text, tv_save_work;
     private DialogUtils utils;
     private StartPresenter startPresenter;
+    private StartPresenter presenter;
 
     @Override
     protected int getLayout() {
@@ -67,6 +68,7 @@ public class WorkInformationActivity extends BaseActivity implements View.OnClic
     @Override
     protected void preLogic() {
         startPresenter = new StartPresenter(this);
+        presenter = new StartPresenter(this);
         Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
         Map<String, Object> body = new HashMap<>();
         utils.show();
@@ -96,7 +98,7 @@ public class WorkInformationActivity extends BaseActivity implements View.OnClic
                 break;
             case R.id.tv_save_work:
                 SalaryRequestBean requestBean = new SalaryRequestBean();
-                if (employment_text.getText() != null && !employment_text.getText().toString().equals("")) {
+                if (employment_text.getText() != null && !"".equals(employment_text.getText().toString())) {
                     if (employment_text.getText().toString().contains("Full-time")) {
                         requestBean.setEmployment_type(1);
                     } else if (employment_text.getText().toString().contains("Part-time job")) {
@@ -106,7 +108,7 @@ public class WorkInformationActivity extends BaseActivity implements View.OnClic
                     Toast.makeText(mActivity, "Please select the type of occupation", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (monthly_text.getText() != null && !monthly_text.getText().toString().equals("")) {
+                if (monthly_text.getText() != null && !"".equals(monthly_text.getText().toString())) {
                     if (monthly_text.getText().toString().contains("0～8000")) {
                         requestBean.setMonthly_salary(1);
                     } else if (monthly_text.getText().toString().contains("8000～20000")) {
@@ -122,7 +124,7 @@ public class WorkInformationActivity extends BaseActivity implements View.OnClic
                     Toast.makeText(mActivity, "Please fill in your income", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (family_text.getText() != null && !family_text.getText().toString().equals("")) {
+                if (family_text.getText() != null && !"".equals(family_text.getText().toString())) {
                     if (family_text.getText().toString().contains("<20000")) {
                         requestBean.setMonthly_family_salary(1);
                     } else if (family_text.getText().toString().contains("20000～30000")) {
@@ -138,7 +140,7 @@ public class WorkInformationActivity extends BaseActivity implements View.OnClic
                     Toast.makeText(mActivity, "Please fill in your household income", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                StartPresenter presenter = new StartPresenter(this);
+                presenter = new StartPresenter(this);
                 Gson gson = new Gson();
                 String s = gson.toJson(requestBean);
                 RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"), s);
@@ -147,6 +149,7 @@ public class WorkInformationActivity extends BaseActivity implements View.OnClic
                 utils.show();
                 presenter.postQueryBody(Constant.UPWORKINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
                 break;
+            default:break;
         }
     }
 
@@ -174,7 +177,7 @@ public class WorkInformationActivity extends BaseActivity implements View.OnClic
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if (error.toString().trim().equals("HTTP 401")) {
+        if ("HTTP 401".equals(error.toString().trim())) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
             UserUtils.getInstance().clearAllSp(mActivity);

@@ -44,6 +44,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     @Override
     protected void initView() {
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
+        startPresenter = new StartPresenter(this);
         ll_feedback = getActivity().findViewById(R.id.ll_feedback);
         log_out = getActivity().findViewById(R.id.log_out);
         my_name = getActivity().findViewById(R.id.my_name);
@@ -55,19 +56,15 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
         bottom_wenan.setText(UserUtils.getInstance().getsys_service_email_bak(mActivity));
         netWork();
         me_refresh.setEnableLoadMore(false);
-        me_refresh.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                netWork();
-                me_refresh.finishRefresh();
-            }
+        me_refresh.setOnRefreshListener(refreshLayout -> {
+            netWork();
+            me_refresh.finishRefresh();
         });
 
 
     }
 
     private void netWork() {
-        startPresenter = new StartPresenter(this);
         Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
         Map<String, Object> body = new HashMap<>();
         utils.show();
@@ -89,6 +86,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
 
     }
 
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.log_out:
@@ -124,7 +122,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if (error.toString().trim().equals("HTTP 401")) {
+        if ("HTTP 401".equals(error.toString().trim())) {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
             UserUtils.getInstance().clearAllSp(mActivity);

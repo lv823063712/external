@@ -134,6 +134,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
                     home_borrow_money.setText("₹ 150,000");
                 }
                 break;
+            default:break;
         }
     }
 
@@ -174,7 +175,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if (error.toString().trim().equals("HTTP 401")) {
+        if ("HTTP 401".equals(error.toString().trim())) {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
             UserUtils.getInstance().clearAllSp(mActivity);

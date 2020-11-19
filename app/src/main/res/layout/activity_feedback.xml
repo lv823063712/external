@@ -51,6 +51,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottoms"
+        android:overScrollMode="never"
+        android:scrollbars="none"
         android:layout_below="@+id/feed_text">
 
         <RelativeLayout

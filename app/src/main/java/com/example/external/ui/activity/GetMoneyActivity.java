@@ -45,6 +45,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
     private DialogUtils utils;
 
     private String idNet;
+    private StartPresenter startPresenter;
 
     @Override
     protected int getLayout() {
@@ -55,6 +56,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
     protected void initData() {
         StatusBarUtil.setTextColor(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
+        startPresenter = new StartPresenter(this);
         initView();
         hint_textview.setText(UserUtils.getInstance().gettips_pay(mActivity));
         Intent intent = getIntent();
@@ -173,18 +175,18 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
             case R.id.get_loan:
                 razNetWork();
                 break;
+            default:break;
         }
     }
 
     private void razNetWork() {
-        StartPresenter startPresenter = new StartPresenter(this);
         Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
         Map<String, Object> body = new HashMap<>();
         body.put("id", idNet);
         utils.show();
-        if (UserUtils.getInstance().getPayChannel(mActivity).equals("razorpay")) {
+        if ("razorpay".equals(UserUtils.getInstance().getPayChannel(mActivity))) {
             startPresenter.get(Constant.CREATERAZORPAY_URL, header, body, GetMoneyBean.class);
-        } else if (UserUtils.getInstance().getPayChannel(mActivity).equals("cashfree")) {
+        } else if ("cashfree".equals(UserUtils.getInstance().getPayChannel(mActivity))) {
             startPresenter.get(Constant.CREATECASHFREEPAY_URL, header, body, GetMoneyBean.class);
         }
 
@@ -299,7 +301,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if (error.toString().trim().equals("HTTP 401")) {
+        if ("HTTP 401".equals(error.toString().trim())) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
             UserUtils.getInstance().clearAllSp(mActivity);

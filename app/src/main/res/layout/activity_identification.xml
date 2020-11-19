@@ -77,6 +77,8 @@
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/first_step"
+            android:overScrollMode="never"
+            android:scrollbars="none"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

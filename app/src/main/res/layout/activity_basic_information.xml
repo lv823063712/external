@@ -40,7 +40,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/tv_save"
-        android:layout_below="@+id/header_titles">
+        android:layout_below="@+id/header_titles"
+        android:overScrollMode="never"
+        android:scrollbars="none">
 
 
         <LinearLayout

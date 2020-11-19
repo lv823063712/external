@@ -67,6 +67,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
                 Intent bankIntent = new Intent(this, BankInformationActivity.class);
                 startActivity(bankIntent);
                 break;
+            default:break;
         }
     }
 }
