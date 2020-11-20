@@ -24,6 +24,7 @@ import com.example.external.ui.activity.GetMoneyActivity;
 import com.example.external.ui.activity.IdentificationActivity;
 import com.example.external.ui.activity.LoginActivity;
 import com.example.external.ui.activity.ReviewingActivity;
+import com.example.external.ui.adapter.HomeListAdapter;
 import com.example.external.utils.DataUtils;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.LuckyNoticeView;
@@ -50,11 +51,13 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     private int money_show = 1;
     private int status;
     private int phase;
-    private SmartRefreshLayout home_page_refresh,home_page_refreshs;
+    private SmartRefreshLayout home_page_refresh, home_page_refreshs;
     private LinearLayout my_infor, my_get_money;
     private View title_view;
     private StartPresenter startPresenter;
     private RecyclerView myHome_rv;
+    private ArrayList<ProductBean.DataBean.ViplistBean> list = new ArrayList<>();
+    private HomeListAdapter adapter;
 
     @Override
     protected int getLayout() {
@@ -68,10 +71,10 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
         borrow = mActivity.findViewById(R.id.Borrow);
         title_view = mActivity.findViewById(R.id.title_view);
         ImmersionBar.with(this)
-                .transparentStatusBar()  //透明状态栏，不写默认透明色
+                .statusBarColor(R.color.white)   //透明状态栏，不写默认透明色
                 .keyboardEnable(true)
                 .statusBarView(title_view)
-                .autoStatusBarDarkModeEnable(true,0.2f)
+                .autoStatusBarDarkModeEnable(true, 0.2f)
                 .init();
         home_some_user = mActivity.findViewById(R.id.home_some_user);
         reduce_money = mActivity.findViewById(R.id.reduce_money);
@@ -99,18 +102,25 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
             netWork();
             home_page_refresh.finishRefresh();
         });
+        home_page_refreshs.setOnRefreshListener(refreshLayout -> {
+            netWork();
+            home_page_refreshs.finishRefresh();
+        });
         LinearLayoutManager manager = new LinearLayoutManager(mActivity);
         myHome_rv.setLayoutManager(manager);
+        adapter = new HomeListAdapter(mActivity, list);
+        myHome_rv.setAdapter(adapter);
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (!hidden){
+        if (!hidden) {
             netWork();
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -222,13 +232,22 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
         if (data instanceof ProductBean) {
             ProductBean productBean = (ProductBean) data;
             beans.add(productBean);
-            for (int i = 0; i < productBean.getData().getLimits().size(); i++) {
-                if (productBean.getData().getLimits().get(i).getIs_default() == 1) {
-                    home_borrow_money.setText("₹ "+ DataUtils.addComma(productBean.getData().getLimits().get(i).getAmount()+""));
+            if (productBean.getData().getViplist().size() < 1) {
+                home_page_refresh.setVisibility(View.VISIBLE);
+                home_page_refreshs.setVisibility(View.GONE);
+                for (int i = 0; i < productBean.getData().getLimits().size(); i++) {
+                    if (productBean.getData().getLimits().get(i).getIs_default() == 1) {
+                        home_borrow_money.setText("₹ " + DataUtils.addComma(productBean.getData().getLimits().get(i).getAmount() + ""));
+                    }
                 }
+                status = productBean.getData().getCertification();
+                phase = productBean.getData().getCertification();
+            } else {
+                home_page_refresh.setVisibility(View.GONE);
+                home_page_refreshs.setVisibility(View.VISIBLE);
+                list.addAll(productBean.getData().getViplist());
+                adapter.setData(list);
             }
-            status = productBean.getData().getCertification();
-            phase = productBean.getData().getCertification();
         } else if (data instanceof MarqueeBean) {
             MarqueeBean bean = (MarqueeBean) data;
             dataBeans.addAll(bean.getData());
@@ -240,7 +259,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if (error.toString().trim().equals("HTTP 401")) {
+        if (error.toString().trim().contains("401")) {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
         }

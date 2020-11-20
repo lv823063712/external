@@ -118,7 +118,7 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if (error.toString().trim().equals("HTTP 401")) {
+        if (error.toString().trim().equals("401")) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
         }

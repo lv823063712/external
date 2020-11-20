@@ -46,7 +46,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     protected void initView() {
         startPresenter = new StartPresenter(this);
         ImmersionBar.with(this)
-                .transparentStatusBar()  //透明状态栏，不写默认透明色
+                .statusBarColor(R.color.white)  //透明状态栏，不写默认透明色
                 .keyboardEnable(true)
                 .statusBarView(mActivity.findViewById(R.id.title_view))
                 .autoStatusBarDarkModeEnable(true,0.2f)
@@ -130,7 +130,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if (error.toString().trim().equals("HTTP 401")) {
+        if (error.toString().trim().equals("401")) {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
         }
