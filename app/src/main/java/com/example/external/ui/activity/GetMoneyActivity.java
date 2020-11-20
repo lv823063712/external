@@ -3,8 +3,6 @@ package com.example.external.ui.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,7 +15,6 @@ import com.example.external.base.BaseActivity;
 import com.example.external.common.RequestCommon;
 import com.example.external.mvp.bean.GetMoneyBean;
 import com.example.external.mvp.bean.ProductBean;
-import com.example.external.mvp.bean.SuccessCommon;
 import com.example.external.mvp.bean.UserInfoBean;
 import com.example.external.mvp.myinterface.StartInterface;
 import com.example.external.mvp.network.Constant;
@@ -31,7 +28,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class GetMoneyActivity extends BaseActivity implements View.OnClickListener, StartInterface.StrartView {
+
 
     private TextView show_money;
     private TextView get_loan, month_show, loan_term, loan_interest, monthly_payment, monthly_principal, monthly_inerest,
@@ -276,6 +275,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void setMothBackGround(int plan, TextView textView) {
         if (plan <= 25) {
             months_one.setBackground(getResources().getDrawable(R.color.red_6D83F2));
