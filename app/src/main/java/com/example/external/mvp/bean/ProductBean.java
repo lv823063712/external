@@ -90,23 +90,20 @@ public class ProductBean implements Parcelable {
         dest.writeParcelable(data, flags);
     }
 
-    public static class DataBean implements Parcelable{
-        /**
-         * limits : [{"amount":30000,"is_default":0,"durations":[{"id":"4f81a20225abfec4f0c40e7d5c510621","amount":30000,"interest":300,"duration":"1 month","monthly_payment":30300,"monthly_principal":30000,"monthly_inerest":300,"member_ori_fee":397,"member_fee":297,"is_default":0},{"id":"8dd185f2c322cc6facad31dee9a9b604","amount":30000,"interest":900,"duration":"3 months","monthly_payment":10300,"monthly_principal":10000,"monthly_inerest":300,"member_ori_fee":397,"member_fee":297,"is_default":0},{"id":"b6538cb79b75f175563efc5e01133b93","amount":30000,"interest":1800,"duration":"6 months","monthly_payment":5300,"monthly_principal":5000,"monthly_inerest":300,"member_ori_fee":397,"member_fee":297,"is_default":0},{"id":"d76fdb3799bfbf5fad1e5d89fd5ab819","amount":30000,"interest":3600,"duration":"12 months","monthly_payment":2800,"monthly_principal":2500,"monthly_inerest":300,"member_ori_fee":397,"member_fee":297,"is_default":0}]},{"amount":50000,"is_default":0,"durations":[{"id":"27e8e4ba7fdfc13d53b553dc90454d2e","amount":50000,"interest":500,"duration":"1 month","monthly_payment":50500,"monthly_principal":50000,"monthly_inerest":500,"member_ori_fee":497,"member_fee":397,"is_default":0},{"id":"b750a92ab44911ff5012e1670c6254b6","amount":50000,"interest":1500,"duration":"3 months","monthly_payment":17167,"monthly_principal":16667,"monthly_inerest":500,"member_ori_fee":497,"member_fee":397,"is_default":0},{"id":"d3406c1c7c7b9598500a60dbd36e6445","amount":50000,"interest":3000,"duration":"6 months","monthly_payment":8833,"monthly_principal":8333,"monthly_inerest":500,"member_ori_fee":497,"member_fee":397,"is_default":0},{"id":"f1883a1fd0e7415ce79e0c9786490a46","amount":50000,"interest":6000,"duration":"12 months","monthly_payment":4667,"monthly_principal":4167,"monthly_inerest":500,"member_ori_fee":497,"member_fee":397,"is_default":0}]},{"amount":80000,"is_default":1,"durations":[{"id":"21720df198df2d4230544c4cfc597cc9","amount":80000,"interest":800,"duration":"1 month","monthly_payment":80800,"monthly_principal":80000,"monthly_inerest":800,"member_ori_fee":597,"member_fee":497,"is_default":1},{"id":"654f48d6843f98627d64d8aee8065d95","amount":80000,"interest":2400,"duration":"3 months","monthly_payment":27467,"monthly_principal":26667,"monthly_inerest":800,"member_ori_fee":597,"member_fee":497,"is_default":0},{"id":"a37157660ca542f43a7b4b6df9aae75d","amount":80000,"interest":4800,"duration":"6 months","monthly_payment":14133,"monthly_principal":13333,"monthly_inerest":800,"member_ori_fee":597,"member_fee":497,"is_default":0},{"id":"e86c6199e58e677abdad69c79186a165","amount":80000,"interest":9600,"duration":"12 months","monthly_payment":7467,"monthly_principal":6667,"monthly_inerest":800,"member_ori_fee":597,"member_fee":497,"is_default":0}]},{"amount":150000,"is_default":0,"durations":[{"id":"038811065cde2759e85d67d31c3496aa","amount":150000,"interest":1500,"duration":"1 month","monthly_payment":151500,"monthly_principal":150000,"monthly_inerest":1500,"member_ori_fee":797,"member_fee":697,"is_default":0},{"id":"579e9b8da5636890f30397c7ab1b414a","amount":150000,"interest":4500,"duration":"3 months","monthly_payment":51500,"monthly_principal":50000,"monthly_inerest":1500,"member_ori_fee":797,"member_fee":697,"is_default":0},{"id":"5b76b485ec6aee0cff6c9f19a38c3f09","amount":150000,"interest":9000,"duration":"6 months","monthly_payment":26500,"monthly_principal":25000,"monthly_inerest":1500,"member_ori_fee":797,"member_fee":697,"is_default":0},{"id":"79c5d5af076bb27b27384f54f6e3a271","amount":150000,"interest":18000,"duration":"12 months","monthly_payment":14000,"monthly_principal":12500,"monthly_inerest":1500,"member_ori_fee":797,"member_fee":697,"is_default":0}]}]
-         * viplist : []
-         * certification : 0
-         * phase : 2
-         */
+
+    public static class DataBean implements Parcelable {
+
 
         private int certification;
         private int phase;
         private List<LimitsBean> limits;
-        private List<?> viplist;
+        private List<ViplistBean> viplist;
 
         protected DataBean(Parcel in) {
             certification = in.readInt();
             phase = in.readInt();
             limits = in.createTypedArrayList(LimitsBean.CREATOR);
+            viplist = in.createTypedArrayList(ViplistBean.CREATOR);
         }
 
         public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
@@ -120,6 +117,14 @@ public class ProductBean implements Parcelable {
                 return new DataBean[size];
             }
         };
+
+        public List<ViplistBean> getViplist() {
+            return viplist;
+        }
+
+        public void setViplist(List<ViplistBean> viplist) {
+            this.viplist = viplist;
+        }
 
         public int getCertification() {
             return certification;
@@ -145,14 +150,6 @@ public class ProductBean implements Parcelable {
             this.limits = limits;
         }
 
-        public List<?> getViplist() {
-            return viplist;
-        }
-
-        public void setViplist(List<?> viplist) {
-            this.viplist = viplist;
-        }
-
         @Override
         public int describeContents() {
             return 0;
@@ -163,18 +160,16 @@ public class ProductBean implements Parcelable {
             dest.writeInt(certification);
             dest.writeInt(phase);
             dest.writeTypedList(limits);
+            dest.writeTypedList(viplist);
         }
 
-        public static class LimitsBean implements Parcelable{
-            /**
-             * amount : 30000
-             * is_default : 0
-             * durations : [{"id":"4f81a20225abfec4f0c40e7d5c510621","amount":30000,"interest":300,"duration":"1 month","monthly_payment":30300,"monthly_principal":30000,"monthly_inerest":300,"member_ori_fee":397,"member_fee":297,"is_default":0},{"id":"8dd185f2c322cc6facad31dee9a9b604","amount":30000,"interest":900,"duration":"3 months","monthly_payment":10300,"monthly_principal":10000,"monthly_inerest":300,"member_ori_fee":397,"member_fee":297,"is_default":0},{"id":"b6538cb79b75f175563efc5e01133b93","amount":30000,"interest":1800,"duration":"6 months","monthly_payment":5300,"monthly_principal":5000,"monthly_inerest":300,"member_ori_fee":397,"member_fee":297,"is_default":0},{"id":"d76fdb3799bfbf5fad1e5d89fd5ab819","amount":30000,"interest":3600,"duration":"12 months","monthly_payment":2800,"monthly_principal":2500,"monthly_inerest":300,"member_ori_fee":397,"member_fee":297,"is_default":0}]
-             */
+
+        public static class LimitsBean implements Parcelable {
 
             private int amount;
             private int is_default;
             private List<DurationsBean> durations;
+
 
             protected LimitsBean(Parcel in) {
                 amount = in.readInt();
@@ -378,6 +373,184 @@ public class ProductBean implements Parcelable {
                     dest.writeInt(member_fee);
                     dest.writeInt(is_default);
                 }
+            }
+        }
+        public static class ViplistBean implements Parcelable {
+            private String id;
+            private String cash_name;
+            private String icon_url;
+            private String download_url;
+            private String min_amount;
+            private String max_amount;
+            private String min_interest;
+            private String max_interest;
+            private Object successful;
+            private int star;
+            private String desc;
+            private int is_best_recommend;
+            private int is_default;
+            private int is_high_quota;
+
+            protected ViplistBean(Parcel in) {
+                id = in.readString();
+                cash_name = in.readString();
+                icon_url = in.readString();
+                download_url = in.readString();
+                min_amount = in.readString();
+                max_amount = in.readString();
+                min_interest = in.readString();
+                max_interest = in.readString();
+                star = in.readInt();
+                desc = in.readString();
+                is_best_recommend = in.readInt();
+                is_default = in.readInt();
+                is_high_quota = in.readInt();
+            }
+
+            public static final Creator<ViplistBean> CREATOR = new Creator<ViplistBean>() {
+                @Override
+                public ViplistBean createFromParcel(Parcel in) {
+                    return new ViplistBean(in);
+                }
+
+                @Override
+                public ViplistBean[] newArray(int size) {
+                    return new ViplistBean[size];
+                }
+            };
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
+
+            public String getCash_name() {
+                return cash_name;
+            }
+
+            public void setCash_name(String cash_name) {
+                this.cash_name = cash_name;
+            }
+
+            public String getIcon_url() {
+                return icon_url;
+            }
+
+            public void setIcon_url(String icon_url) {
+                this.icon_url = icon_url;
+            }
+
+            public String getDownload_url() {
+                return download_url;
+            }
+
+            public void setDownload_url(String download_url) {
+                this.download_url = download_url;
+            }
+
+            public String getMin_amount() {
+                return min_amount;
+            }
+
+            public void setMin_amount(String min_amount) {
+                this.min_amount = min_amount;
+            }
+
+            public String getMax_amount() {
+                return max_amount;
+            }
+
+            public void setMax_amount(String max_amount) {
+                this.max_amount = max_amount;
+            }
+
+            public String getMin_interest() {
+                return min_interest;
+            }
+
+            public void setMin_interest(String min_interest) {
+                this.min_interest = min_interest;
+            }
+
+            public String getMax_interest() {
+                return max_interest;
+            }
+
+            public void setMax_interest(String max_interest) {
+                this.max_interest = max_interest;
+            }
+
+            public Object getSuccessful() {
+                return successful;
+            }
+
+            public void setSuccessful(Object successful) {
+                this.successful = successful;
+            }
+
+            public int getStar() {
+                return star;
+            }
+
+            public void setStar(int star) {
+                this.star = star;
+            }
+
+            public String getDesc() {
+                return desc;
+            }
+
+            public void setDesc(String desc) {
+                this.desc = desc;
+            }
+
+            public int getIs_best_recommend() {
+                return is_best_recommend;
+            }
+
+            public void setIs_best_recommend(int is_best_recommend) {
+                this.is_best_recommend = is_best_recommend;
+            }
+
+            public int getIs_default() {
+                return is_default;
+            }
+
+            public void setIs_default(int is_default) {
+                this.is_default = is_default;
+            }
+
+            public int getIs_high_quota() {
+                return is_high_quota;
+            }
+
+            public void setIs_high_quota(int is_high_quota) {
+                this.is_high_quota = is_high_quota;
+            }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(id);
+                dest.writeString(cash_name);
+                dest.writeString(icon_url);
+                dest.writeString(download_url);
+                dest.writeString(min_amount);
+                dest.writeString(max_amount);
+                dest.writeString(min_interest);
+                dest.writeString(max_interest);
+                dest.writeInt(star);
+                dest.writeString(desc);
+                dest.writeInt(is_best_recommend);
+                dest.writeInt(is_default);
+                dest.writeInt(is_high_quota);
             }
         }
     }

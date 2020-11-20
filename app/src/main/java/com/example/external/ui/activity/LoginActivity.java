@@ -91,7 +91,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 Map<String, Object> bodys = new HashMap<>();
                 LoginRequestBean bean = new LoginRequestBean();
                 if (user_input_phone.getText() != null && !"".equals(user_input_phone.getText().toString())) {
-                    bean.setMobile("+91" + user_input_phone.getText().toString());
+                    bean.setMobile(user_input_phone.getText().toString());
                 } else {
                     Toast.makeText(mActivity, "Please enter your mobile phone number", Toast.LENGTH_SHORT).show();
                 }

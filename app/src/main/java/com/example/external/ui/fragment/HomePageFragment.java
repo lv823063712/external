@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.external.R;
 import com.example.external.base.BaseFragment;
@@ -47,9 +49,10 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     private int money_show = 1;
     private int status;
     private int phase;
-    private SmartRefreshLayout home_page_refresh;
+    private SmartRefreshLayout home_page_refresh,home_page_refreshs;
     private LinearLayout my_infor, my_get_money;
     private StartPresenter startPresenter;
+    private RecyclerView myHome_rv;
 
     @Override
     protected int getLayout() {
@@ -67,6 +70,8 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
         home_borrow_money = mActivity.findViewById(R.id.home_borrow_money);
         testVf = mActivity.findViewById(R.id.testVf);
         home_page_refresh = mActivity.findViewById(R.id.home_page_refresh);
+        home_page_refreshs = mActivity.findViewById(R.id.home_page_refreshs);
+        myHome_rv = mActivity.findViewById(R.id.myHome_rv);
         my_infor = mActivity.findViewById(R.id.my_infor);
         my_get_money = mActivity.findViewById(R.id.my_get_money);
         home_some_user_content = mActivity.findViewById(R.id.home_some_user_content);
@@ -85,6 +90,8 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
             netWork();
             home_page_refresh.finishRefresh();
         });
+        LinearLayoutManager manager = new LinearLayoutManager(mActivity);
+        myHome_rv.setLayoutManager(manager);
     }
 
     @Override
