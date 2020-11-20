@@ -32,7 +32,8 @@
 -keepclasseswithmembernames class * {
     public <init>(android.content.Context, android.util.AttributeSet, int);
 }
-
+ -keep class com.gyf.immersionbar.* {*;}
+ -dontwarn com.gyf.immersionbar.**
 -keepclassmembers class * {
    public <init> (org.json.JSONObject);
 }

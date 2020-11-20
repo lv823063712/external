@@ -13,6 +13,7 @@ import com.example.external.config.AppStatusConstant;
 import com.example.external.ui.activity.StartActivity;
 import com.example.external.utils.AppStatusManager;
 import com.example.external.utils.StatusBarUtil;
+import com.gyf.immersionbar.ImmersionBar;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -70,7 +71,12 @@ public abstract class BaseActivity extends SupportActivity {
     }
 
     protected void setStatusBar() {
-        StatusBarUtil.setStatusBar(mActivity);
+        ImmersionBar.with(this)
+                .transparentStatusBar()  //透明状态栏，不写默认透明色
+                .keyboardEnable(true)
+                .autoStatusBarDarkModeEnable(true,0.2f)
+                .init();
+//        StatusBarUtil.setStatusBar(mActivity);
     }
 
     protected void backActivity() {

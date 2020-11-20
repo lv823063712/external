@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 
 import com.example.external.R;
 import com.example.external.utils.StatusBarUtil;
+import com.gyf.immersionbar.ImmersionBar;
 
 import me.yokeyword.fragmentation.SupportActivity;
 
@@ -40,7 +41,12 @@ public abstract class BaseActivitys extends SupportActivity {
     }
 
     protected void setStatusBar() {
-        StatusBarUtil.setStatusBar(mActivity);
+        ImmersionBar.with(this)
+                .transparentStatusBar()  //透明状态栏，不写默认透明色
+                .keyboardEnable(true)
+                .autoStatusBarDarkModeEnable(true,0.2f)
+                .init();
+//        StatusBarUtil.setStatusBar(mActivity);
     }
 
     protected void backActivity() {
