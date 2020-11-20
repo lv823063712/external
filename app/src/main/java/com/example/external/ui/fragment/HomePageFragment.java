@@ -26,6 +26,7 @@ import com.example.external.utils.DataUtils;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.LuckyNoticeView;
 import com.example.external.utils.UserUtils;
+import com.gyf.immersionbar.ImmersionBar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -49,6 +50,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     private int phase;
     private SmartRefreshLayout home_page_refresh;
     private LinearLayout my_infor, my_get_money;
+    private View title_view;
     private StartPresenter startPresenter;
 
     @Override
@@ -61,6 +63,13 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
         startPresenter = new StartPresenter(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
         borrow = mActivity.findViewById(R.id.Borrow);
+        title_view = mActivity.findViewById(R.id.title_view);
+        ImmersionBar.with(this)
+                .transparentStatusBar()  //透明状态栏，不写默认透明色
+                .keyboardEnable(true)
+                .statusBarView(title_view)
+                .autoStatusBarDarkModeEnable(true,0.2f)
+                .init();
         home_some_user = mActivity.findViewById(R.id.home_some_user);
         reduce_money = mActivity.findViewById(R.id.reduce_money);
         increase_money = mActivity.findViewById(R.id.increase_money);

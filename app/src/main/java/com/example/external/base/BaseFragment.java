@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.external.utils.StatusBarUtil;
+import com.gyf.immersionbar.ImmersionBar;
 
 import me.yokeyword.fragmentation.SupportFragment;
 
@@ -84,7 +85,12 @@ public abstract class BaseFragment extends SupportFragment {
     }
 
     protected void setStatusBar() {
-        StatusBarUtil.setTextColor(mActivity);
+        ImmersionBar.with(this)
+                .transparentStatusBar()  //透明状态栏，不写默认透明色
+                .keyboardEnable(true)
+                .autoStatusBarDarkModeEnable(true,0.2f)
+                .init();
+//        StatusBarUtil.setTextColor(mActivity);
     }
 
     private void lazyLoad() {

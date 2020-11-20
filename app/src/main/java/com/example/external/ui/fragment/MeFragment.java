@@ -19,6 +19,7 @@ import com.example.external.ui.activity.LoginActivity;
 import com.example.external.ui.activity.MyProfileActivity;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.UserUtils;
+import com.gyf.immersionbar.ImmersionBar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -44,6 +45,12 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     @Override
     protected void initView() {
         startPresenter = new StartPresenter(this);
+        ImmersionBar.with(this)
+                .transparentStatusBar()  //透明状态栏，不写默认透明色
+                .keyboardEnable(true)
+                .statusBarView(mActivity.findViewById(R.id.title_view))
+                .autoStatusBarDarkModeEnable(true,0.2f)
+                .init();
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
         ll_feedback = getActivity().findViewById(R.id.ll_feedback);
         log_out = getActivity().findViewById(R.id.log_out);

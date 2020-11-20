@@ -48,7 +48,7 @@ android {
             keyPassword key_password
             v1SigningEnabled true
             v2SigningEnabled true
-            storeFile file('E:\\external\\doc\\sinature\\external.jks')
+            storeFile file('doc\\sinature\\external.jks')
         }
         release {
             storePassword store_password
@@ -56,7 +56,7 @@ android {
             keyPassword key_password
             v1SigningEnabled true
             v2SigningEnabled true
-            storeFile file('E:\\external\\doc\\sinature\\external.jks')
+            storeFile file('doc\\sinature\\external.jks')
         }
     }
 
@@ -146,4 +146,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
 }
