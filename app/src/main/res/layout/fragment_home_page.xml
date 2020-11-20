@@ -18,9 +18,11 @@
             android:id="@+id/c_header_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srlTextPulling="下拉可以刷新"
-            app:srlTextRefreshing="正在刷新数据中..."
-            app:srlTextRelease="松开立即刷新" />
+            app:srlTextPulling="Drop down to refresh"
+            app:srlTextRefreshing="Refreshing data in progress..."
+            app:srlTextFinish="Refresh to complete"
+            app:srlTextUpdate="\'Last Update\' M-d HH:mm"
+            app:srlTextRelease="Release and refresh immediately"  />
 
         <RelativeLayout
             android:layout_width="match_parent"
