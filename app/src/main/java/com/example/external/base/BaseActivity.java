@@ -13,6 +13,7 @@ import com.example.external.config.AppStatusConstant;
 import com.example.external.ui.activity.StartActivity;
 import com.example.external.utils.AppStatusManager;
 import com.example.external.utils.StatusBarUtil;
+import com.gyf.immersionbar.ImmersionBar;
 
 import me.yokeyword.fragmentation.SupportActivity;
 
@@ -34,9 +35,15 @@ public abstract class BaseActivity extends SupportActivity {
                 startActivity(intent);
                 break;
             case AppStatusConstant.STATUS_NORMAL:
-                setStatusBar();
+                ImmersionBar.with(this)
+                        //解决软键盘与底部输入框冲突问题
+                        .keyboardEnable(true)
+                        .statusBarDarkFont(true, 0.2f)
+                        .init();
+//                setStatusBar();
                 init();
                 break;
+            default:break;
         }
     }
 

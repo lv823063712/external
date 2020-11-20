@@ -143,4 +143,6 @@ dependencies {
     implementation rootProject.ext.compilelibs['PickerView']
 
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
+    // 基础依赖包，必须要依赖
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
 }

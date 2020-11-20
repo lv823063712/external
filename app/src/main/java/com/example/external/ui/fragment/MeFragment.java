@@ -19,6 +19,7 @@ import com.example.external.ui.activity.LoginActivity;
 import com.example.external.ui.activity.MyProfileActivity;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.UserUtils;
+import com.gyf.immersionbar.ImmersionBar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.HashMap;
@@ -31,6 +32,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     private StartPresenter startPresenter;
     private SmartRefreshLayout me_refresh;
     private LinearLayout my_profile, my_customer, my_aboutus, ll_feedback;
+    private View title_view;
 
     @Override
     protected int getLayout() {
@@ -40,6 +42,14 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     @Override
     protected void initView() {
         startPresenter = new StartPresenter(this);
+        title_view = getActivity().findViewById(R.id.title_view);
+        ImmersionBar.with(this)
+                //解决软键盘与底部输入框冲突问题
+                .keyboardEnable(true)
+                .statusBarView(title_view)
+                .statusBarDarkFont(true, 0.2f)
+                .titleBarMarginTop(title_view)
+                .init();
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
         startPresenter = new StartPresenter(this);
         ll_feedback = getActivity().findViewById(R.id.ll_feedback);

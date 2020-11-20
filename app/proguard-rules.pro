@@ -82,6 +82,7 @@
 #这句非常重要，主要是滤掉 com.example.external.ui 下的.class文件不进行混淆编译
 -keep class com.example.external.ui.** {*;}
 -keep class com.example.external.mvp.bean.** {*;}
+-keep class com.example.external.mvp.requestbean.** {*;}
 
 # Bean
 -keep class com.example.external.mvp.bean.**{*;} # 自定义数据模型的bean目录
@@ -108,7 +109,11 @@
 -keep class com.google.gson.examples.android.model.** { *; }
 -keep class com.google.gson.** { *; }
 
-###########################################################################################
+#############################################################################################
+#immersionbar
+ -keep class com.gyf.immersionbar.* {*;}
+ -dontwarn com.gyf.immersionbar.**
+#############################################################################################
 # OkHttp3
 #-libraryjars libs/okhttp-3.8.1.jar
 -dontwarn com.squareup.okhttp3.**

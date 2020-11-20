@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 
 import com.example.external.R;
 import com.example.external.utils.StatusBarUtil;
+import com.gyf.immersionbar.ImmersionBar;
 
 import me.yokeyword.fragmentation.SupportActivity;
 
@@ -40,7 +41,12 @@ public abstract class BaseActivitys extends SupportActivity {
     }
 
     protected void setStatusBar() {
-        StatusBarUtil.setStatusBar(mActivity);
+        ImmersionBar.with(this)
+                //解决软键盘与底部输入框冲突问题
+                .keyboardEnable(true)
+                .statusBarDarkFont(true, 0.2f)
+                .init();
+//        StatusBarUtil.setStatusBar(mActivity);
     }
 
     protected void backActivity() {

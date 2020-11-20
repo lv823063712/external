@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".ui.fragment.HomePageFragment">
+
+    <View
+        android:id="@+id/title_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/dp_2" />
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/home_page_refresh"
@@ -16,10 +21,10 @@
 
         <com.scwang.smartrefresh.layout.header.ClassicsHeader
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srlTextPulling="下拉可以刷新"
-            app:srlTextRefreshing="正在刷新数据中..."
-            app:srlTextRelease="松开立即刷新" />
+            android:layout_height="wrap_content" />
+        <!--            app:srlTextPulling="下拉可以刷新"-->
+        <!--            app:srlTextRefreshing="正在刷新数据中..."-->
+        <!--            app:srlTextRelease="松开立即刷新" />-->
 
         <RelativeLayout
             android:layout_width="match_parent"

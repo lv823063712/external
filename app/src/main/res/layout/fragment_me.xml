@@ -5,7 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragment.MeFragment">
-
+    <View
+        android:id="@+id/title_view"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/dp_2"
+        android:layout_height="0dp"/>
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/me_refresh"
         android:layout_width="match_parent"
@@ -15,10 +19,10 @@
 
         <com.scwang.smartrefresh.layout.header.ClassicsHeader
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srlTextPulling="下拉可以刷新"
-            app:srlTextRefreshing="正在刷新数据中..."
-            app:srlTextRelease="松开立即刷新" />
+            android:layout_height="wrap_content"/>
+<!--            app:srlTextPulling="下拉可以刷新"-->
+<!--            app:srlTextRefreshing="正在刷新数据中..."-->
+<!--            app:srlTextRelease="松开立即刷新" />-->
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -138,6 +142,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/my_customer"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -160,6 +165,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/my_aboutus"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

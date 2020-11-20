@@ -6,6 +6,8 @@ import android.app.Application;
 import androidx.multidex.MultiDex;
 
 import com.example.external.ui.activity.StartActivity;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 import java.util.LinkedHashSet;
 
@@ -22,6 +24,23 @@ public class MyApplication extends Application {
     private MyApplication mContext;
     private LinkedHashSet<Activity> mAllActivities = new LinkedHashSet();
 
+    static {
+        ClassicsHeader.REFRESH_HEADER_REFRESHING = "Is refreshing...";
+        ClassicsHeader.REFRESH_HEADER_LOADING = "Being loaded...";
+        ClassicsHeader.REFRESH_HEADER_RELEASE = "Release refresh now";
+        ClassicsHeader.REFRESH_HEADER_FINISH = "Refresh to complete";
+        ClassicsHeader.REFRESH_HEADER_FAILED = "Refresh the failure";
+        ClassicsHeader.REFRESH_HEADER_SECONDARY = "Release into the second floor";
+        ClassicsFooter.REFRESH_FOOTER_PULLING = "Pull up loads more";
+        ClassicsFooter.REFRESH_FOOTER_RELEASE = "Release immediate load";
+        ClassicsFooter.REFRESH_FOOTER_REFRESHING = "Is refreshing...";
+        ClassicsFooter.REFRESH_FOOTER_LOADING = "Being loaded...";
+        ClassicsFooter.REFRESH_FOOTER_FINISH = "loaded";
+        ClassicsFooter.REFRESH_FOOTER_FAILED = "Load failed";
+        ClassicsFooter.REFRESH_FOOTER_NOTHING = "There's no more data";
+
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -34,11 +53,16 @@ public class MyApplication extends Application {
         MultiDex.install(this);
         AutoSize.initCompatMultiProcess(this);
         initCrash();
+        initSmart();
+    }
+
+    private void initSmart() {
 
     }
 
     private void initCrash() {
-        CaocConfig.Builder.create()
+        CaocConfig
+                .Builder.create()
                 .enabled(true)
                 .showErrorDetails(false)
                 .showRestartButton(false)

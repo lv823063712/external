@@ -23,6 +23,7 @@ import com.example.external.ui.activity.ReviewingActivity;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.LuckyNoticeView;
 import com.example.external.utils.UserUtils;
+import com.gyf.immersionbar.ImmersionBar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -38,6 +39,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
 
     private DialogUtils utils;
     private TextView home_some_user, reduce_money, increase_money, home_borrow_money, borrow, home_some_user_content;
+    private View title_view;
     private LuckyNoticeView testVf;
     private List<MarqueeBean.DataBean> dataBeans = new ArrayList<>();
     private ArrayList<ProductBean> beans = new ArrayList<>();
@@ -55,6 +57,14 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
 
     @Override
     protected void initView() {
+        title_view = mActivity.findViewById(R.id.title_view);
+
+        ImmersionBar.with(this)
+                //解决软键盘与底部输入框冲突问题
+                .keyboardEnable(true)
+                .statusBarView(title_view)
+                .statusBarDarkFont(true, 0.2f)
+                .init();
         startPresenter = new StartPresenter(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
         borrow = mActivity.findViewById(R.id.Borrow);
