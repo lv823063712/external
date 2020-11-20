@@ -126,7 +126,6 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
                         }
                     }.start();
                 } else if (bean.getData().getPhase() == 2) {
-                    netWorks();
                     for (int i = 0; i < bean.getData().getLimits().size(); i++) {
                         if (bean.getData().getLimits().get(i).getIs_default() == 1) {
                             moneys = "₹" + DataUtils.addComma(bean.getData().getLimits().get(i).getAmount() + "");
@@ -139,6 +138,7 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
                     first_reviewing.setText("2. Approved");
                     step_tv.setEnabled(true);
                     vip_hint.setText(UserUtils.getInstance().gettips_congratulations(mActivity));
+                    netWorks();
                 }
             } else {
                 new CountDownTimer(3 * 1000, 1000) {
@@ -156,6 +156,7 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
             }
         } else if (data instanceof MarqueeBean) {
             MarqueeBean bean = (MarqueeBean) data;
+            testVfs.clearDisappearingChildren();
             dataBeans.addAll(bean.getData());
             testVfs.addNotice(dataBeans);
             testVfs.startFlipping();

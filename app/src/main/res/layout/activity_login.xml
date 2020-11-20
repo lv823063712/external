@@ -51,7 +51,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
                 android:background="@null"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.@-"
+                android:digits="0123456789"
                 android:inputType="phone|number"
                 android:singleLine="true"
                 android:textColor="#041D98"

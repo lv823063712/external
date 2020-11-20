@@ -3,29 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.external">
 
-    <uses-permission android:name="android.permission.CALL_PHONE" /><!--获取手机的信息-->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /><!--显示系统窗口-->
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" /><!--能否联网-->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /><!--wifi状态权限-->
-    <uses-permission
-        android:name="android.permission.WRITE_SECURE_SETTINGS"
-        tools:ignore="ProtectedPermissions" /><!--允许程序读写-->
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" /><!--允许程序写入外部存储-->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /><!--允许程序读取外部存储-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /><!--获取网络信息状态-->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /><!--获取当前WiFi接入的状态-->
     <uses-permission android:name="android.permission.INTERNET" /><!--网络权限-->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" /><!--访问电话状态-->
-    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
-    <uses-permission
-        android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions" /><!--允许读写系统设置项-->
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:hasFragileUserData="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/net_work"

@@ -23,11 +23,7 @@ public class RequestCommon {
     public HashMap<String, Object> headers(Context context) {
 
         String deviceId = null;
-        try {
-            deviceId = PhoneInfoUtil.readKey();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        deviceId = PhoneInfoUtil.readKey(context);
         HashMap<String, Object> map = new HashMap<>();
         map.put("os-type", "android");
         map.put("os-version", PhoneInfoUtil.getOsInfo());

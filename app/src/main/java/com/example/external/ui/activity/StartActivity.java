@@ -22,26 +22,26 @@ import com.example.external.mvp.presenter.StartPresenter;
 import com.example.external.ui.view.CustomDialog;
 import com.example.external.utils.AppStatusManager;
 import com.example.external.utils.DialogUtils;
+import com.example.external.utils.PhoneInfoUtil;
 import com.example.external.utils.UserUtils;
 import com.yanzhenjie.permission.AndPermission;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class StartActivity extends BaseActivitys implements StartInterface.StrartView {
-    private String[] strings = new String[]{
-            Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_PHONE_NUMBERS,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE
-    };
     private StartPresenter startPresenter;
     private CustomDialog dialog;
     private DialogUtils utils;
-    ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppStatusManager.getInstance().setAppStatus(AppStatusConstant.STATUS_NORMAL);
+
+        PhoneInfoUtil.readKey(mActivity);
+
 
     }
 
@@ -83,17 +83,13 @@ public class StartActivity extends BaseActivitys implements StartInterface.Strar
                 UserUtils.getInstance().savesys_service_email_bak(mActivity, configBean.getData().getSys_service_email_bak());
                 UserUtils.getInstance().savesys_service_email(mActivity, configBean.getData().getSys_service_email());
                 UserUtils.getInstance().savesys_service_time(mActivity, configBean.getData().getSys_service_time());
-                AndPermission.with(mActivity)
-                        .runtime()
-                        .permission(strings)
-                        .onGranted(datas -> {
-                            if (UserUtils.getInstance().getToken(mActivity).length() == 0) {
-                                startActivity(new Intent(mActivity, LoginActivity.class));
-                            } else {
-                                startActivity(new Intent(mActivity, MainActivity.class));
-                            }
-                            finish();
-                        }).onDenied(datas -> PermissionUtils.launchAppDetailsSettings()).start();
+
+                if (UserUtils.getInstance().getToken(mActivity).length() == 0) {
+                    startActivity(new Intent(mActivity, LoginActivity.class));
+                } else {
+                    startActivity(new Intent(mActivity, MainActivity.class));
+                }
+                backActivity();
             } else if (configBean.getStatus() == 0) {
                 Toast.makeText(mActivity, configBean.getMessage(), Toast.LENGTH_SHORT).show();
                 showErrorDialog();
@@ -137,10 +133,10 @@ public class StartActivity extends BaseActivitys implements StartInterface.Strar
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (utils!=null) {
+        if (utils != null) {
             utils.dismissDialog(utils);
         }
-        if (startPresenter!=null){
+        if (startPresenter != null) {
             startPresenter.onDatacth();
         }
     }
