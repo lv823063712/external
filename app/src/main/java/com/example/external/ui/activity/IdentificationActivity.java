@@ -373,6 +373,7 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
             } else if (next_step == 3) {
                 Intent intent = new Intent(this, ReviewingActivity.class);
                 startActivity(intent);
+                backActivity();
             }
             Toast.makeText(mActivity, common.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -384,7 +385,6 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
         if (error.toString().trim().equals("HTTP 401")) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
-            UserUtils.getInstance().clearAllSp(mActivity);
         }
     }
 

@@ -106,7 +106,6 @@
                     android:hint="Full Name"
                     android:paddingStart="24dp"
                     android:textColor="#6D83F2"
-                    android:textColorHint="#6D83F2"
                     android:textSize="16sp" />
 
                 <TextView
@@ -123,7 +122,6 @@
                     android:paddingStart="24dp"
                     android:paddingEnd="17dp"
                     android:textColor="#6D83F2"
-                    android:textColorHint="#6D83F2"
                     android:textSize="16sp" />
 
                 <TextView
@@ -140,7 +138,6 @@
                     android:paddingStart="24dp"
                     android:paddingEnd="17dp"
                     android:textColor="#6D83F2"
-                    android:textColorHint="#6D83F2"
                     android:textSize="16sp" />
 
                 <TextView
@@ -157,7 +154,6 @@
                     android:paddingStart="24dp"
                     android:paddingEnd="17dp"
                     android:textColor="#6D83F2"
-                    android:textColorHint="#6D83F2"
                     android:textSize="16sp" />
 
                 <TextView
@@ -174,7 +170,6 @@
                     android:paddingStart="24dp"
                     android:paddingEnd="17dp"
                     android:textColor="#6D83F2"
-                    android:textColorHint="#6D83F2"
                     android:textSize="16sp" />
 
                 <EditText
@@ -189,7 +184,6 @@
                     android:hint="E-mail"
                     android:paddingStart="24dp"
                     android:textColor="#6D83F2"
-                    android:textColorHint="#6D83F2"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -227,7 +221,6 @@
                 android:paddingStart="24dp"
                 android:paddingEnd="17dp"
                 android:textColor="#6D83F2"
-                android:textColorHint="#6D83F2"
                 android:textSize="16sp" />
 
             <TextView
@@ -244,7 +237,6 @@
                 android:paddingStart="24dp"
                 android:paddingEnd="17dp"
                 android:textColor="#6D83F2"
-                android:textColorHint="#6D83F2"
                 android:textSize="16sp" />
 
             <TextView
@@ -261,7 +253,6 @@
                 android:paddingStart="24dp"
                 android:paddingEnd="17dp"
                 android:textColor="#6D83F2"
-                android:textColorHint="#6D83F2"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -294,7 +285,6 @@
                 android:hint="IFSC Code"
                 android:paddingStart="24dp"
                 android:textColor="#6D83F2"
-                android:textColorHint="#6D83F2"
                 android:textSize="16sp" />
 
             <EditText
@@ -308,7 +298,6 @@
                 android:hint="Bank Name"
                 android:paddingStart="24dp"
                 android:textColor="#6D83F2"
-                android:textColorHint="#6D83F2"
                 android:textSize="16sp" />
 
             <EditText
@@ -322,7 +311,6 @@
                 android:hint="Bank Account NO."
                 android:paddingStart="24dp"
                 android:textColor="#6D83F2"
-                android:textColorHint="#6D83F2"
                 android:textSize="16sp" />
 
         </LinearLayout>

@@ -2,6 +2,7 @@ package com.example.external.ui.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.example.external.ui.activity.GetMoneyActivity;
 import com.example.external.ui.activity.IdentificationActivity;
 import com.example.external.ui.activity.LoginActivity;
 import com.example.external.ui.activity.ReviewingActivity;
+import com.example.external.utils.DataUtils;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.LuckyNoticeView;
 import com.example.external.utils.UserUtils;
@@ -83,6 +85,14 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
             netWork();
             home_page_refresh.finishRefresh();
         });
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden){
+            netWork();
+        }
     }
 
     @Override
@@ -198,7 +208,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
             beans.add(productBean);
             for (int i = 0; i < productBean.getData().getLimits().size(); i++) {
                 if (productBean.getData().getLimits().get(i).getIs_default() == 1) {
-                    home_borrow_money.setText("₹ "+productBean.getData().getLimits().get(i).getAmount());
+                    home_borrow_money.setText("₹ "+ DataUtils.addComma(productBean.getData().getLimits().get(i).getAmount()+""));
                 }
             }
             status = productBean.getData().getCertification();
@@ -217,7 +227,6 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
         if (error.toString().trim().equals("HTTP 401")) {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
-            UserUtils.getInstance().clearAllSp(mActivity);
         }
     }
 

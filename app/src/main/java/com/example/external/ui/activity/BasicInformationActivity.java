@@ -217,7 +217,6 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
         if (error.toString().trim().equals("HTTP 401")) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
-            UserUtils.getInstance().clearAllSp(mActivity);
         }
     }
 

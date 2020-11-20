@@ -92,7 +92,6 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.log_out:
-                UserUtils.getInstance().clearAllSp(mActivity);
                 startActivity(new Intent(mActivity, LoginActivity.class));
                 mActivity.finish();
                 break;
@@ -127,7 +126,6 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
         if (error.toString().trim().equals("HTTP 401")) {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
-            UserUtils.getInstance().clearAllSp(mActivity);
         }
     }
 

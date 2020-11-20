@@ -180,7 +180,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         if (error.toString().trim().equals("HTTP 401")) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
-            UserUtils.getInstance().clearAllSp(mActivity);
         }
     }
 

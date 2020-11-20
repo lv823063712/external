@@ -130,7 +130,6 @@ public class BankInformationActivity extends BaseActivity implements View.OnClic
         if (error.toString().trim().equals("HTTP 401")) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
-            UserUtils.getInstance().clearAllSp(mActivity);
         }
     }
 
