@@ -107,7 +107,5 @@
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold" />
-
-
     </RelativeLayout>
 </RelativeLayout>
