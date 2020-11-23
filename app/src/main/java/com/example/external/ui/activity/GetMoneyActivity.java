@@ -44,7 +44,6 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
     private ImageView details_img;
     private ArrayList<ProductBean> ints;
     private DialogUtils utils;
-
     private String idNet;
     private StartPresenter startPresenter;
     private String money;
@@ -67,7 +66,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
         money = intent.getStringExtra("money");
         if (money.contains("30,000")) {
             show_money.setText(money);
-            money_bar.setProgress(15);
+            money_bar.setProgress(10);
             money_one.setBackground(getResources().getDrawable(R.color.red_6D83F2));
             money_two.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             money_three.setBackground(getResources().getDrawable(R.color.green_6D83F2));
@@ -147,7 +146,6 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 setMBackGround(progress, show_money);
-
             }
 
             @Override
@@ -227,8 +225,8 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
         } else if (UserUtils.getInstance().getPayChannel(mActivity).equals("cashfree")) {
             startPresenter.get(Constant.CREATECASHFREEPAY_URL, header, body, GetMoneyBean.class);
         }
-
     }
+
 
     private void netWork() {
         Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
@@ -266,24 +264,28 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
             money_three.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             money_four.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             textView.setText("₹30,000");
+            isProgress(ints.get(0));
         } else if (plan > 25 && plan <= 50) {
             money_one.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             money_two.setBackground(getResources().getDrawable(R.color.red_6D83F2));
             money_three.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             money_four.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             textView.setText("₹50,000");
+            isProgress(ints.get(0));
         } else if (plan > 50 && plan <= 75) {
             money_one.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             money_two.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             money_three.setBackground(getResources().getDrawable(R.color.red_6D83F2));
             money_four.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             textView.setText("₹80,000");
+            isProgress(ints.get(0));
         } else if (plan > 75 && plan <= 100) {
             money_one.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             money_two.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             money_three.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             money_four.setBackground(getResources().getDrawable(R.color.red_6D83F2));
             textView.setText("₹150,000");
+            isProgress(ints.get(0));
         }
     }
 
@@ -327,66 +329,80 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
         } else if (data instanceof ProductBean) {
             ProductBean bean = (ProductBean) data;
             ints.add(bean);
-            for (int i = 0; i < bean.getData().getLimits().size(); i++) {
-                if (show_money.getText().toString().length() > 3) {
-                    if (show_money.getText().toString().contains(DataUtils.addComma(bean.getData().getLimits().get(i).getAmount() + ""))) {
-                        for (int j = 0; j < bean.getData().getLimits().get(i).getDurations().size(); j++) {
-                            if (bean.getData().getLimits().get(i).getDurations().get(j).getIs_default() == 1) {
-                                if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("1 month")) {
-                                    plan_months.setProgress(15);
-                                    setMothBackGround(15, month_show);
-                                    setData(bean);
-                                } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("3 months")) {
-                                    plan_months.setProgress(35);
-                                    setMothBackGround(35, month_show);
-                                    setData(bean);
-                                } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("6 months")) {
-                                    plan_months.setProgress(65);
-                                    setMothBackGround(65, month_show);
-                                    setData(bean);
-                                } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("12 months")) {
-                                    plan_months.setProgress(95);
-                                    setMothBackGround(95, month_show);
-                                    setData(bean);
-                                }
-                            }else{
-                                plan_months.setProgress(95);
-                                setMothBackGround(95, month_show);
-                                setData(bean);
-                            }
-                        }
-                    }
-                } else if (money.contains(DataUtils.addComma(bean.getData().getLimits().get(i).getAmount() + ""))) {
-                    if (show_money.getText().toString().contains(DataUtils.addComma(bean.getData().getLimits().get(i).getAmount() + ""))) {
-                        for (int j = 0; j < bean.getData().getLimits().get(i).getDurations().size(); j++) {
-                            if (bean.getData().getLimits().get(i).getDurations().get(j).getIs_default() == 1) {
-                                if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("1 month")) {
-                                    plan_months.setProgress(15);
-                                    setMothBackGround(15, month_show);
-                                } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("3 months")) {
-                                    plan_months.setProgress(65);
-                                    setMothBackGround(35, month_show);
-                                } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("6 months")) {
-                                    plan_months.setProgress(65);
-                                    setMothBackGround(65, month_show);
-                                } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("12 months")) {
-                                    plan_months.setProgress(95);
-                                    setMothBackGround(95, month_show);
-                                }
-                            }else{
-                                plan_months.setProgress(95);
-                                setMothBackGround(95, month_show);
-                            }
-                        }
-                    }
-                }
-            }
+            isProgress(bean);
         } else if (data instanceof GetMoneyBean) {
             GetMoneyBean moneyBean = (GetMoneyBean) data;
             if (moneyBean.getStatus() == 1) {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 backActivity();
+            }
+        }
+    }
+
+    public void isProgress(ProductBean bean ){
+        for (int i = 0; i < bean.getData().getLimits().size(); i++) {
+            if (show_money.getText().toString().length() > 3) {
+                if (show_money.getText().toString().contains(DataUtils.addComma(bean.getData().getLimits().get(i).getAmount() + ""))) {
+                    for (int j = 0; j < bean.getData().getLimits().get(i).getDurations().size(); j++) {
+                        if (bean.getData().getLimits().get(i).getDurations().get(j).getIs_default() == 1) {
+                            if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("1 month")) {
+                                plan_months.setProgress(10);
+                                setMothBackGround(10, month_show);
+                                setData(bean);
+                                break;
+                            } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("3 months")) {
+                                plan_months.setProgress(35);
+                                setMothBackGround(35, month_show);
+                                setData(bean);
+                                break;
+                            } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("6 months")) {
+                                plan_months.setProgress(65);
+                                setMothBackGround(65, month_show);
+                                setData(bean);
+                                break;
+                            } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("12 months")) {
+                                plan_months.setProgress(95);
+                                setMothBackGround(95, month_show);
+                                setData(bean);
+                                break;
+                            }
+                        }else{
+                            plan_months.setProgress(95);
+                            setMothBackGround(95, month_show);
+                            setData(bean);
+                            break;
+                        }
+                    }
+                }
+            } else if (money.contains(DataUtils.addComma(bean.getData().getLimits().get(i).getAmount() + ""))) {
+                if (show_money.getText().toString().contains(DataUtils.addComma(bean.getData().getLimits().get(i).getAmount() + ""))) {
+                    for (int j = 0; j < bean.getData().getLimits().get(i).getDurations().size(); j++) {
+                        if (bean.getData().getLimits().get(i).getDurations().get(j).getIs_default() == 1) {
+                            if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("1 month")) {
+                                plan_months.setProgress(10);
+                                setMothBackGround(10, month_show);
+                                break;
+                            } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("3 months")) {
+                                plan_months.setProgress(65);
+                                setMothBackGround(35, month_show);
+                                break;
+                            } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("6 months")) {
+                                plan_months.setProgress(65);
+                                setMothBackGround(65, month_show);
+                                break;
+                            } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("12 months")) {
+                                plan_months.setProgress(95);
+                                setMothBackGround(95, month_show);
+                                break;
+                            }
+                        }else{
+                            plan_months.setProgress(95);
+                            setMothBackGround(95, month_show);
+                            break;
+                        }
+                    }
+                }
             }
         }
     }
