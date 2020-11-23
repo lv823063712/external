@@ -2,13 +2,12 @@ package com.example.external.ui.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,6 +30,10 @@ import com.example.external.utils.LuckyNoticeView;
 import com.gyf.immersionbar.ImmersionBar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,10 +43,13 @@ import java.util.Map;
 public class HomePageFragment extends BaseFragment implements StartInterface.StrartView, View.OnClickListener {
 
     private DialogUtils utils;
-    private TextView home_some_user, reduce_money, increase_money, home_borrow_money, borrow, home_some_user_content;
+    private TextView reduce_money;
+    private TextView increase_money;
+    private TextView home_borrow_money;
+    private TextView borrow;
     private LuckyNoticeView testVf;
-    private List<MarqueeBean.DataBean> dataBeans = new ArrayList<>();
-    private ArrayList<ProductBean> beans = new ArrayList<>();
+    private final List<MarqueeBean.DataBean> dataBeans = new ArrayList<>();
+    private final ArrayList<ProductBean> beans = new ArrayList<>();
     private int money_show = 1;
     private boolean MoneyChangeFlag = false;
     private int status;
@@ -51,10 +57,9 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     private SmartRefreshLayout home_page_refresh, home_page_refreshs;
     private LinearLayout my_infor, my_get_money;
     private RelativeLayout bototm_button;
-    private View title_view;
     private StartPresenter startPresenter;
     private RecyclerView myHome_rv;
-    private ArrayList<ProductBean.DataBean.ViplistBean> list = new ArrayList<>();
+    private final ArrayList<ProductBean.DataBean.ViplistBean> list = new ArrayList<>();
     private HomeListAdapter adapter;
 
     @Override
@@ -64,17 +69,17 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
 
     @Override
     protected void initView() {
+        EventBus.getDefault().register(this);
         startPresenter = new StartPresenter(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
         borrow = mActivity.findViewById(R.id.Borrow);
-        title_view = mActivity.findViewById(R.id.title_view);
+        View title_view = mActivity.findViewById(R.id.title_view);
         ImmersionBar.with(this)
                 .statusBarColor(R.color.white)   //透明状态栏，不写默认透明色
                 .keyboardEnable(true)
                 .statusBarView(title_view)
                 .autoStatusBarDarkModeEnable(true, 0.2f)
                 .init();
-        home_some_user = mActivity.findViewById(R.id.home_some_user);
         reduce_money = mActivity.findViewById(R.id.reduce_money);
         bototm_button = mActivity.findViewById(R.id.bototm_button);
         increase_money = mActivity.findViewById(R.id.increase_money);
@@ -85,8 +90,6 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
         myHome_rv = mActivity.findViewById(R.id.myHome_rv);
         my_infor = mActivity.findViewById(R.id.my_infor);
         my_get_money = mActivity.findViewById(R.id.my_get_money);
-        home_some_user_content = mActivity.findViewById(R.id.home_some_user_content);
-        AppCompatImageView test = mActivity.findViewById(R.id.test);
         initClick();
     }
 
@@ -111,14 +114,13 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
         myHome_rv.setAdapter(adapter);
     }
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden) {
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(String isHidden) {
+        if (isHidden.equals("yes")) {
             netWork();
         }
     }
-
+    
     @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View v) {
@@ -228,14 +230,6 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     protected void loadData() {
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            netWork();
-        }
-    }
-
     @SuppressLint("SetTextI18n")
     @Override
     public void success(Object data) {
@@ -246,7 +240,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
             if (productBean.getData().getViplist().size() < 1) {
                 home_page_refresh.setVisibility(View.VISIBLE);
                 home_page_refreshs.setVisibility(View.GONE);
-                if (!MoneyChangeFlag){
+                if (!MoneyChangeFlag) {
                     for (int i = 0; i < productBean.getData().getLimits().size(); i++) {
                         if (productBean.getData().getLimits().get(i).getIs_default() == 1) {
                             home_borrow_money.setText
@@ -285,6 +279,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        EventBus.getDefault().unregister(this);
         utils.dismissDialog(utils);
         if (startPresenter != null) {
             startPresenter.onDatacth();

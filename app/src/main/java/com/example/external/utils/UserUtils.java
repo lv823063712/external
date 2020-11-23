@@ -9,24 +9,24 @@ import android.content.Context;
  * @Creator: lf
  */
 public class UserUtils {
-    private String ISEMAIL = "isEmail";//客服邮箱
-    private String ISEMAILS = "isEmails";//客服备用邮箱
-    private String SERVICETIME = "serviceTime";//客服时间
-    private String CONGRATULATIONS = "congratulations";//审核成功
-    private String PAY_CHANNEL = "pay_channel";//支付渠道
-    private String USER_ID = "user_id";//用户ID
-    private String ACTION = "action";//区分注册还是登陆
-    private String MOBILE = "mobile";//手机号码
-    private String AUTHORIZED = "authorized";//是否认证
-    private String TOKEN = "token";//Token
-    private String NAME = "name";//用户名
-    private String TIPS_PROCESSING = "tips_processing";//审核中
-    private String TIPS_CONGRATULATIONS = "tips_congratulations";//审核成功
-    private String TIPS_PAY = "tips_pay";//支付底部
-    private String SYS_SERVICE_EMAIL_BAK = "sys_service_email_bak";//个人中心底部
-    private String SYS_SERVICE_EMAIL = "sys_service_email";//邮箱
-    private String SYS_SERVICE_TIME = "sys_service_time";//服务时间
-    private String UUID = "uuid";//服务时间
+    private final String ISEMAIL = "isEmail";//客服邮箱
+    private final String ISEMAILS = "isEmails";//客服备用邮箱
+    private final String SERVICETIME = "serviceTime";//客服时间
+    private final String CONGRATULATIONS = "congratulations";//审核成功
+    private final String PAY_CHANNEL = "pay_channel";//支付渠道
+    private final String USER_ID = "user_id";//用户ID
+    private final String ACTION = "action";//区分注册还是登陆
+    private final String MOBILE = "mobile";//手机号码
+    private final String AUTHORIZED = "authorized";//是否认证
+    private final String TOKEN = "token";//Token
+    private final String NAME = "name";//用户名
+    private final String TIPS_PROCESSING = "tips_processing";//审核中
+    private final String TIPS_CONGRATULATIONS = "tips_congratulations";//审核成功
+    private final String TIPS_PAY = "tips_pay";//支付底部
+    private final String SYS_SERVICE_EMAIL_BAK = "sys_service_email_bak";//个人中心底部
+    private final String SYS_SERVICE_EMAIL = "sys_service_email";//邮箱
+    private final String SYS_SERVICE_TIME = "sys_service_time";//服务时间
+    private final String UUID = "uuid";//设备唯一码
 
     public static UserUtils getInstance() {
         return ViewHolder.USER_UTILS;

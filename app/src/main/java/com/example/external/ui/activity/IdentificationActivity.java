@@ -34,6 +34,8 @@ import com.example.external.utils.StatusBarUtil;
 import com.example.external.utils.UserUtils;
 import com.google.gson.Gson;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -182,6 +184,7 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
                 incomePop.mySelectAll(nameAb -> monthly_family_income_et.setText(nameAb));
                 break;
             case R.id.iden_back:
+                EventBus.getDefault().postSticky("yes");
                 backActivity();
                 break;
             case R.id.step_tv:
