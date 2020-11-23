@@ -63,12 +63,9 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
         bottom_wenan.setText(UserUtils.getInstance().getsys_service_email_bak(mActivity));
         netWork();
         me_refresh.setEnableLoadMore(false);
-        me_refresh.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                netWork();
-                me_refresh.finishRefresh();
-            }
+        me_refresh.setOnRefreshListener(refreshLayout -> {
+            netWork();
+            me_refresh.finishRefresh();
         });
 
 
@@ -99,6 +96,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.log_out:
+                UserUtils.getInstance().clearAllSp(getContext());
                 startActivity(new Intent(mActivity, LoginActivity.class));
                 mActivity.finish();
                 break;
@@ -123,7 +121,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
         if (data instanceof UserInfoBean) {
             UserInfoBean userInfoBean = (UserInfoBean) data;
 //            Toast.makeText(mContext, userInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
-            my_name.setText(userInfoBean.getData().getName());
+            my_name.setText(userInfoBean.getData().getMobile());
         }
     }
 

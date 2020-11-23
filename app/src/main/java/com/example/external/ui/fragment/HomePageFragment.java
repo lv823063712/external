@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -205,6 +206,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
                     home_borrow_money.setText("₹ 150,000");
                 }
                 break;
+            default:break;
         }
     }
 
@@ -223,6 +225,14 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
 
     @Override
     protected void loadData() {
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            netWork();
+        }
     }
 
     @SuppressLint("SetTextI18n")

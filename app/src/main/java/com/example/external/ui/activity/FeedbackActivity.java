@@ -30,8 +30,7 @@ import com.google.gson.Gson;
 import java.util.HashMap;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -41,6 +40,7 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     private ImageView feed_msg_back, feed_images;
     private EditText add_content;
     private TextView feed_save;
+    private TextView tv_feedtime;
     private DialogUtils utils;
     private StartPresenter startPresenter;
     private TextView feed_text;
@@ -65,6 +65,8 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
         feed_text = mActivity.findViewById(R.id.feed_text);
         add_content = mActivity.findViewById(R.id.add_content);
         feed_save = mActivity.findViewById(R.id.feed_save);
+        tv_feedtime = mActivity.findViewById(R.id.tv_feedtime);
+        tv_feedtime.setText( UserUtils.getInstance().getServiceTime(this));
         feed_text.setText("Any questions about the App, please contact us by E-mail.\n\n" +
                 "E-mail: " + UserUtils.getInstance().getsys_service_email(mActivity));
     }
@@ -102,6 +104,7 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
             case R.id.feed_msg_back:
                 backActivity();
                 break;
+            default:break;
         }
     }
 

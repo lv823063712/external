@@ -170,14 +170,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             UserUtils.getInstance().saveName(mActivity, loginBean.getData().getName());
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-
+            finish();
         }
     }
 
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if (error.toString().trim().equals("401")) {
+        if ("401".equals(error.toString().trim())) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
         }
@@ -186,7 +186,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (utils!=null) {
+        if (utils != null) {
             utils.dismissDialog(utils);
         }
         if (startPresenter != null) {
