@@ -271,7 +271,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
             dataBeans.addAll(bean.getData());
             testVf.addNotice(dataBeans);
             testVf.startFlipping();
-            new CountDownTimer(5 * 1000, 1000) {
+            /*new CountDownTimer(5 * 1000, 1000) {
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void onTick(long millisUntilFinished) {
@@ -284,7 +284,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
                     Map<String, Object> body = new HashMap<>();
                     startPresenter.get(Constant.MARQUEE_URL, header, body, MarqueeBean.class);
                 }
-            }.start();
+            }.start();*/
         }
     }
 
