@@ -145,6 +145,7 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
                     first_show.setVisibility(View.GONE);
                     second_reviewing.setVisibility(View.VISIBLE);
                     first_reviewing.setText("2. Approved");
+                    step_tv.setText("Next");
                     vip_hint.setText(UserUtils.getInstance().gettips_congratulations(mActivity));
                     netWorks();
                 }

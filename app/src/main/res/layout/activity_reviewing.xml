@@ -126,6 +126,6 @@
         android:textColor="@color/white"
         android:textSize="17sp"
         android:textStyle="bold"
-        tools:text="Next" />
+        tools:text="Refresh" />
 
 </RelativeLayout>
