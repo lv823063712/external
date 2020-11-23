@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -49,6 +50,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     private int phase;
     private SmartRefreshLayout home_page_refresh, home_page_refreshs;
     private LinearLayout my_infor, my_get_money;
+    private RelativeLayout bototm_button;
     private View title_view;
     private StartPresenter startPresenter;
     private RecyclerView myHome_rv;
@@ -74,6 +76,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
                 .init();
         home_some_user = mActivity.findViewById(R.id.home_some_user);
         reduce_money = mActivity.findViewById(R.id.reduce_money);
+        bototm_button = mActivity.findViewById(R.id.bototm_button);
         increase_money = mActivity.findViewById(R.id.increase_money);
         home_borrow_money = mActivity.findViewById(R.id.home_borrow_money);
         testVf = mActivity.findViewById(R.id.testVf);
@@ -253,7 +256,10 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
                 }
                 status = productBean.getData().getCertification();
                 phase = productBean.getData().getCertification();
+                bototm_button.setVisibility(View.VISIBLE);
+
             } else {
+                bototm_button.setVisibility(View.GONE);
                 home_page_refresh.setVisibility(View.GONE);
                 home_page_refreshs.setVisibility(View.VISIBLE);
                 list.addAll(productBean.getData().getViplist());
