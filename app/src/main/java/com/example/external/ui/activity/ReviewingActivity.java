@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,6 +22,8 @@ import com.example.external.utils.DialogUtils;
 import com.example.external.utils.LuckyNoticeView;
 import com.example.external.utils.StatusBarUtil;
 import com.example.external.utils.UserUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -169,6 +172,15 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            EventBus.getDefault().postSticky("yes");
+            backActivity();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override

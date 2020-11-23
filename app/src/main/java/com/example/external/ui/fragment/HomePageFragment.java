@@ -120,7 +120,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
             netWork();
         }
     }
-    
+
     @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View v) {
@@ -245,6 +245,12 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
                         if (productBean.getData().getLimits().get(i).getIs_default() == 1) {
                             home_borrow_money.setText
                                     ("₹ " + DataUtils.addComma(productBean.getData().getLimits().get(i).getAmount() + ""));
+                            if (productBean.getData().getLimits().get(i).getAmount()==80000){
+                                money_show=2;
+                            }else if (productBean.getData().getLimits().get(i).getAmount()==50000){
+                                money_show=1;
+                            }else if (productBean.getData().getLimits().get(i).getAmount()==30000){
+                            }
                         }
                     }
                 }

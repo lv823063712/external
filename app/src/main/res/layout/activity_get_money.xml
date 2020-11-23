@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
-                android:text="₹30,000"
+                tools:text="₹30,000"
                 android:textColor="#041D98"
                 android:textSize="38sp" />
 

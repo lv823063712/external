@@ -54,6 +54,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
         return R.layout.activity_get_money;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void initData() {
         startPresenter = new StartPresenter(this);
@@ -87,6 +88,13 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
             money_four.setBackground(getResources().getDrawable(R.color.green_6D83F2));
         } else if (money.contains("150,000")) {
             show_money.setText(money);
+            money_bar.setProgress(90);
+            money_one.setBackground(getResources().getDrawable(R.color.green_6D83F2));
+            money_two.setBackground(getResources().getDrawable(R.color.green_6D83F2));
+            money_three.setBackground(getResources().getDrawable(R.color.green_6D83F2));
+            money_four.setBackground(getResources().getDrawable(R.color.red_6D83F2));
+        }else{
+            show_money.setText("₹150,000");
             money_bar.setProgress(90);
             money_one.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             money_two.setBackground(getResources().getDrawable(R.color.green_6D83F2));
@@ -188,7 +196,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
                     details_img.setImageDrawable(getResources().getDrawable(R.mipmap.icon_xsj));
                     my_background.setBackground(getResources().getDrawable(R.drawable.icon_back_bg));
                     ViewGroup.LayoutParams layoutParams = my_background.getLayoutParams();
-                    int i = AppUtils.dip2px(mActivity, 258);
+                    int i = AppUtils.dip2px(mActivity, 278);
                     layoutParams.height = i;
                     my_background.setLayoutParams(layoutParams);
                     isShow = 1;
@@ -320,23 +328,31 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
             ProductBean bean = (ProductBean) data;
             ints.add(bean);
             for (int i = 0; i < bean.getData().getLimits().size(); i++) {
-                if (show_money.getText().toString() != null && show_money.getText().toString().length() > 3) {
+                if (show_money.getText().toString().length() > 3) {
                     if (show_money.getText().toString().contains(DataUtils.addComma(bean.getData().getLimits().get(i).getAmount() + ""))) {
                         for (int j = 0; j < bean.getData().getLimits().get(i).getDurations().size(); j++) {
                             if (bean.getData().getLimits().get(i).getDurations().get(j).getIs_default() == 1) {
                                 if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("1 month")) {
+                                    plan_months.setProgress(15);
                                     setMothBackGround(15, month_show);
                                     setData(bean);
                                 } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("3 months")) {
+                                    plan_months.setProgress(35);
                                     setMothBackGround(35, month_show);
                                     setData(bean);
                                 } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("6 months")) {
+                                    plan_months.setProgress(65);
                                     setMothBackGround(65, month_show);
                                     setData(bean);
                                 } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("12 months")) {
-                                    setMothBackGround(90, month_show);
+                                    plan_months.setProgress(95);
+                                    setMothBackGround(95, month_show);
                                     setData(bean);
                                 }
+                            }else{
+                                plan_months.setProgress(95);
+                                setMothBackGround(95, month_show);
+                                setData(bean);
                             }
                         }
                     }
@@ -345,14 +361,21 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
                         for (int j = 0; j < bean.getData().getLimits().get(i).getDurations().size(); j++) {
                             if (bean.getData().getLimits().get(i).getDurations().get(j).getIs_default() == 1) {
                                 if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("1 month")) {
+                                    plan_months.setProgress(15);
                                     setMothBackGround(15, month_show);
                                 } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("3 months")) {
+                                    plan_months.setProgress(65);
                                     setMothBackGround(35, month_show);
                                 } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("6 months")) {
+                                    plan_months.setProgress(65);
                                     setMothBackGround(65, month_show);
                                 } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("12 months")) {
-                                    setMothBackGround(90, month_show);
+                                    plan_months.setProgress(95);
+                                    setMothBackGround(95, month_show);
                                 }
+                            }else{
+                                plan_months.setProgress(95);
+                                setMothBackGround(95, month_show);
                             }
                         }
                     }

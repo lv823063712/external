@@ -1,6 +1,8 @@
 package com.example.external.ui.activity;
 
 import android.content.Intent;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -392,12 +394,21 @@ public class IdentificationActivity extends BaseActivity implements View.OnClick
     }
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            EventBus.getDefault().postSticky("yes");
+            backActivity();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (utils!=null) {
+        if (utils != null) {
             utils.dismissDialog(utils);
         }
-        if (startPresenter!=null){
+        if (startPresenter != null) {
             startPresenter.onDatacth();
         }
     }
