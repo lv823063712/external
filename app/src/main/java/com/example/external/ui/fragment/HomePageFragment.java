@@ -2,12 +2,10 @@ package com.example.external.ui.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,12 +27,8 @@ import com.example.external.ui.adapter.HomeListAdapter;
 import com.example.external.utils.DataUtils;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.LuckyNoticeView;
-import com.example.external.utils.UserUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,6 +44,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
     private List<MarqueeBean.DataBean> dataBeans = new ArrayList<>();
     private ArrayList<ProductBean> beans = new ArrayList<>();
     private int money_show = 1;
+    private boolean MoneyChangeFlag = false;
     private int status;
     private int phase;
     private SmartRefreshLayout home_page_refresh, home_page_refreshs;
@@ -185,6 +180,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
                 }
                 break;
             case R.id.reduce_money:
+                MoneyChangeFlag = true;
                 if (money_show == 3) {
                     home_borrow_money.setText("₹ 80,000");
                     money_show = 2;
@@ -196,6 +192,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
                 }
                 break;
             case R.id.increase_money:
+                MoneyChangeFlag = true;
                 if (money_show == 1) {
                     home_borrow_money.setText("₹ 50,000");
                     money_show = 2;
@@ -206,7 +203,8 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
                     home_borrow_money.setText("₹ 150,000");
                 }
                 break;
-            default:break;
+            default:
+                break;
         }
     }
 
@@ -245,9 +243,12 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
             if (productBean.getData().getViplist().size() < 1) {
                 home_page_refresh.setVisibility(View.VISIBLE);
                 home_page_refreshs.setVisibility(View.GONE);
-                for (int i = 0; i < productBean.getData().getLimits().size(); i++) {
-                    if (productBean.getData().getLimits().get(i).getIs_default() == 1) {
-                        home_borrow_money.setText("₹ " + DataUtils.addComma(productBean.getData().getLimits().get(i).getAmount() + ""));
+                if (!MoneyChangeFlag){
+                    for (int i = 0; i < productBean.getData().getLimits().size(); i++) {
+                        if (productBean.getData().getLimits().get(i).getIs_default() == 1) {
+                            home_borrow_money.setText
+                                    ("₹ " + DataUtils.addComma(productBean.getData().getLimits().get(i).getAmount() + ""));
+                        }
                     }
                 }
                 status = productBean.getData().getCertification();

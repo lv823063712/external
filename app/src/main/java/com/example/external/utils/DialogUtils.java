@@ -25,7 +25,8 @@ public class DialogUtils extends ProgressDialog {
     private void init(Context context) {
         setCancelable(true);
         setCanceledOnTouchOutside(false);
-        setContentView(R.layout.lodding);//loading的xml文件
+        //loading的xml文件
+        setContentView(R.layout.lodding);
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.width = WindowManager.LayoutParams.WRAP_CONTENT;
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -43,7 +44,7 @@ public class DialogUtils extends ProgressDialog {
     }
 
     public void dismissDialog(DialogUtils utils) {
-        if (utils != null) {
+        if (utils != null && utils.isShowing()) {
             utils.dismiss();
         }
     }

@@ -123,7 +123,7 @@
         android:layout_marginBottom="23dp"
         android:background="@drawable/shape_next_bg"
         android:gravity="center"
-        android:text="Next"
+        android:text="Refresh"
         android:textColor="@color/white"
         android:textSize="17sp"
         android:textStyle="bold" />

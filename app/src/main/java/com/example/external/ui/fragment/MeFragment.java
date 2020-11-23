@@ -21,13 +21,10 @@ import com.example.external.utils.DialogUtils;
 import com.example.external.utils.UserUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import butterknife.OnClick;
 
 public class MeFragment extends BaseFragment implements View.OnClickListener, StartInterface.StrartView {
 

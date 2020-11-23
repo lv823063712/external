@@ -100,7 +100,6 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
     private void netWorks() {
         Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
         Map<String, Object> body = new HashMap<>();
-        utils.show();
         startPresenter.get(Constant.MARQUEE_URL, header, body, MarqueeBean.class);
     }
 
