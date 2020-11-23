@@ -2,6 +2,7 @@ package com.example.external.ui.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -270,6 +271,20 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
             dataBeans.addAll(bean.getData());
             testVf.addNotice(dataBeans);
             testVf.startFlipping();
+            new CountDownTimer(5 * 1000, 1000) {
+                @SuppressLint("SetTextI18n")
+                @Override
+                public void onTick(long millisUntilFinished) {
+                }
+
+                @SuppressLint("WrongConstant")
+                @Override
+                public void onFinish() {
+                    Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
+                    Map<String, Object> body = new HashMap<>();
+                    startPresenter.get(Constant.MARQUEE_URL, header, body, MarqueeBean.class);
+                }
+            }.start();
         }
     }
 
