@@ -16,19 +16,26 @@ import com.example.external.base.BaseActivity;
 import com.example.external.common.RequestCommon;
 import com.example.external.mvp.bean.GetMoneyBean;
 import com.example.external.mvp.bean.ProductBean;
+import com.example.external.mvp.bean.SuccessCommon;
 import com.example.external.mvp.bean.UserInfoBean;
 import com.example.external.mvp.myinterface.StartInterface;
 import com.example.external.mvp.network.Constant;
 import com.example.external.mvp.presenter.StartPresenter;
+import com.example.external.mvp.requestbean.EventRequestBean;
+import com.example.external.mvp.requestbean.QueryRequestBean;
 import com.example.external.utils.AppUtils;
 import com.example.external.utils.DataUtils;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.StatusBarUtil;
 import com.example.external.utils.UserUtils;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 
 public class GetMoneyActivity extends BaseActivity implements View.OnClickListener, StartInterface.StrartView {
@@ -92,7 +99,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
             money_two.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             money_three.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             money_four.setBackground(getResources().getDrawable(R.color.red_6D83F2));
-        }else{
+        } else {
             show_money.setText("₹150,000");
             money_bar.setProgress(90);
             money_one.setBackground(getResources().getDrawable(R.color.green_6D83F2));
@@ -235,10 +242,41 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
         startPresenter.get(Constant.HOMEPAGE, header, body, ProductBean.class);
     }
 
+    //查询订单的接口    直接提供订单号
+    private void QueryOrder(String order_id) {
+        QueryRequestBean bean = new QueryRequestBean();
+        bean.setOrder_id(order_id);
+        Gson gson = new Gson();
+        String s = gson.toJson(bean);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"), s);
+        Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
+        Map<String, Object> body = new HashMap<>();
+        utils.show();
+        if (UserUtils.getInstance().getPayChannel(mActivity).equals("razorpay")) {
+            startPresenter.postQueryBody(Constant.UPIDINFO_URL, header, body, requestBody, SuccessCommon.class);
+        } else if (UserUtils.getInstance().getPayChannel(mActivity).equals("cashfree")) {
+            startPresenter.postQueryBody(Constant.PAYLIST_URL, header, body, requestBody, SuccessCommon.class);
+        }
+    }
+
+    //埋点的接口   直接提供  操作 type,以及 产品ID
+    private void setEvent(String type, String loan_id) {
+        EventRequestBean bean = new EventRequestBean();
+        bean.setType(type);
+        bean.setLoan_id(loan_id);
+        Gson gson = new Gson();
+        String s = gson.toJson(bean);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"), s);
+        Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
+        Map<String, Object> body = new HashMap<>();
+        utils.show();
+        startPresenter.postQueryBody(Constant.TREVENT_URL, header, body, requestBody, SuccessCommon.class);
+    }
+
     @SuppressLint("SetTextI18n")
     private void setData(ProductBean data) {
         for (int i = 0; i < data.getData().getLimits().size(); i++) {
-            if (show_money.getText().toString().contains(DataUtils.addComma(data.getData().getLimits().get(i).getAmount()+""))) {
+            if (show_money.getText().toString().contains(DataUtils.addComma(data.getData().getLimits().get(i).getAmount() + ""))) {
                 for (int j = 0; j < data.getData().getLimits().get(i).getDurations().size(); j++) {
                     if (data.getData().getLimits().get(i).getDurations().get(j).getDuration().contains(month_show.getText().toString().replace("Months", "month"))) {
                         idNet = data.getData().getLimits().get(i).getDurations().get(j).getId();
@@ -332,6 +370,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
             isProgress(bean);
         } else if (data instanceof GetMoneyBean) {
             GetMoneyBean moneyBean = (GetMoneyBean) data;
+//            QueryOrder(moneyBean.getData().getOrder_id());调用示例
             if (moneyBean.getStatus() == 1) {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
@@ -340,7 +379,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
-    public void isProgress(ProductBean bean ){
+    public void isProgress(ProductBean bean) {
         for (int i = 0; i < bean.getData().getLimits().size(); i++) {
             if (show_money.getText().toString().length() > 3) {
                 if (show_money.getText().toString().contains(DataUtils.addComma(bean.getData().getLimits().get(i).getAmount() + ""))) {
@@ -367,7 +406,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
                                 setData(bean);
                                 break;
                             }
-                        }else{
+                        } else {
                             plan_months.setProgress(95);
                             setMothBackGround(95, month_show);
                             setData(bean);
@@ -396,7 +435,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
                                 setMothBackGround(95, month_show);
                                 break;
                             }
-                        }else{
+                        } else {
                             plan_months.setProgress(95);
                             setMothBackGround(95, month_show);
                             break;
