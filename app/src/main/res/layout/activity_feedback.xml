@@ -78,7 +78,6 @@
                 android:enabled="true"
                 android:gravity="top"
                 android:hint="Message to us"
-                android:inputType="textMultiLine"
                 android:maxLines="10"
                 android:minLines="8"
                 android:padding="20dp"

@@ -279,6 +279,7 @@ public class HomePageFragment extends BaseFragment implements StartInterface.Str
         if (error.toString().trim().contains("401")) {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
+            getActivity().finish();
         }
     }
 

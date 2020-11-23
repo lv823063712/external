@@ -123,9 +123,9 @@
         android:layout_marginBottom="23dp"
         android:background="@drawable/shape_next_bg"
         android:gravity="center"
-        android:text="Refresh"
         android:textColor="@color/white"
         android:textSize="17sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text="Next" />
 
 </RelativeLayout>

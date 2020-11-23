@@ -177,7 +177,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if ("401".equals(error.toString().trim())) {
+        if (error.toString().trim().contains("401")) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
         }

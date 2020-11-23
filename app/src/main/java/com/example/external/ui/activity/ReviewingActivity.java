@@ -40,6 +40,7 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
     private List<MarqueeBean.DataBean> dataBeans = new ArrayList<>();
     private ArrayList<ProductBean> beans = new ArrayList<>();
     private String moneys;
+    private int isRz = 1;
 
     @Override
     protected int getLayout() {
@@ -73,18 +74,24 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
         under_review_hint.setText(UserUtils.getInstance().gettips_processing(mActivity));
         Log.e("Show up in the audit", UserUtils.getInstance().gettips_processing(mActivity));
         step_tv = findViewById(R.id.step_tvs);
-        step_tv.setEnabled(false);
         netWork();
     }
 
     @Override
     protected void setClick() {
         step_tv.setOnClickListener(v -> {
-            Intent intent = new Intent(mActivity, GetMoneyActivity.class);
-            intent.putParcelableArrayListExtra("ints", beans);
-            intent.putExtra("money", moneys);
-            startActivity(intent);
-            backActivity();
+            if (isRz == 2) {
+                Intent intent = new Intent(mActivity, GetMoneyActivity.class);
+                intent.putParcelableArrayListExtra("ints", beans);
+                intent.putExtra("money", moneys);
+                startActivity(intent);
+                backActivity();
+            } else if (isRz == 1){
+                Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
+                Map<String, Object> body = new HashMap<>();
+                utils.show();
+                startPresenter.get(Constant.HOMEPAGE, header, body, ProductBean.class);
+            }
         });
     }
 
@@ -96,7 +103,6 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
     private void netWork() {
         Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
         Map<String, Object> body = new HashMap<>();
-        utils.show();
         startPresenter.get(Constant.HOMEPAGE, header, body, ProductBean.class);
     }
 
@@ -114,6 +120,7 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
             ProductBean bean = (ProductBean) data;
             beans.add(bean);
             if (bean.getData() != null) {
+                isRz = bean.getData().getPhase();
                 if (bean.getData().getPhase() == 1) {
                     new CountDownTimer(3 * 1000, 1000) {
                         @SuppressLint("SetTextI18n")
@@ -138,7 +145,6 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
                     first_show.setVisibility(View.GONE);
                     second_reviewing.setVisibility(View.VISIBLE);
                     first_reviewing.setText("2. Approved");
-                    step_tv.setEnabled(true);
                     vip_hint.setText(UserUtils.getInstance().gettips_congratulations(mActivity));
                     netWorks();
                 }
@@ -168,9 +174,10 @@ public class ReviewingActivity extends BaseActivity implements StartInterface.St
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if (error.toString().trim().equals("401")) {
+        if (error.toString().trim().contains("401")) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
+            backActivity();
         }
     }
 

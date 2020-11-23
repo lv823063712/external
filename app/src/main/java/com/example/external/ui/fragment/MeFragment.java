@@ -125,9 +125,10 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if (error.toString().trim().equals("401")) {
+        if (error.toString().trim().contains("401")) {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
+            getActivity().finish();
         }
     }
 
