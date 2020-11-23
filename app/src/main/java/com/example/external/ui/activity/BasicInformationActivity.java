@@ -92,19 +92,19 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
                 break;
             case R.id.tv_save:
                 BaseInfoRequestBean bean = new BaseInfoRequestBean();
-                if (!"".equals(full_name_edit.getText().toString()) && full_name_edit.getText().toString() != null) {
+                if (!full_name_edit.getText().toString().equals("") && full_name_edit.getText().toString() != null) {
                     bean.setName(full_name_edit.getText().toString());
                 } else {
                     Toast.makeText(mActivity, "Please enter Full Name", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (!"".equals(birthday_text.getText().toString()) && birthday_text.getText().toString() != null) {
+                if (!birthday_text.getText().toString().equals("") && birthday_text.getText().toString() != null) {
                     bean.setBirthday(birthday_text.getText().toString());
                 } else {
                     Toast.makeText(mActivity, "Please choose your birthday", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (!"".equals(gender_text.getText().toString()) && gender_text.getText().toString() != null) {
+                if (!gender_text.getText().toString().equals("") && gender_text.getText().toString() != null) {
                     if (gender_text.getText().toString().contains("MALE")) {
                         bean.setGender(1);
                     } else {
@@ -114,7 +114,7 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
                     Toast.makeText(mActivity, "Please choose gender", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (!"".equals(marital_text.getText().toString()) && marital_text.getText().toString() != null) {
+                if (!marital_text.getText().toString().equals("") && marital_text.getText().toString() != null) {
                     if (marital_text.getText().toString().contains("Married")) {
                         bean.setMarital(1);
                     } else if (marital_text.getText().toString().contains("Unmarried")) {
@@ -126,7 +126,7 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
                     Toast.makeText(mActivity, "Please choose marital status", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (!"".equals(education_text.getText().toString()) && education_text.getText().toString() != null) {
+                if (!education_text.getText().toString().equals("") && education_text.getText().toString() != null) {
                     if (education_text.getText().toString().contains("Other")) {
                         bean.setEducation(1);
                     } else if (education_text.getText().toString().contains("High School Diploma")) {
@@ -142,7 +142,7 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
                     Toast.makeText(mActivity, "Please select education background", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (!"".equals(email_edit.getText().toString()) && email_edit.getText().toString() != null) {
+                if (!email_edit.getText().toString().equals("") && email_edit.getText().toString() != null) {
                     bean.setEmail(email_edit.getText().toString());
                 } else {
                     Toast.makeText(mActivity, "Please enter email address", Toast.LENGTH_SHORT).show();
@@ -183,7 +183,6 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
                 educationPop.showPopupWindow();
                 educationPop.mySelectAll(nameAb -> education_text.setText(nameAb));
                 break;
-            default:break;
         }
     }
 
@@ -215,10 +214,9 @@ public class BasicInformationActivity extends BaseActivity implements View.OnCli
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if ("HTTP 401".equals(error.toString().trim())) {
+        if (error.toString().trim().equals("401")) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
-            UserUtils.getInstance().clearAllSp(mActivity);
         }
     }
 

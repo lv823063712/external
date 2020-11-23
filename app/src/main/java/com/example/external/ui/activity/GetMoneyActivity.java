@@ -3,7 +3,6 @@ package com.example.external.ui.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +16,12 @@ import com.example.external.base.BaseActivity;
 import com.example.external.common.RequestCommon;
 import com.example.external.mvp.bean.GetMoneyBean;
 import com.example.external.mvp.bean.ProductBean;
-import com.example.external.mvp.bean.SuccessCommon;
 import com.example.external.mvp.bean.UserInfoBean;
 import com.example.external.mvp.myinterface.StartInterface;
 import com.example.external.mvp.network.Constant;
 import com.example.external.mvp.presenter.StartPresenter;
 import com.example.external.utils.AppUtils;
+import com.example.external.utils.DataUtils;
 import com.example.external.utils.DialogUtils;
 import com.example.external.utils.StatusBarUtil;
 import com.example.external.utils.UserUtils;
@@ -31,7 +30,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class GetMoneyActivity extends BaseActivity implements View.OnClickListener, StartInterface.StrartView {
+
 
     private TextView show_money;
     private TextView get_loan, month_show, loan_term, loan_interest, monthly_payment, monthly_principal, monthly_inerest,
@@ -46,6 +47,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
 
     private String idNet;
     private StartPresenter startPresenter;
+    private String money;
 
     @Override
     protected int getLayout() {
@@ -57,12 +59,11 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
         startPresenter = new StartPresenter(this);
         StatusBarUtil.setTextColor(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
-        startPresenter = new StartPresenter(this);
         initView();
         hint_textview.setText(UserUtils.getInstance().gettips_pay(mActivity));
         Intent intent = getIntent();
         ints = intent.getParcelableArrayListExtra("ints");
-        String money = intent.getStringExtra("money");
+        money = intent.getStringExtra("money");
         if (money.contains("30,000")) {
             show_money.setText(money);
             money_bar.setProgress(15);
@@ -70,7 +71,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
             money_two.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             money_three.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             money_four.setBackground(getResources().getDrawable(R.color.green_6D83F2));
-        } else if (money.contains("50,000") &&!money.contains("150,000")) {
+        } else if (money.contains("50,000") && !money.contains("150,000")) {
             show_money.setText(money);
             money_bar.setProgress(35);
             money_one.setBackground(getResources().getDrawable(R.color.green_6D83F2));
@@ -93,7 +94,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
             money_four.setBackground(getResources().getDrawable(R.color.red_6D83F2));
         }
 //        if (ints.get(0) == null) {
-            netWork();
+        netWork();
 //        } else {
 //            setData(ints.get(0));
 //        }
@@ -205,7 +206,6 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
             case R.id.get_loan:
                 razNetWork();
                 break;
-            default:break;
         }
     }
 
@@ -214,9 +214,9 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
         Map<String, Object> body = new HashMap<>();
         body.put("id", idNet);
         utils.show();
-        if ("razorpay".equals(UserUtils.getInstance().getPayChannel(mActivity))) {
+        if (UserUtils.getInstance().getPayChannel(mActivity).equals("razorpay")) {
             startPresenter.get(Constant.CREATERAZORPAY_URL, header, body, GetMoneyBean.class);
-        } else if ("cashfree".equals(UserUtils.getInstance().getPayChannel(mActivity))) {
+        } else if (UserUtils.getInstance().getPayChannel(mActivity).equals("cashfree")) {
             startPresenter.get(Constant.CREATECASHFREEPAY_URL, header, body, GetMoneyBean.class);
         }
 
@@ -232,7 +232,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
     @SuppressLint("SetTextI18n")
     private void setData(ProductBean data) {
         for (int i = 0; i < data.getData().getLimits().size(); i++) {
-            if (data.getData().getLimits().get(i).getAmount() == Integer.parseInt(show_money.getText().toString().split("₹")[1].replace(",", "").trim())) {
+            if (show_money.getText().toString().contains(DataUtils.addComma(data.getData().getLimits().get(i).getAmount()+""))) {
                 for (int j = 0; j < data.getData().getLimits().get(i).getDurations().size(); j++) {
                     if (data.getData().getLimits().get(i).getDurations().get(j).getDuration().contains(month_show.getText().toString().replace("Months", "month"))) {
                         idNet = data.getData().getLimits().get(i).getDurations().get(j).getId();
@@ -250,6 +250,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void setMBackGround(int plan, TextView textView) {
         if (plan <= 25) {
             money_one.setBackground(getResources().getDrawable(R.color.red_6D83F2));
@@ -278,6 +279,7 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void setMothBackGround(int plan, TextView textView) {
         if (plan <= 25) {
             months_one.setBackground(getResources().getDrawable(R.color.red_6D83F2));
@@ -285,19 +287,19 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
             months_three.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             months_four.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             textView.setText("1 Months");
-        } else if (plan <= 50) {
+        } else if (plan > 25 && plan <= 50) {
             months_one.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             months_two.setBackground(getResources().getDrawable(R.color.red_6D83F2));
             months_three.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             months_four.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             textView.setText("3 Months");
-        } else if (plan <= 75) {
+        } else if (plan > 50 && plan <= 75) {
             months_one.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             months_two.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             months_three.setBackground(getResources().getDrawable(R.color.red_6D83F2));
             months_four.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             textView.setText("6 Months");
-        } else if (plan <= 100) {
+        } else if (plan > 75 && plan <= 100) {
             months_one.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             months_two.setBackground(getResources().getDrawable(R.color.green_6D83F2));
             months_three.setBackground(getResources().getDrawable(R.color.green_6D83F2));
@@ -317,6 +319,45 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
         } else if (data instanceof ProductBean) {
             ProductBean bean = (ProductBean) data;
             ints.add(bean);
+            for (int i = 0; i < bean.getData().getLimits().size(); i++) {
+                if (show_money.getText().toString() != null && show_money.getText().toString().length() > 3) {
+                    if (show_money.getText().toString().contains(DataUtils.addComma(bean.getData().getLimits().get(i).getAmount() + ""))) {
+                        for (int j = 0; j < bean.getData().getLimits().get(i).getDurations().size(); j++) {
+                            if (bean.getData().getLimits().get(i).getDurations().get(j).getIs_default() == 1) {
+                                if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("1 month")) {
+                                    setMothBackGround(15, month_show);
+                                    setData(bean);
+                                } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("3 months")) {
+                                    setMothBackGround(35, month_show);
+                                    setData(bean);
+                                } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("6 months")) {
+                                    setMothBackGround(65, month_show);
+                                    setData(bean);
+                                } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("12 months")) {
+                                    setMothBackGround(90, month_show);
+                                    setData(bean);
+                                }
+                            }
+                        }
+                    }
+                } else if (money.contains(DataUtils.addComma(bean.getData().getLimits().get(i).getAmount() + ""))) {
+                    if (show_money.getText().toString().contains(DataUtils.addComma(bean.getData().getLimits().get(i).getAmount() + ""))) {
+                        for (int j = 0; j < bean.getData().getLimits().get(i).getDurations().size(); j++) {
+                            if (bean.getData().getLimits().get(i).getDurations().get(j).getIs_default() == 1) {
+                                if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("1 month")) {
+                                    setMothBackGround(15, month_show);
+                                } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("3 months")) {
+                                    setMothBackGround(35, month_show);
+                                } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("6 months")) {
+                                    setMothBackGround(65, month_show);
+                                } else if (bean.getData().getLimits().get(i).getDurations().get(j).getDuration().contains("12 months")) {
+                                    setMothBackGround(90, month_show);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         } else if (data instanceof GetMoneyBean) {
             GetMoneyBean moneyBean = (GetMoneyBean) data;
             if (moneyBean.getStatus() == 1) {
@@ -330,17 +371,16 @@ public class GetMoneyActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if ("HTTP 401".equals(error.toString().trim())) {
+        if (error.toString().trim().equals("401")) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
-            UserUtils.getInstance().clearAllSp(mActivity);
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (utils!=null) {
+        if (utils != null) {
             utils.dismissDialog(utils);
         }
         if (startPresenter != null) {

@@ -15,6 +15,8 @@ import android.util.Log;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.blankj.utilcode.util.Utils;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -164,10 +166,11 @@ public class PhoneInfoUtil {
     }
 
 
-    public static void saveBitmap() throws IOException {
+    public static void saveBitmap(Context context) throws IOException {
         // 创建目录
         //获取内部存储状态
-        String state = Environment.getExternalStorageState();
+
+       /* String state = Environment.getExternalStorageState();
         //如果状态不是mounted，无法读写
         if (!state.equals(Environment.MEDIA_MOUNTED)) {
             return;
@@ -192,14 +195,18 @@ public class PhoneInfoUtil {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
-    public static String readKey() throws IOException {
+    public static String readKey(Context context) {
 
         // 创建目录
         //获取内部存储状态
-        String state = Environment.getExternalStorageState();
+        if (UserUtils.getInstance().getUuid(context) == null || UserUtils.getInstance().getUuid(context).equals("")) {
+            UserUtils.getInstance().saveUuid(context, getUUID());
+        }
+        return UserUtils.getInstance().getUuid(context);
+        /*String state = Environment.getExternalStorageState();
         //如果状态不是mounted，无法读写
         if (!state.equals(Environment.MEDIA_MOUNTED)) {
             return null;
@@ -209,7 +216,7 @@ public class PhoneInfoUtil {
         if (!appDir.exists()) {
             appDir.mkdir();
         }
-        String fileName = "5i5ysole" + ".txt";
+        String fileName = "sole" + ".txt";
         File file = new File(appDir, fileName);
         if (!file.exists()) {
             file.createNewFile();
@@ -236,7 +243,7 @@ public class PhoneInfoUtil {
             }
         }
 
-        return content != null ? content.toString() : null;
+        return content != null ? content.toString() : null;*/
     }
 
     /**

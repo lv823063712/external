@@ -21,9 +21,13 @@ import com.example.external.utils.DialogUtils;
 import com.example.external.utils.UserUtils;
 import com.gyf.immersionbar.ImmersionBar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import butterknife.OnClick;
 
 public class MeFragment extends BaseFragment implements View.OnClickListener, StartInterface.StrartView {
 
@@ -32,7 +36,6 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     private StartPresenter startPresenter;
     private SmartRefreshLayout me_refresh;
     private LinearLayout my_profile, my_customer, my_aboutus, ll_feedback;
-    private View title_view;
 
     @Override
     protected int getLayout() {
@@ -42,16 +45,13 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     @Override
     protected void initView() {
         startPresenter = new StartPresenter(this);
-        title_view = getActivity().findViewById(R.id.title_view);
         ImmersionBar.with(this)
-                //解决软键盘与底部输入框冲突问题
+                .statusBarColor(R.color.white)  //透明状态栏，不写默认透明色
                 .keyboardEnable(true)
-                .statusBarView(title_view)
-                .statusBarDarkFont(true, 0.2f)
-                .titleBarMarginTop(title_view)
+                .statusBarView(mActivity.findViewById(R.id.title_view))
+                .autoStatusBarDarkModeEnable(true,0.2f)
                 .init();
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
-        startPresenter = new StartPresenter(this);
         ll_feedback = getActivity().findViewById(R.id.ll_feedback);
         log_out = getActivity().findViewById(R.id.log_out);
         my_name = getActivity().findViewById(R.id.my_name);
@@ -61,17 +61,16 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
         my_aboutus = getActivity().findViewById(R.id.my_aboutus);
         bottom_wenan = getActivity().findViewById(R.id.bottom_wenan);
         bottom_wenan.setText(UserUtils.getInstance().getsys_service_email_bak(mActivity));
-        log_out.setOnClickListener(this);
-        my_profile.setOnClickListener(this);
-        ll_feedback.setOnClickListener(this);
-//        my_customer.setOnClickListener(this);
-//        my_aboutus.setOnClickListener(this);
         netWork();
         me_refresh.setEnableLoadMore(false);
-        me_refresh.setOnRefreshListener(refreshLayout -> {
-            netWork();
-            me_refresh.finishRefresh();
+        me_refresh.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                netWork();
+                me_refresh.finishRefresh();
+            }
         });
+
 
     }
 
@@ -84,7 +83,11 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
 
     @Override
     protected void initData() {
-
+        log_out.setOnClickListener(this);
+        my_profile.setOnClickListener(this);
+        ll_feedback.setOnClickListener(this);
+        my_customer.setOnClickListener(this);
+        my_aboutus.setOnClickListener(this);
 
     }
 
@@ -93,11 +96,9 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
 
     }
 
-    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.log_out:
-                UserUtils.getInstance().clearAllSp(mActivity);
                 startActivity(new Intent(mActivity, LoginActivity.class));
                 mActivity.finish();
                 break;
@@ -129,10 +130,9 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, St
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if ("HTTP 401".equals(error.toString().trim())) {
+        if (error.toString().trim().equals("401")) {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
-            UserUtils.getInstance().clearAllSp(mActivity);
         }
     }
 

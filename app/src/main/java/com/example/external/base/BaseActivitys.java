@@ -42,9 +42,9 @@ public abstract class BaseActivitys extends SupportActivity {
 
     protected void setStatusBar() {
         ImmersionBar.with(this)
-                //解决软键盘与底部输入框冲突问题
+                .transparentStatusBar()  //透明状态栏，不写默认透明色
                 .keyboardEnable(true)
-                .statusBarDarkFont(true, 0.2f)
+                .autoStatusBarDarkModeEnable(true,0.2f)
                 .init();
 //        StatusBarUtil.setStatusBar(mActivity);
     }

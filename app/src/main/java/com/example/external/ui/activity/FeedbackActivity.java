@@ -30,6 +30,8 @@ import com.google.gson.Gson;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -52,8 +54,6 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     protected void initData() {
         startPresenter = new StartPresenter(this);
         utils = new DialogUtils(mActivity, R.style.CustomDialog);
-        startPresenter = new StartPresenter(this);
-
         StatusBarUtil.setTextColor(this);
         initView();
     }
@@ -87,7 +87,7 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
                 Map<String, Object> header = RequestCommon.getInstance().headers(mActivity);
                 Map<String, Object> body = new HashMap<>();
                 FeedbackRequestBean bean = new FeedbackRequestBean();
-                if (add_content.getText() != null && !"".equals(add_content.getText().toString())) {
+                if (add_content.getText() != null && !add_content.getText().toString().equals("")) {
                     bean.setContent(add_content.getText().toString());
                 } else {
                     Toast.makeText(mActivity, "Please fill in the feedback", Toast.LENGTH_SHORT).show();
@@ -102,7 +102,6 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
             case R.id.feed_msg_back:
                 backActivity();
                 break;
-            default:break;
         }
     }
 
@@ -119,10 +118,9 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if ("HTTP 401".equals(error.toString().trim())) {
+        if (error.toString().trim().equals("401")) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
-            UserUtils.getInstance().clearAllSp(mActivity);
         }
     }
 
@@ -136,5 +134,6 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
             startPresenter.onDatacth();
         }
     }
+
 
 }

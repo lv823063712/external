@@ -108,7 +108,6 @@
                     android:hint="Full Name"
                     android:paddingStart="24dp"
                     android:textColor="#6D83F2"
-                    android:textColorHint="#6D83F2"
                     android:textSize="16sp" />
 
                 <TextView
@@ -125,7 +124,6 @@
                     android:paddingStart="24dp"
                     android:paddingEnd="17dp"
                     android:textColor="#6D83F2"
-                    android:textColorHint="#6D83F2"
                     android:textSize="16sp" />
 
                 <TextView
@@ -142,7 +140,6 @@
                     android:paddingStart="24dp"
                     android:paddingEnd="17dp"
                     android:textColor="#6D83F2"
-                    android:textColorHint="#6D83F2"
                     android:textSize="16sp" />
 
                 <TextView
@@ -159,7 +156,6 @@
                     android:paddingStart="24dp"
                     android:paddingEnd="17dp"
                     android:textColor="#6D83F2"
-                    android:textColorHint="#6D83F2"
                     android:textSize="16sp" />
 
                 <TextView
@@ -176,7 +172,6 @@
                     android:paddingStart="24dp"
                     android:paddingEnd="17dp"
                     android:textColor="#6D83F2"
-                    android:textColorHint="#6D83F2"
                     android:textSize="16sp" />
 
                 <EditText
@@ -189,9 +184,10 @@
                     android:layout_marginBottom="@dimen/dp_50"
                     android:background="@drawable/shape_6c82f0_26"
                     android:hint="E-mail"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.@-"
+                    android:inputType="textEmailAddress|textEmailSubject|textWebEmailAddress"
                     android:paddingStart="24dp"
                     android:textColor="#6D83F2"
-                    android:textColorHint="#6D83F2"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -229,7 +225,6 @@
                 android:paddingStart="24dp"
                 android:paddingEnd="17dp"
                 android:textColor="#6D83F2"
-                android:textColorHint="#6D83F2"
                 android:textSize="16sp" />
 
             <TextView
@@ -246,7 +241,6 @@
                 android:paddingStart="24dp"
                 android:paddingEnd="17dp"
                 android:textColor="#6D83F2"
-                android:textColorHint="#6D83F2"
                 android:textSize="16sp" />
 
             <TextView
@@ -263,7 +257,6 @@
                 android:paddingStart="24dp"
                 android:paddingEnd="17dp"
                 android:textColor="#6D83F2"
-                android:textColorHint="#6D83F2"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -296,7 +289,6 @@
                 android:hint="IFSC Code"
                 android:paddingStart="24dp"
                 android:textColor="#6D83F2"
-                android:textColorHint="#6D83F2"
                 android:textSize="16sp" />
 
             <EditText
@@ -310,7 +302,6 @@
                 android:hint="Bank Name"
                 android:paddingStart="24dp"
                 android:textColor="#6D83F2"
-                android:textColorHint="#6D83F2"
                 android:textSize="16sp" />
 
             <EditText
@@ -320,11 +311,12 @@
                 android:layout_marginStart="@dimen/dp_30"
                 android:layout_marginTop="@dimen/dp_15"
                 android:layout_marginEnd="@dimen/dp_30"
+                android:digits="0123456789"
                 android:background="@drawable/shape_6c82f0_26"
                 android:hint="Bank Account NO."
+                android:inputType="number"
                 android:paddingStart="24dp"
                 android:textColor="#6D83F2"
-                android:textColorHint="#6D83F2"
                 android:textSize="16sp" />
 
         </LinearLayout>

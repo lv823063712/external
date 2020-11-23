@@ -96,7 +96,7 @@ public class WorkInformationActivity extends BaseActivity implements View.OnClic
                 break;
             case R.id.tv_save_work:
                 SalaryRequestBean requestBean = new SalaryRequestBean();
-                if (employment_text.getText() != null && !"".equals(employment_text.getText().toString())) {
+                if (employment_text.getText() != null && !employment_text.getText().toString().equals("")) {
                     if (employment_text.getText().toString().contains("Full-time")) {
                         requestBean.setEmployment_type(1);
                     } else if (employment_text.getText().toString().contains("Part-time job")) {
@@ -106,7 +106,7 @@ public class WorkInformationActivity extends BaseActivity implements View.OnClic
                     Toast.makeText(mActivity, "Please select the type of occupation", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (monthly_text.getText() != null && !"".equals(monthly_text.getText().toString())) {
+                if (monthly_text.getText() != null && !monthly_text.getText().toString().equals("")) {
                     if (monthly_text.getText().toString().contains("0～8000")) {
                         requestBean.setMonthly_salary(1);
                     } else if (monthly_text.getText().toString().contains("8000～20000")) {
@@ -122,7 +122,7 @@ public class WorkInformationActivity extends BaseActivity implements View.OnClic
                     Toast.makeText(mActivity, "Please fill in your income", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (family_text.getText() != null && !"".equals(family_text.getText().toString())) {
+                if (family_text.getText() != null && !family_text.getText().toString().equals("")) {
                     if (family_text.getText().toString().contains("<20000")) {
                         requestBean.setMonthly_family_salary(1);
                     } else if (family_text.getText().toString().contains("20000～30000")) {
@@ -146,7 +146,6 @@ public class WorkInformationActivity extends BaseActivity implements View.OnClic
                 utils.show();
                 startPresenter.postQueryBody(Constant.UPWORKINFO_URL, headers, bodys, requestBody, SuccessCommon.class);
                 break;
-            default:break;
         }
     }
 
@@ -174,10 +173,9 @@ public class WorkInformationActivity extends BaseActivity implements View.OnClic
     @Override
     public void error(Object error) {
         utils.dismissDialog(utils);
-        if ("HTTP 401".equals(error.toString().trim())) {
+        if (error.toString().trim().equals("401")) {
             Intent intent = new Intent(mActivity, LoginActivity.class);
             startActivity(intent);
-            UserUtils.getInstance().clearAllSp(mActivity);
         }
     }
 

@@ -142,7 +142,9 @@ dependencies {
     implementation rootProject.ext.compilelibs['BasePopup']
     implementation rootProject.ext.compilelibs['PickerView']
 
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
-    // 基础依赖包，必须要依赖
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
 }

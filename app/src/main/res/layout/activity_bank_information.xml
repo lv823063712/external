@@ -106,6 +106,7 @@
             android:layout_marginEnd="33dp"
             android:background="@drawable/shape_edit_basic"
             android:paddingLeft="10dp"
+            android:digits="0123456789"
             android:paddingRight="10dp"
             android:textColor="#ff1e2f4b"
             android:textSize="20sp" />

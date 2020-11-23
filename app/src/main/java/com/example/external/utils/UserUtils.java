@@ -26,11 +26,24 @@ public class UserUtils {
     private String SYS_SERVICE_EMAIL_BAK = "sys_service_email_bak";//个人中心底部
     private String SYS_SERVICE_EMAIL = "sys_service_email";//邮箱
     private String SYS_SERVICE_TIME = "sys_service_time";//服务时间
+    private String UUID = "uuid";//服务时间
 
     public static UserUtils getInstance() {
         return ViewHolder.USER_UTILS;
     }
 
+    //Uuid
+    public void saveUuid(Context context, String uuid) {
+        SharedPreferencesUtil.getInstance(context).putString(UUID, uuid);
+    }
+
+    public String getUuid(Context context) {
+        return SharedPreferencesUtil.getInstance(context).getString(UUID);
+    }
+
+    public void removeUuid(Context context) {
+        SharedPreferencesUtil.getInstance(context).remove(UUID);
+    }
     //客服邮箱
     public void saveEmail(Context context, String email) {
         SharedPreferencesUtil.getInstance(context).putString(ISEMAIL, email);
