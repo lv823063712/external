@@ -66,8 +66,8 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
         add_content = mActivity.findViewById(R.id.add_content);
         feed_save = mActivity.findViewById(R.id.feed_save);
         tv_feedtime = mActivity.findViewById(R.id.tv_feedtime);
-        tv_feedtime.setText( UserUtils.getInstance().getServiceTime(this));
-        feed_text.setText("Any questions about the App, please contact us by E-mail.\n\n" +
+//        tv_feedtime.setText( UserUtils.getInstance().getServiceTime(this));
+        feed_text.setText(UserUtils.getInstance().getServiceTime(this)+ "\n\n" +
                 "E-mail: " + UserUtils.getInstance().getsys_service_email(mActivity));
     }
 
